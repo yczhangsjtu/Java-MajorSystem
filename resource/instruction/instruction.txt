@@ -1,0 +1,4 @@
+addaction 0 moveright
+addaction 0 movedown
+addaction 0 moveleft
+addaction 0 moveup
