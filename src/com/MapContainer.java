@@ -1,8 +1,8 @@
 package com;
 
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.Image;
+import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import javax.imageio.ImageIO;
@@ -16,17 +16,16 @@ public class MapContainer{
 	int windowWidth = 800;
 	int windowHeight = 600;
 	Image groundImage[] = new Image[3];
-	Toolkit tk = Toolkit.getDefaultToolkit();
 	int map[][] = new int[mapWidth][mapHeight];
 	UnitContainer uc;
 	CharacterContainer cc;
 	public MapContainer(String mapfile, String unitfile)
 	{
-		groundImage[0] = tk.createImage("resource/images/ground/ground0.jpg");
-		groundImage[1] = tk.createImage("resource/images/ground/ground1.jpg");
-		groundImage[2] = tk.createImage("resource/images/ground/ground2.jpg");
 		try
 		{
+			groundImage[0] = ImageIO.read(new File("resource/images/ground/ground0.jpg"));
+			groundImage[1] = ImageIO.read(new File("resource/images/ground/ground1.jpg"));
+			groundImage[2] = ImageIO.read(new File("resource/images/ground/ground2.jpg"));
 			BufferedReader br = new BufferedReader(
 					new FileReader("resource/map/"+mapfile));
 			for(int y = 0; y < mapHeight; y++)
@@ -55,10 +54,14 @@ public class MapContainer{
 			{
 				int k = map[x][y];
 				int X = x*gridSize - viewOffsetX, Y = y*gridSize - viewOffsetY;
-				g.drawImage(groundImage[k],X,Y,gridSize,gridSize,null);
+				if(X + gridSize >= 0 && X <= windowWidth &&
+				   Y + gridSize >= 0 && Y <= windowHeight)
+			    {
+					g.drawImage(groundImage[k],X,Y,gridSize,gridSize,null);
+				}
 			}
 		}
-		uc.draw(g);
+		uc.draw(g,viewOffsetX,viewOffsetY);
 	}
 
 	void adaptViewOffset()

@@ -19,7 +19,7 @@ public class Unit{
 		y = Y;
 	}
 
-	public void draw(Graphics g)
+	public void draw(Graphics g, int viewOffsetX, int viewOffsetY)
 	{
 	}
 

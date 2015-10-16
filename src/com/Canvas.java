@@ -37,6 +37,7 @@ public class Canvas extends JPanel
 				repaint();
 			}
 		});
+		repaint();
 	}
 
 	public void paint(Graphics g)

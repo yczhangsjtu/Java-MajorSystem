@@ -20,8 +20,8 @@ public class Character extends Unit{
 		characterId = id;
 		images = imgs;
 	}
-	public void draw(Graphics g)
+	public void draw(Graphics g, int viewOffsetX, int viewOffsetY)
 	{
-		g.drawImage(images[0][0],x*width,y*height,width,height,null);
+		g.drawImage(images[0][0],x*width-viewOffsetX,y*height-viewOffsetY,width,height,null);
 	}
 }

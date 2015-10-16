@@ -51,12 +51,12 @@ public class UnitContainer{
 			e.printStackTrace();
 		}
 	}
-	public void draw(Graphics g)
+	public void draw(Graphics g, int viewOffsetX, int viewOffsetY)
 	{
 		for(String id: units.keySet())
 		{
 			Unit unit = units.get(id);
-			unit.draw(g);
+			unit.draw(g, viewOffsetX, viewOffsetY);
 		}
 	}
 	public Image[][] getUnitImage(String filename)
