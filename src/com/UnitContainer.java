@@ -15,10 +15,11 @@ import com.Unit;
 
 public class UnitContainer{
 	TreeMap<String,Unit> units;
-	Image characterImage[][][] = new Image[1][4][4];
+	Image characterImage[][][] = new Image[2][4][4];
 	public UnitContainer()
 	{
 		characterImage[0] = getUnitImage("resource/images/unit/unit0.png");
+		characterImage[1] = getUnitImage("resource/images/unit/unit1.png");
 		units = new TreeMap<String,Unit>();
 	}
 	public void readFromFile(String filename)
@@ -40,7 +41,8 @@ public class UnitContainer{
 				{
 					int x = Integer.parseInt(ss[2]);
 					int y = Integer.parseInt(ss[3]);
-					units.put(ss[0],new Character(ss[0],x,y,characterImage[0]));
+					int k = hash(ss[0])%2;
+					units.put(ss[0],new Character(ss[0],x,y,characterImage[k]));
 				}
 				s = br.readLine();
 			}
@@ -107,5 +109,15 @@ public class UnitContainer{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	int hash(String str)
+	{
+		int s = 0;
+		for(int i = 0; i < str.length(); i++)
+		{
+			int c = str.codePointAt(i);
+			s += c;
+		}
+		return s;
 	}
 }

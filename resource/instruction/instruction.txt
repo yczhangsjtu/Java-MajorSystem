@@ -1,4 +1,3 @@
-addaction 0 moveright
-addaction 0 movedown
-addaction 0 moveleft
-addaction 0 moveup
+addaction 1 moveright
+addaction 1 movedown
+addaction 1 moveleft

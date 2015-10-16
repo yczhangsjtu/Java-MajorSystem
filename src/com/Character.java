@@ -74,9 +74,9 @@ public class Character extends Unit{
 	}
 	public boolean moveLeft(MapContainer map)
 	{
+		direction = Dir.Left;
 		if(map.isAvailable(x-1,y))
 		{
-			direction = Dir.Left;
 			state = State.Moving;
 			return true;
 		}
@@ -84,9 +84,9 @@ public class Character extends Unit{
 	}
 	public boolean moveRight(MapContainer map)
 	{
+		direction = Dir.Right;
 		if(map.isAvailable(x+1,y))
 		{
-			direction = Dir.Right;
 			state = State.Moving;
 			return true;
 		}
@@ -94,9 +94,9 @@ public class Character extends Unit{
 	}
 	public boolean moveUp(MapContainer map)
 	{
+		direction = Dir.Up;
 		if(map.isAvailable(x,y-1))
 		{
-			direction = Dir.Up;
 			state = State.Moving;
 			return true;
 		}
@@ -104,9 +104,9 @@ public class Character extends Unit{
 	}
 	public boolean moveDown(MapContainer map)
 	{
+		direction = Dir.Down;
 		if(map.isAvailable(x,y+1))
 		{
-			direction = Dir.Down;
 			state = State.Moving;
 			return true;
 		}
