@@ -23,7 +23,7 @@ public class MapContainer{
 	UnitContainer uc;
 	CharacterContainer cc;
 	Image groundImage[] = new Image[3];
-	public MapContainer(String mapfile, String unitfile)
+	public MapContainer(String mapfile)
 	{
 		try
 		{
@@ -46,15 +46,6 @@ public class MapContainer{
 		}
 		uc = new UnitContainer();
 		cc = new CharacterContainer();
-		uc.readFromFile("resource/unit/"+unitfile);
-		cc.getFromUnitContainer(uc);
-		for(String id: uc.getAllUnitsId())
-		{
-			Unit unit = uc.getUnitById(id);
-			int x = unit.getX(), y = unit.getY();
-			if(isAvailable(x,y))
-				units[x][y] = unit;
-		}
 	}
 
 	public void draw(Graphics g)
@@ -111,6 +102,12 @@ public class MapContainer{
 			cc.move(target,direction,this);
 			return true;
 		}
+		else if(tokens[0].equals("addaction"))
+		{
+			String target = tokens[1];
+			String action = tokens[2];
+			uc.addAction(target,action);
+		}
 		return true;
 	}
 
@@ -148,5 +145,37 @@ public class MapContainer{
 		if(viewOffsetX > maxOffsetX) viewOffsetX = maxOffsetX;
 		if(viewOffsetY < 0) viewOffsetY = 0;
 		if(viewOffsetY > maxOffsetX) viewOffsetY = maxOffsetY;
+	}
+
+	public void readUnitFile(String filename)
+	{
+		uc.readFromFile("resource/unit/"+filename);
+		cc.getFromUnitContainer(uc);
+		for(String id: uc.getAllUnitsId())
+		{
+			Unit unit = uc.getUnitById(id);
+			int x = unit.getX(), y = unit.getY();
+			if(isAvailable(x,y))
+				units[x][y] = unit;
+		}
+	}
+
+	public void readInstructionFile(String filename)
+	{
+		try
+		{
+			BufferedReader br = new BufferedReader(
+					new FileReader("resource/instruction/"+filename));
+			String line = br.readLine();
+			while(line != null)
+			{
+				instructions.add(line);
+				line = br.readLine();
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

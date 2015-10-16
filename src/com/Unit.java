@@ -30,16 +30,21 @@ abstract class Unit{
 
 	public void update(MapContainer map)
 	{
-		while(actions.size() > 0)
+		if(actions.size() > 0)
 		{
-			if(!act(actions.get(0), map)) break;
-			actions.remove(0);
+			if(act(actions.get(0), map))
+				actions.remove(0);
 		}
 	}
 
 	public boolean act(String action, MapContainer map)
 	{
 		return true;
+	}
+
+	public void addAction(String action)
+	{
+		actions.add(action);
 	}
 
 	public String getUnitId()

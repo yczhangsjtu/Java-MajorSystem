@@ -74,6 +74,10 @@ public class UnitContainer{
 	{
 		return units.keySet();
 	}
+	public void addAction(String id, String action)
+	{
+		units.get(id).addAction(action);
+	}
 	Image[][] getUnitImage(String filename)
 	{
 		try

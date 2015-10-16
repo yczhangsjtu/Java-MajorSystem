@@ -15,7 +15,9 @@ public class Canvas extends JPanel implements ActionListener
 	Timer timer;
 	public Canvas()
 	{
-		map = new MapContainer("map.txt","units.txt");
+		map = new MapContainer("map.txt");
+		map.readUnitFile("units.txt");
+		map.readInstructionFile("instruction.txt");
 		timer = new Timer(50,this);
 		timer.setRepeats(true);
 		timer.setActionCommand("tick");
