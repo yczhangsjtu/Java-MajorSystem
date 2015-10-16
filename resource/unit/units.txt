@@ -1,0 +1,2 @@
+#id type x y
+0 Character 0 0

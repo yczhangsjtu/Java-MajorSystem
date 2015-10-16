@@ -13,12 +13,12 @@ public class Main extends JFrame
 		new Main("Java Memo");
 	}
 
-
 	public Main(String s)
 	{
 		super(s);
 		canvas = new Canvas();
 		canvas.setFocusable(true);
+		canvas.setSize(new Dimension(800,600));
 		
 		add(canvas);
 		setLayout(new BorderLayout());

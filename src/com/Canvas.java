@@ -12,10 +12,10 @@ import com.Character;
 public class Canvas extends JPanel
 {
 	Memo memo = new Memo();
+	MapContainer map;
 	public Canvas()
 	{
-		System.out.println(memo.getWord("45"));
-		repaint();
+		map = new MapContainer("map.txt","units.txt");
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e)
 			{
@@ -38,8 +38,10 @@ public class Canvas extends JPanel
 			}
 		});
 	}
+
 	public void paint(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;
+		map.draw(g);
 	}
 }
