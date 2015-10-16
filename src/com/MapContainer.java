@@ -11,6 +11,10 @@ public class MapContainer{
 	int gridSize = 50;
 	int mapWidth = 100;
 	int mapHeight = 100;
+	int viewOffsetX = 0;
+	int viewOffsetY = 0;
+	int windowWidth = 800;
+	int windowHeight = 600;
 	Image groundImage[] = new Image[3];
 	Toolkit tk = Toolkit.getDefaultToolkit();
 	int map[][] = new int[mapWidth][mapHeight];
@@ -44,15 +48,28 @@ public class MapContainer{
 
 	public void draw(Graphics g)
 	{
+		adaptViewOffset();
 		for(int x = 0; x < mapWidth; x++)
 		{
 			for(int y = 0; y < mapHeight; y++)
 			{
 				int k = map[x][y];
-				int X = x*gridSize, Y = y*gridSize;
+				int X = x*gridSize - viewOffsetX, Y = y*gridSize - viewOffsetY;
 				g.drawImage(groundImage[k],X,Y,gridSize,gridSize,null);
 			}
 		}
 		uc.draw(g);
+	}
+
+	void adaptViewOffset()
+	{
+		int imgWidth = gridSize * mapWidth;
+		int imgHeight = gridSize * mapHeight;
+		int maxOffsetX = imgWidth - windowWidth;
+		int maxOffsetY = imgHeight - windowHeight;
+		if(viewOffsetX < 0) viewOffsetX = 0;
+		if(viewOffsetX > maxOffsetX) viewOffsetX = maxOffsetX;
+		if(viewOffsetY < 0) viewOffsetY = 0;
+		if(viewOffsetY > maxOffsetX) viewOffsetY = maxOffsetY;
 	}
 }
