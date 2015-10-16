@@ -1,5 +1,6 @@
 package com;
 
+import java.util.Set;
 import java.util.TreeMap;
 import java.io.File;
 import java.io.FileReader;
@@ -7,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.Toolkit;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 
@@ -16,7 +16,6 @@ import com.Unit;
 public class UnitContainer{
 	TreeMap<String,Unit> units;
 	Image characterImage[][][] = new Image[1][4][4];
-	Toolkit tk = Toolkit.getDefaultToolkit();
 	public UnitContainer()
 	{
 		characterImage[0] = getUnitImage("resource/images/unit/unit0.png");
@@ -51,15 +50,31 @@ public class UnitContainer{
 			e.printStackTrace();
 		}
 	}
-	public void draw(Graphics g, int viewOffsetX, int viewOffsetY)
+	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
 	{
-		for(String id: units.keySet())
+		for(String id: getAllUnitsId())
 		{
 			Unit unit = units.get(id);
-			unit.draw(g, viewOffsetX, viewOffsetY);
+			unit.draw(g, viewOffsetX, viewOffsetY, clock);
 		}
 	}
-	public Image[][] getUnitImage(String filename)
+	public void update(MapContainer map)
+	{
+		for(String id: getAllUnitsId())
+		{
+			Unit unit = units.get(id);
+			unit.update(map);
+		}
+	}
+	public Unit getUnitById(String id)
+	{
+		return units.get(id);
+	}
+	public Set<String> getAllUnitsId()
+	{
+		return units.keySet();
+	}
+	Image[][] getUnitImage(String filename)
 	{
 		try
 		{

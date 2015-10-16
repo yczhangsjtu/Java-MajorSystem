@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 public class MapContainer{
@@ -15,10 +16,13 @@ public class MapContainer{
 	int viewOffsetY = 0;
 	int windowWidth = 800;
 	int windowHeight = 600;
-	Image groundImage[] = new Image[3];
+	int clock = 0;
 	int map[][] = new int[mapWidth][mapHeight];
+	Unit units[][] = new Unit[mapWidth][mapHeight];
+	LinkedList<String> instructions = new LinkedList<String>();
 	UnitContainer uc;
 	CharacterContainer cc;
+	Image groundImage[] = new Image[3];
 	public MapContainer(String mapfile, String unitfile)
 	{
 		try
@@ -43,6 +47,14 @@ public class MapContainer{
 		uc = new UnitContainer();
 		cc = new CharacterContainer();
 		uc.readFromFile("resource/unit/"+unitfile);
+		cc.getFromUnitContainer(uc);
+		for(String id: uc.getAllUnitsId())
+		{
+			Unit unit = uc.getUnitById(id);
+			int x = unit.getX(), y = unit.getY();
+			if(isAvailable(x,y))
+				units[x][y] = unit;
+		}
 	}
 
 	public void draw(Graphics g)
@@ -61,7 +73,69 @@ public class MapContainer{
 				}
 			}
 		}
-		uc.draw(g,viewOffsetX,viewOffsetY);
+		uc.draw(g,viewOffsetX,viewOffsetY,clock);
+	}
+
+	public void tick()
+	{
+		clock++;
+		if(clock >= 10)
+		{
+			clock = 0;
+			update();
+		}
+	}
+
+	public void executeInstructions()
+	{
+		while(instructions.size() > 0)
+		{
+			String instruction = instructions.get(0);
+			if(!execute(instruction)) break;
+			instructions.remove(0);
+		}
+	}
+
+	public void addInstruction(String instruction)
+	{
+		instructions.add(instruction);
+	}
+
+	public boolean execute(String instruction)
+	{
+		String []tokens = instruction.trim().split(" ");
+		if(tokens[0].equals("move"))
+		{
+			String target = tokens[1];
+			String direction = tokens[2];
+			cc.move(target,direction,this);
+			return true;
+		}
+		return true;
+	}
+
+	public void update()
+	{
+		uc.update(this);
+		executeInstructions();
+	}
+
+	public boolean isAvailable(int x, int y)
+	{
+		if(x < 0 || x >= mapWidth) return false;
+		if(y < 0 || y >= mapHeight) return false;
+		if(units[x][y] != null) return false;
+		return true;
+	}
+
+	public Unit getUnitByPosition(int x, int y)
+	{
+		return units[x][y];
+	}
+
+	public void setUnitByPosition(Unit unit, int x, int y)
+	{
+		units[x][y] = unit;
 	}
 
 	void adaptViewOffset()
