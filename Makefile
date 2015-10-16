@@ -34,3 +34,6 @@ $(bpath)UnitContainer.class: $(spath)UnitContainer.java
 
 $(bpath)CharacterContainer.class: $(spath)CharacterContainer.java
 	javac -sourcepath src -d bin $<
+
+editor: $(spath)editor/MapEditor.java
+	javac -sourcepath src -d bin $<

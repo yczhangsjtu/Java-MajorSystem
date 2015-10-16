@@ -121,6 +121,7 @@ public class MapContainer{
 	{
 		if(x < 0 || x >= mapWidth) return false;
 		if(y < 0 || y >= mapHeight) return false;
+		if(map[x][y] > 2) return false;
 		if(units[x][y] != null) return false;
 		return true;
 	}
