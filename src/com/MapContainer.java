@@ -2,6 +2,7 @@ package com;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -10,8 +11,14 @@ import javax.imageio.ImageIO;
 
 public class MapContainer{
 	int gridSize = 50;
+	int miniSize = 2;
+	int miniPad = 10;
 	int mapWidth = 100;
 	int mapHeight = 100;
+	int imgWidth = gridSize * mapWidth;
+	int imgHeight = gridSize * mapHeight;
+	int miniWidth = miniSize * mapWidth;
+	int miniHeight = miniSize * mapHeight;
 	int viewOffsetX = 0;
 	int viewOffsetY = 0;
 	int windowWidth = 800;
@@ -19,6 +26,7 @@ public class MapContainer{
 	int clock = 0;
 	int map[][] = new int[mapWidth][mapHeight];
 	int groundTypeNum = 4;
+	boolean miniLeft = true;
 	Unit units[][] = new Unit[mapWidth][mapHeight];
 	LinkedList<String> instructions = new LinkedList<String>();
 	UnitContainer uc;
@@ -66,6 +74,29 @@ public class MapContainer{
 			}
 		}
 		uc.draw(g,viewOffsetX,viewOffsetY,clock);
+		drawMiniMap(g,miniLeft);
+		uc.drawMini(g,miniSize,miniPad,miniWidth,windowWidth,miniLeft);
+	}
+
+	public void drawMiniMap(Graphics g, boolean left)
+	{
+		int x0 = miniPad, y0 = miniPad;
+		if(!left) x0 = windowWidth - miniWidth - miniPad;
+		for(int x = 0; x < mapWidth; x++)
+		{
+			for(int y = 0; y < mapHeight; y++)
+			{
+				int k = map[x][y];
+				int X = x*miniSize+x0, Y = y*miniSize+y0;
+				g.drawImage(groundImage[k],X,Y,miniSize,miniSize,null);
+			}
+		}
+		g.setColor(Color.BLACK);
+		int miniOffX = viewOffsetX * miniWidth / imgWidth;
+		int miniOffY = viewOffsetY * miniHeight / imgHeight;
+		int miniWindowWidth = windowWidth * miniWidth / imgWidth;
+		int miniWindowHeight = windowHeight * miniHeight / imgHeight;
+		g.drawRect(x0+miniOffX,y0+miniOffY,miniWindowWidth,miniWindowHeight);
 	}
 
 	public void focus(int x, int y)
@@ -73,6 +104,10 @@ public class MapContainer{
 		viewOffsetX = x-windowWidth/2;
 		viewOffsetY = y-windowHeight/2;
 		adaptViewOffset();
+		int X = x - viewOffsetX, Y = y - viewOffsetY;
+		miniLeft = X > windowWidth - miniWidth - miniPad
+				&& X < windowWidth - miniPad && Y > miniPad
+				&& Y < miniPad + miniHeight;
 	}
 
 	public void focus(Unit unit)
@@ -158,8 +193,6 @@ public class MapContainer{
 
 	void adaptViewOffset()
 	{
-		int imgWidth = gridSize * mapWidth;
-		int imgHeight = gridSize * mapHeight;
 		int maxOffsetX = imgWidth - windowWidth;
 		int maxOffsetY = imgHeight - windowHeight;
 		if(viewOffsetX < 0) viewOffsetX = 0;

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
+import java.awt.Color;
 import javax.imageio.ImageIO;
 
 import com.Unit;
@@ -66,6 +67,19 @@ public class UnitContainer{
 		{
 			Unit unit = units.get(id);
 			unit.draw(g, viewOffsetX, viewOffsetY, clock);
+		}
+	}
+	public void drawMini(Graphics g, int miniSize, int miniPad, int miniWidth, int windowWidth, boolean left)
+	{
+		int x0 = miniPad, y0 = miniPad;
+		if(!left) x0 = windowWidth - miniWidth - miniPad;
+		for(String id: getAllUnitsId())
+		{
+			Unit unit = units.get(id);
+			int x = unit.getX()*miniSize+x0;
+			int y = unit.getY()*miniSize+y0;
+			g.setColor(Color.BLUE);
+			g.fillRect(x,y,miniSize,miniSize);
 		}
 	}
 	public void update(MapContainer map)
