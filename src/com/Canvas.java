@@ -13,6 +13,7 @@ public class Canvas extends JPanel implements ActionListener
 	Memo memo = new Memo();
 	MapContainer map;
 	Timer timer;
+	int hero = 1;
 	public Canvas()
 	{
 		map = new MapContainer("map.txt");
@@ -27,19 +28,19 @@ public class Canvas extends JPanel implements ActionListener
 			{
 				if(e.getKeyCode() == KeyEvent.VK_LEFT) /*Left*/
 				{
-					map.addInstruction("move 0 left");
+					map.addInstruction("move "+hero+" left");
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_UP) /*Up*/
 				{
-					map.addInstruction("move 0 up");
+					map.addInstruction("move "+hero+" up");
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_RIGHT) /*Right*/
 				{
-					map.addInstruction("move 0 right");
+					map.addInstruction("move "+hero+" right");
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_DOWN) /*Down*/
 				{
-					map.addInstruction("move 0 down");
+					map.addInstruction("move "+hero+" down");
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_SPACE)
 				{
@@ -56,7 +57,7 @@ public class Canvas extends JPanel implements ActionListener
 		if(cmd.equals("tick"))
 		{
 			map.tick();
-			map.focus("0");
+			map.focus(""+hero);
 		}
 		repaint();
 	}

@@ -69,15 +69,21 @@ public class Character extends Unit{
 	}
 	public void update(MapContainer map)
 	{
+		int xx = x, yy = y;
 		if(state == State.Moving)
 		{
-			map.setUnitByPosition(null,x,y);
-			if(direction == Dir.Down) y++;
-			if(direction == Dir.Left) x--;
-			if(direction == Dir.Right) x++;
-			if(direction == Dir.Up) y--;
+			if(direction == Dir.Down) yy++;
+			if(direction == Dir.Left) xx--;
+			if(direction == Dir.Right) xx++;
+			if(direction == Dir.Up) yy--;
 			state = State.Standing;
-			map.setUnitByPosition(this,x,y);
+			if(map.isAvailable(xx,yy))
+			{
+				map.setUnitByPosition(null,x,y);
+				map.setUnitByPosition(this,xx,yy);
+				x = xx;
+				y = yy;
+			}
 		}
 		super.update(map);
 	}
@@ -102,6 +108,7 @@ public class Character extends Unit{
 			state = State.Moving;
 			return true;
 		}
+		state = State.Standing;
 		return false;
 	}
 	public boolean moveRight(MapContainer map)
@@ -112,6 +119,7 @@ public class Character extends Unit{
 			state = State.Moving;
 			return true;
 		}
+		state = State.Standing;
 		return false;
 	}
 	public boolean moveUp(MapContainer map)
@@ -122,6 +130,7 @@ public class Character extends Unit{
 			state = State.Moving;
 			return true;
 		}
+		state = State.Standing;
 		return false;
 	}
 	public boolean moveDown(MapContainer map)
@@ -132,6 +141,7 @@ public class Character extends Unit{
 			state = State.Moving;
 			return true;
 		}
+		state = State.Standing;
 		return false;
 	}
 }

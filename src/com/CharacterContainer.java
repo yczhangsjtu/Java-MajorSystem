@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 
 public class CharacterContainer extends UnitContainer{
 	TreeMap<String,Character> characters;
-	int imageNum = 2;
 	Image characterImage[][][] = new Image[imageNum][4][4];
 	public CharacterContainer()
 	{
