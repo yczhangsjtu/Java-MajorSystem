@@ -15,14 +15,19 @@ import com.Unit;
 
 public class UnitContainer{
 	TreeMap<String,Unit> units;
-	Image characterImage[][][] = new Image[2][4][4];
+	int imageNum = 2;
+	public enum ImageType {Character}
+	BufferedImage images[] = new BufferedImage[imageNum];
+	ImageType imageTypes[] = new ImageType[imageNum];
 	public UnitContainer()
 	{
-		characterImage[0] = getUnitImage("resource/images/unit/unit0.png");
-		characterImage[1] = getUnitImage("resource/images/unit/unit1.png");
+		images[0] = getUnitImage("resource/images/unit/unit0.png");
+		images[1] = getUnitImage("resource/images/unit/unit1.png");
+		imageTypes[0] = ImageType.Character;
+		imageTypes[1] = ImageType.Character;
 		units = new TreeMap<String,Unit>();
 	}
-	public void readFromFile(String filename)
+	public void readFromFile(String filename, CharacterContainer cc)
 	{
 		try
 		{
@@ -42,7 +47,8 @@ public class UnitContainer{
 					int x = Integer.parseInt(ss[2]);
 					int y = Integer.parseInt(ss[3]);
 					int k = hash(ss[0])%2;
-					units.put(ss[0],new Character(ss[0],x,y,characterImage[k]));
+					cc.addCharacter(ss[0],x,y,k);
+					units.put(ss[0],cc.getUnitById(ss[0]));
 				}
 				s = br.readLine();
 			}
@@ -68,6 +74,10 @@ public class UnitContainer{
 			unit.update(map);
 		}
 	}
+	public void addUnit(String id, Unit unit)
+	{
+		units.put(id,unit);
+	}
 	public Unit getUnitById(String id)
 	{
 		return units.get(id);
@@ -76,33 +86,24 @@ public class UnitContainer{
 	{
 		return units.keySet();
 	}
+	public BufferedImage getImage(int i)
+	{
+		return images[i];
+	}
+	public ImageType getImageType(int i)
+	{
+		return imageTypes[i];
+	}
 	public void addAction(String id, String action)
 	{
 		units.get(id).addAction(action);
 	}
-	Image[][] getUnitImage(String filename)
+	BufferedImage getUnitImage(String filename)
 	{
 		try
 		{
-			BufferedImage big = ImageIO.read(new File(filename));
-			Image result[][] = new Image[4][4];
-			int width = big.getWidth();
-			int height = big.getHeight();
-			if(width < 100 && height < 100)
-			{
-				for(int i = 0; i < 4; i++)
-					for(int j = 0; j < 4; j++)
-						result[i][j] = big;
-			}
-			else
-			{
-				width /= 4;
-				height /= 4;
-				for(int i = 0; i < 4; i++)
-					for(int j = 0; j < 4; j++)
-						result[i][j] = big.getSubimage(j*width,i*height,width,height);
-			}
-			return result;
+			BufferedImage image = ImageIO.read(new File(filename));
+			return image;
 		}
 		catch(Exception e)
 		{

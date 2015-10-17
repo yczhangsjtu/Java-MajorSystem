@@ -25,6 +25,28 @@ public class Character extends Unit{
 		characterId = id;
 		images = imgs;
 	}
+	public int getPixelX(int clock)
+	{
+		if(state == State.Moving)
+		{
+			if(direction == Dir.Down) return super.getPixelX(clock);
+			if(direction == Dir.Left) return super.getPixelX(clock) - clock*width/10;
+			if(direction == Dir.Right) return super.getPixelX(clock) + clock*width/10;
+			if(direction == Dir.Up) return super.getPixelX(clock);
+		}
+		return super.getPixelX(clock);
+	}
+	public int getPixelY(int clock)
+	{
+		if(state == State.Moving)
+		{
+			if(direction == Dir.Down) return super.getPixelY(clock) + clock*height/10;
+			if(direction == Dir.Left) return super.getPixelY(clock);
+			if(direction == Dir.Right) return super.getPixelY(clock);
+			if(direction == Dir.Up) return super.getPixelY(clock) - clock*height/10;
+		}
+		return super.getPixelY(clock);
+	}
 	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
 	{
 		int X = x*width-viewOffsetX;

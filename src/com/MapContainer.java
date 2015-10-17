@@ -18,18 +18,18 @@ public class MapContainer{
 	int windowHeight = 600;
 	int clock = 0;
 	int map[][] = new int[mapWidth][mapHeight];
+	int groundTypeNum = 4;
 	Unit units[][] = new Unit[mapWidth][mapHeight];
 	LinkedList<String> instructions = new LinkedList<String>();
 	UnitContainer uc;
 	CharacterContainer cc;
-	Image groundImage[] = new Image[3];
+	Image groundImage[] = new Image[groundTypeNum];
 	public MapContainer(String mapfile)
 	{
 		try
 		{
-			groundImage[0] = ImageIO.read(new File("resource/images/ground/ground0.jpg"));
-			groundImage[1] = ImageIO.read(new File("resource/images/ground/ground1.jpg"));
-			groundImage[2] = ImageIO.read(new File("resource/images/ground/ground2.jpg"));
+			for(int i = 0; i < groundTypeNum; i++)
+				groundImage[i] = ImageIO.read(new File("resource/images/ground/ground"+i+".jpg"));
 			BufferedReader br = new BufferedReader(
 					new FileReader("resource/map/"+mapfile));
 			for(int y = 0; y < mapHeight; y++)
@@ -46,6 +46,7 @@ public class MapContainer{
 		}
 		uc = new UnitContainer();
 		cc = new CharacterContainer();
+		cc.getImageFromUnitContainer(uc);
 	}
 
 	public void draw(Graphics g)
@@ -65,6 +66,25 @@ public class MapContainer{
 			}
 		}
 		uc.draw(g,viewOffsetX,viewOffsetY,clock);
+	}
+
+	public void focus(int x, int y)
+	{
+		viewOffsetX = x-windowWidth/2;
+		viewOffsetY = y-windowHeight/2;
+		adaptViewOffset();
+	}
+
+	public void focus(Unit unit)
+	{
+		int x = unit.getPixelX(clock), y = unit.getPixelY(clock);
+		focus(x,y);
+	}
+
+	public void focus(String id)
+	{
+		Unit unit = uc.getUnitById(id);
+		focus(unit);
 	}
 
 	public void tick()
@@ -145,13 +165,12 @@ public class MapContainer{
 		if(viewOffsetX < 0) viewOffsetX = 0;
 		if(viewOffsetX > maxOffsetX) viewOffsetX = maxOffsetX;
 		if(viewOffsetY < 0) viewOffsetY = 0;
-		if(viewOffsetY > maxOffsetX) viewOffsetY = maxOffsetY;
+		if(viewOffsetY > maxOffsetY) viewOffsetY = maxOffsetY;
 	}
 
 	public void readUnitFile(String filename)
 	{
-		uc.readFromFile("resource/unit/"+filename);
-		cc.getFromUnitContainer(uc);
+		uc.readFromFile("resource/unit/"+filename,cc);
 		for(String id: uc.getAllUnitsId())
 		{
 			Unit unit = uc.getUnitById(id);

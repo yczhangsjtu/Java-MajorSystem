@@ -56,6 +56,7 @@ public class Canvas extends JPanel implements ActionListener
 		if(cmd.equals("tick"))
 		{
 			map.tick();
+			map.focus("0");
 		}
 		repaint();
 	}

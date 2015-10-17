@@ -62,4 +62,14 @@ abstract class Unit{
 		return y;
 	}
 
+	public int getPixelX(int clock)
+	{
+		return x * width;
+	}
+
+	public int getPixelY(int clock)
+	{
+		return y * height;
+	}
+
 }
