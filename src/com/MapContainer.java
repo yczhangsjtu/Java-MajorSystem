@@ -204,6 +204,11 @@ public class MapContainer{
 		if(viewOffsetY > maxOffsetY) viewOffsetY = maxOffsetY;
 	}
 
+	Unit getUnitById(String unitId)
+	{
+		return uc.getUnitById(unitId);
+	}
+
 	public void readUnitFile(String filename)
 	{
 		uc.readFromFile("resource/unit/"+filename,cc,this);

@@ -17,6 +17,7 @@ public class Character extends Unit{
 	State state = State.Standing;
 	Dir direction = Dir.Down;
 	LinkedList<Point> pathToDest;
+	Unit target;
 	Point dest;
 	public Character(String id)
 	{
@@ -90,6 +91,7 @@ public class Character extends Unit{
 				y = yy;
 			}
 		}
+		if(target != null) setDest(target.getX(),target.getY());
 		if(dest != null) gotoDest(map);
 		super.update(map);
 	}
@@ -109,6 +111,10 @@ public class Character extends Unit{
 			int X = Integer.parseInt(tokens[1]);
 			int Y = Integer.parseInt(tokens[2]);
 			setDest(X,Y);
+		}
+		else if(tokens[0].equals("follow"))
+		{
+			follow(map.getUnitById(tokens[1]));
 		}
 		return true;
 	}
@@ -170,26 +176,43 @@ public class Character extends Unit{
 				if(pathToDest.isEmpty()) return true;
 				p = pathToDest.get(0);
 			}
-			if(p.x == x + 1 && p.y == y) return moveRight(map);
-			if(p.x == x - 1 && p.y == y) return moveLeft(map);
-			if(p.x == x && p.y == y + 1) return moveDown(map);
-			if(p.x == x && p.y == y - 1) return moveUp(map);
-			LinkedList<Point> path = map.findPath(new Point(x,y),p);
-			if(path != null && !path.isEmpty())
-			{
-				path.removeLast();
-				pathToDest.addAll(0,path);
-				if(p.x == x + 1 && p.y == y) return moveRight(map);
-				if(p.x == x - 1 && p.y == y) return moveLeft(map);
-				if(p.x == x && p.y == y + 1) return moveDown(map);
-				if(p.x == x && p.y == y - 1) return moveUp(map);
+			boolean moveSucceed = false;
+			if(p.x == x + 1 && p.y == y) moveSucceed = moveRight(map);
+			else if(p.x == x - 1 && p.y == y) moveSucceed = moveLeft(map);
+			else if(p.x == x && p.y == y + 1) moveSucceed = moveDown(map);
+			else if(p.x == x && p.y == y - 1) moveSucceed = moveUp(map);
+			else{
+				LinkedList<Point> path = map.findPath(new Point(x,y),p);
+				if(path != null && !path.isEmpty())
+				{
+					path.removeLast();
+					pathToDest.addAll(0,path);
+					if(p.x == x + 1 && p.y == y) moveSucceed = moveRight(map);
+					else if(p.x == x - 1 && p.y == y) moveSucceed = moveLeft(map);
+					else if(p.x == x && p.y == y + 1) moveSucceed = moveDown(map);
+					else if(p.x == x && p.y == y - 1) moveSucceed = moveUp(map);
+				}
 			}
+			if(!moveSucceed) pathToDest = null;
+			return moveSucceed;
 		}
 		return false;
+	}
+	public void follow(Unit unit)
+	{
+		target = unit;
+	}
+	public void clearFollow()
+	{
+		target = null;
 	}
 	public void setDest(int X, int Y)
 	{
 		dest = new Point(X,Y);
+	}
+	public void clearDest()
+	{
+		dest = null;
 	}
 	public void gotoDest(MapContainer map)
 	{
