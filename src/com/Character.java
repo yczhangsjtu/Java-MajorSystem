@@ -116,6 +116,12 @@ public class Character extends Unit{
 		{
 			follow(map.getUnitById(tokens[1]));
 		}
+		else if(tokens[0].equals("checkpos"))
+		{
+			int X = Integer.parseInt(tokens[1]);
+			int Y = Integer.parseInt(tokens[2]);
+			return x == X && y == Y;
+		}
 		return true;
 	}
 	public boolean moveLeft(MapContainer map)
