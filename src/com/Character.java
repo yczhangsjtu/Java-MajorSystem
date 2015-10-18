@@ -2,6 +2,9 @@ package com;
 
 import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.util.LinkedList;
+import java.util.Iterator;
 
 import com.Unit;
 import com.MapContainer;
@@ -13,6 +16,8 @@ public class Character extends Unit{
 	enum Dir {Up, Down, Left, Right}
 	State state = State.Standing;
 	Dir direction = Dir.Down;
+	LinkedList<Point> pathToDest;
+	Point dest;
 	public Character(String id)
 	{
 		super(id);
@@ -85,11 +90,12 @@ public class Character extends Unit{
 				y = yy;
 			}
 		}
+		if(dest != null) gotoDest(map);
 		super.update(map);
 	}
 	public boolean act(String action, MapContainer map)
 	{
-		String []tokens = action.trim().split(" ");
+		String []tokens = action.trim().split("_");
 		if(tokens[0].equals("moveleft"))
 			return moveLeft(map);
 		else if(tokens[0].equals("moveright"))
@@ -98,6 +104,12 @@ public class Character extends Unit{
 			return moveUp(map);
 		else if(tokens[0].equals("movedown"))
 			return moveDown(map);
+		else if(tokens[0].equals("goto"))
+		{
+			int X = Integer.parseInt(tokens[1]);
+			int Y = Integer.parseInt(tokens[2]);
+			setDest(X,Y);
+		}
 		return true;
 	}
 	public boolean moveLeft(MapContainer map)
@@ -143,5 +155,44 @@ public class Character extends Unit{
 		}
 		state = State.Standing;
 		return false;
+	}
+	public boolean goTo(MapContainer map, int x1, int y1)
+	{
+		if(pathToDest == null || pathToDest.isEmpty() ||
+			!pathToDest.getLast().equals(new Point(x1,y1)))
+			pathToDest = map.findPath(new Point(x,y),new Point(x1,y1));
+		if(pathToDest != null && !pathToDest.isEmpty())
+		{
+			Point p = pathToDest.get(0);
+			if(p.equals(new Point(x,y)))
+			{
+				pathToDest.removeFirst();
+				if(pathToDest.isEmpty()) return true;
+				p = pathToDest.get(0);
+			}
+			if(p.x == x + 1 && p.y == y) return moveRight(map);
+			if(p.x == x - 1 && p.y == y) return moveLeft(map);
+			if(p.x == x && p.y == y + 1) return moveDown(map);
+			if(p.x == x && p.y == y - 1) return moveUp(map);
+			LinkedList<Point> path = map.findPath(new Point(x,y),p);
+			if(path != null && !path.isEmpty())
+			{
+				path.removeLast();
+				pathToDest.addAll(0,path);
+				if(p.x == x + 1 && p.y == y) return moveRight(map);
+				if(p.x == x - 1 && p.y == y) return moveLeft(map);
+				if(p.x == x && p.y == y + 1) return moveDown(map);
+				if(p.x == x && p.y == y - 1) return moveUp(map);
+			}
+		}
+		return false;
+	}
+	public void setDest(int X, int Y)
+	{
+		dest = new Point(X,Y);
+	}
+	public void gotoDest(MapContainer map)
+	{
+		goTo(map,dest.x,dest.y);
 	}
 }

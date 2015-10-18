@@ -16,7 +16,7 @@ import com.Unit;
 
 public class UnitContainer{
 	TreeMap<String,Unit> units;
-	public static int imageNum = 4;
+	public static int imageNum = 5;
 	public enum ImageType {Character}
 	BufferedImage images[] = new BufferedImage[imageNum];
 	ImageType imageTypes[] = new ImageType[imageNum];
@@ -28,9 +28,11 @@ public class UnitContainer{
 		imageTypes[1] = ImageType.Character;
 		imageTypes[2] = ImageType.Character;
 		imageTypes[3] = ImageType.Character;
+		imageTypes[4] = ImageType.Character;
 		units = new TreeMap<String,Unit>();
 	}
-	public void readFromFile(String filename, CharacterContainer cc)
+	public void readFromFile(String filename, CharacterContainer cc,
+		MapContainer map)
 	{
 		try
 		{
@@ -50,8 +52,11 @@ public class UnitContainer{
 					int x = Integer.parseInt(ss[2]);
 					int y = Integer.parseInt(ss[3]);
 					int k = hash(ss[0])%imageNum;
-					cc.addCharacter(ss[0],x,y,k);
-					units.put(ss[0],cc.getUnitById(ss[0]));
+					if(map.isAvailable(x,y))
+					{
+						cc.addCharacter(ss[0],x,y,k);
+						units.put(ss[0],cc.getUnitById(ss[0]));
+					}
 				}
 				s = br.readLine();
 			}

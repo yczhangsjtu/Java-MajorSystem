@@ -13,7 +13,7 @@ public class Canvas extends JPanel implements ActionListener
 	Memo memo = new Memo();
 	MapContainer map;
 	Timer timer;
-	int hero = 1;
+	int hero = 0;
 	public Canvas()
 	{
 		map = new MapContainer("map.txt");
