@@ -1,12 +1,12 @@
 package com;
 
 import java.util.TreeMap;
-
-import com.UnitContainer;
-import com.MapContainer;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import com.UnitContainer;
+import com.MapContainer;
 
 public class CharacterContainer extends UnitContainer{
 	TreeMap<String,Character> characters;

@@ -17,7 +17,7 @@ import com.Unit;
 public class UnitContainer{
 	TreeMap<String,Unit> units;
 	public static int imageNum = 5;
-	public enum ImageType {Character}
+	public enum ImageType {Character,Money}
 	BufferedImage images[] = new BufferedImage[imageNum];
 	ImageType imageTypes[] = new ImageType[imageNum];
 	public UnitContainer()
@@ -32,7 +32,7 @@ public class UnitContainer{
 		units = new TreeMap<String,Unit>();
 	}
 	public void readFromFile(String filename, CharacterContainer cc,
-		MapContainer map)
+		JewelContainer jc, MapContainer map)
 	{
 		try
 		{
@@ -58,6 +58,16 @@ public class UnitContainer{
 						units.put(ss[0],cc.getUnitById(ss[0]));
 					}
 				}
+				else if(ss[1].equals("Money"))
+				{
+					int x = Integer.parseInt(ss[2]);
+					int y = Integer.parseInt(ss[3]);
+					if(map.isAvailable(x,y))
+					{
+						jc.addMoney(ss[0],x,y);
+						units.put(ss[0],jc.getUnitById(ss[0]));
+					}
+				}
 				s = br.readLine();
 			}
 		}
@@ -71,20 +81,24 @@ public class UnitContainer{
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = units.get(id);
-			unit.draw(g, viewOffsetX, viewOffsetY, clock);
+			if(unit != null) unit.draw(g, viewOffsetX, viewOffsetY, clock);
 		}
 	}
-	public void drawMini(Graphics g, int miniSize, int miniPad, int miniWidth, int windowWidth, boolean left)
+	public void drawMini(Graphics g, int miniSize, int miniPad, int miniWidth,
+		int windowWidth, boolean left)
 	{
 		int x0 = miniPad, y0 = miniPad;
 		if(!left) x0 = windowWidth - miniWidth - miniPad;
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = units.get(id);
-			int x = unit.getX()*miniSize+x0;
-			int y = unit.getY()*miniSize+y0;
-			g.setColor(Color.BLUE);
-			g.fillRect(x,y,miniSize,miniSize);
+			if(unit != null)
+			{
+				int x = unit.getX()*miniSize+x0;
+				int y = unit.getY()*miniSize+y0;
+				g.setColor(Color.BLUE);
+				g.fillRect(x,y,miniSize,miniSize);
+			}
 		}
 	}
 	public void update(MapContainer map)
@@ -92,12 +106,16 @@ public class UnitContainer{
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = units.get(id);
-			unit.update(map);
+			if(unit != null) unit.update(map);
 		}
 	}
 	public void addUnit(String id, Unit unit)
 	{
 		units.put(id,unit);
+	}
+	public void removeUnit(String id)
+	{
+		units.put(id,null);
 	}
 	public Unit getUnitById(String id)
 	{

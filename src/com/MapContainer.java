@@ -34,6 +34,7 @@ public class MapContainer{
 	LinkedList<String> instructions = new LinkedList<String>();
 	UnitContainer uc;
 	CharacterContainer cc;
+	JewelContainer jc;
 	Image groundImage[] = new Image[groundTypeNum];
 	public MapContainer(String mapfile)
 	{
@@ -57,6 +58,7 @@ public class MapContainer{
 		}
 		uc = new UnitContainer();
 		cc = new CharacterContainer();
+		jc = new JewelContainer();
 		cc.getImageFromUnitContainer(uc);
 	}
 
@@ -180,13 +182,26 @@ public class MapContainer{
 		if(x < 0 || x >= mapWidth) return false;
 		if(y < 0 || y >= mapHeight) return false;
 		if(map[x][y] > 2) return false;
-		if(units[x][y] != null) return false;
+		if(units[x][y] != null && units[x][y].ocupySpace()) return false;
 		return true;
 	}
 
 	public Unit getUnitByPosition(int x, int y)
 	{
 		return units[x][y];
+	}
+
+	public void removeUnit(int x, int y)
+	{
+		Unit unit = units[x][y];
+		if(unit != null)
+		{
+			String id = units[x][y].getUnitId();
+			uc.removeUnit(id);
+			if(unit instanceof Character) cc.removeUnit(id);
+			if(unit instanceof Jewel) jc.removeUnit(id);
+			units[x][y] = null;
+		}
 	}
 
 	public void setUnitByPosition(Unit unit, int x, int y)
@@ -211,7 +226,7 @@ public class MapContainer{
 
 	public void readUnitFile(String filename)
 	{
-		uc.readFromFile("resource/unit/"+filename,cc,this);
+		uc.readFromFile("resource/unit/"+filename,cc,jc,this);
 		for(String id: uc.getAllUnitsId())
 		{
 			Unit unit = uc.getUnitById(id);

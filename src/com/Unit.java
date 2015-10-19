@@ -2,10 +2,12 @@ package com;
 
 import com.MapContainer;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.LinkedList;
 
 abstract class Unit{
 	String unitId;
+	Image image;
 	LinkedList<String> actions;
 	int x, y;
 	public static int width = 50, height = 50;
@@ -26,6 +28,9 @@ abstract class Unit{
 
 	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
 	{
+		int X = x*width-viewOffsetX;
+		int Y = y*height-viewOffsetY;
+		g.drawImage(image,X,Y,width,height,null);
 	}
 
 	public void update(MapContainer map)
@@ -35,6 +40,11 @@ abstract class Unit{
 			if(act(actions.get(0), map))
 				actions.remove(0);
 		}
+	}
+
+	public boolean ocupySpace()
+	{
+		return true;
 	}
 
 	public boolean act(String action, MapContainer map)

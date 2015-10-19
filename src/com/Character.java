@@ -19,6 +19,7 @@ public class Character extends Unit{
 	LinkedList<Point> pathToDest;
 	Unit target;
 	Point dest;
+	int money = 0;
 	public Character(String id)
 	{
 		super(id);
@@ -85,6 +86,11 @@ public class Character extends Unit{
 			state = State.Standing;
 			if(map.isAvailable(xx,yy))
 			{
+				if(map.getUnitByPosition(xx,yy) instanceof Money)
+				{
+					map.removeUnit(xx,yy);
+					money++;
+				}
 				map.setUnitByPosition(null,x,y);
 				map.setUnitByPosition(this,xx,yy);
 				x = xx;
