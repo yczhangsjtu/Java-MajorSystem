@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 import com.Memo;
 import com.Character;
@@ -19,13 +23,17 @@ public class Canvas extends JPanel implements ActionListener
 	Random rand;
 	String hero = "0";
 	String directions[] = new String[4];
+	String message = null;
 	Pattern followAction = Pattern.compile("addaction (\\d+) follow_"+hero);
+	Pattern answerQuiz = Pattern.compile("answer quiz (\\d+) correctly");
 	int clock = 0;
+	int score = 0;
 	public Canvas()
 	{
 		map = new MapContainer("map.txt");
-		map.readUnitFile("units.txt");
-		map.readInstructionFile("instruction.txt");
+		team = new Team();
+		readSaveFile("resource/save/save.txt");
+		team.addMember(map.getCharacterById(hero));
 		timer = new Timer(50,this);
 		timer.setRepeats(true);
 		timer.setActionCommand("tick");
@@ -35,8 +43,6 @@ public class Canvas extends JPanel implements ActionListener
 		directions[1] = "right";
 		directions[2] = "up";
 		directions[3] = "down";
-		team = new Team();
-		team.addMember(map.getCharacterById(hero));
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e)
 			{
@@ -81,8 +87,14 @@ public class Canvas extends JPanel implements ActionListener
 						}
 					}
 				}
-				else if(e.getKeyCode() >= KeyEvent.VK_A
-					&& e.getKeyCode() <= KeyEvent.VK_Z)
+				else if(e.getKeyCode() == KeyEvent.VK_S &&
+					KeyEvent.getKeyModifiersText(e.getModifiers()).contains("Ctrl"))
+					saveToFile("save.txt");
+				else if((e.getKeyCode() >= KeyEvent.VK_A
+					&& e.getKeyCode() <= KeyEvent.VK_Z) ||
+					(e.getKeyCode() >= KeyEvent.VK_0
+					&& e.getKeyCode() <= KeyEvent.VK_9) ||
+					e.getKeyCode() == KeyEvent.VK_MINUS)
 				{
 					if(map.isTalking()) map.conversation.press(e);
 				}
@@ -112,11 +124,24 @@ public class Canvas extends JPanel implements ActionListener
 		map.focus(""+hero);
 		if(map.conversationResult != null)
 		{
-			map.execute(map.conversationResult);
-			Matcher m = followAction.matcher(map.conversationResult);
-			if(m.find())
+			Matcher m1 = followAction.matcher(map.conversationResult);
+			Matcher m2 = answerQuiz.matcher(map.conversationResult);
+			if(m1.find())
 			{
-				team.addMember(m.group(1),map);
+				map.execute(map.conversationResult);
+				team.addMember(m1.group(1),map);
+			}
+			else if(m2.find())
+			{
+				if(team.cover(m2.group(1),map))
+				{
+					map.removeUnit(m2.group(1));
+					score+=100;
+				}
+				else
+				{
+					message = "What a pity, you don't have enough team members.";
+				}
 			}
 			map.conversationResult = null;
 		}
@@ -124,9 +149,94 @@ public class Canvas extends JPanel implements ActionListener
 		repaint();
 	}
 
+	public void readSaveFile(String filename)
+	{
+		try
+		{
+			map.clear();
+			BufferedReader br = new BufferedReader(new FileReader(filename));
+			String s = br.readLine();
+			while(s != null)
+			{
+				String []ss = s.split(":");
+				if(ss.length < 2)
+				{
+					s = br.readLine();
+					continue;
+				}
+				String cmd = ss[0];
+				String major = ss[1];
+				if(cmd.equals("unit"))
+					map.uc.execute(major,map.cc,map.jc,map.qc,map);
+				else if(cmd.equals("hero"))
+					hero = major;
+				else if(cmd.equals("score"))
+					score = Integer.parseInt(major);
+				else if(cmd.equals("instruction"))
+					map.addInstruction(major);
+				s = br.readLine();
+			}
+			map.setUnitMap();
+			map.update();
+			map.uc.executeAllActions(map);
+			for(String id: map.getAllCharactersId())
+			{
+				Character ch = map.getCharacterById(id);
+				if(ch != null && ch.target != null
+					&& ch.target.getUnitId().equals(hero))
+					team.addMember(ch);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void saveToFile(String filename)
+	{
+		BufferedWriter bw = null;
+		try
+		{
+			bw = new BufferedWriter(
+					new FileWriter("resource/save/"+filename));
+			bw.write("hero:"+hero+"\n");
+			bw.write("score:"+score+"\n");
+			for(String id: map.getAllUnitsId())
+			{
+				Unit unit = map.getUnitById(id);
+				if(unit != null) bw.write(unit.toString());
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if(bw != null){
+					bw.close();
+				}
+				message = "Successfully saved to " + filename;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public void paint(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		map.draw(g);
+		g.setFont(new Font("TimesRoman",Font.PLAIN,12));
+		g.setColor(Color.WHITE);
+		if(message != null) g.drawString(message,0,20);
+		g.drawString("Money: " + map.getCharacterById(hero).getMoney(),0,40);
+		g.drawString("Team: " + team.toString(),0,60);
+		g.drawString("Score: " + score,0,80);
 	}
 }

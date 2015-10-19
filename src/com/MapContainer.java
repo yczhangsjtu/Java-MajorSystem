@@ -36,6 +36,7 @@ public class MapContainer{
 	UnitContainer uc;
 	CharacterContainer cc;
 	JewelContainer jc;
+	QuizContainer qc;
 	Image groundImage[] = new Image[groundTypeNum];
 	Conversation conversation = null;
 	String conversationResult = null;
@@ -62,7 +63,19 @@ public class MapContainer{
 		uc = new UnitContainer();
 		cc = new CharacterContainer();
 		jc = new JewelContainer();
+		qc = new QuizContainer();
 		cc.getImageFromUnitContainer(uc);
+	}
+
+	public void clear()
+	{
+		uc.clear();
+		cc.clear();
+		jc.clear();
+		qc.clear();
+		for(int x = 0; x < mapWidth; x++)
+			for(int y = 0; y < mapHeight; y++)
+				units[x][y] = null;
 	}
 
 	public void draw(Graphics g)
@@ -228,8 +241,24 @@ public class MapContainer{
 			uc.removeUnit(id);
 			if(unit instanceof Character) cc.removeUnit(id);
 			if(unit instanceof Jewel) jc.removeUnit(id);
+			if(unit instanceof Quiz) qc.removeUnit(id);
 			units[x][y] = null;
 		}
+	}
+
+	public void removeUnit(Unit unit)
+	{
+		if(unit != null)
+		{
+			int x = unit.getX();
+			int y = unit.getY();
+			removeUnit(x,y);
+		}
+	}
+
+	public void removeUnit(String id)
+	{
+		removeUnit(uc.getUnitById(id));
 	}
 
 	public void setUnitByPosition(Unit unit, int x, int y)
@@ -257,6 +286,11 @@ public class MapContainer{
 		return cc.getCharacterById(characterId);
 	}
 
+	public Set<String> getAllCharactersId()
+	{
+		return cc.getAllUnitsId();
+	}
+
 	CharacterContainer getCharacterContainer()
 	{
 		return cc;
@@ -267,9 +301,8 @@ public class MapContainer{
 		return uc.getAllUnitsId();
 	}
 
-	public void readUnitFile(String filename)
+	public void setUnitMap()
 	{
-		uc.readFromFile("resource/unit/"+filename,cc,jc,this);
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = uc.getUnitById(id);
@@ -277,6 +310,12 @@ public class MapContainer{
 			if(isAvailable(x,y))
 				units[x][y] = unit;
 		}
+	}
+
+	public void readUnitFile(String filename)
+	{
+		uc.readFromFile("resource/unit/"+filename,cc,jc,qc,this);
+		setUnitMap();
 	}
 
 	public void readInstructionFile(String filename)

@@ -10,11 +10,13 @@ import com.Memo;
 public class Conversation{
 	Character from;
 	Unit to;
-	public enum State {question,answer,result,finished}
+	public enum State {question,choose,answer,result,finished}
 	State state = State.question;
 	String answer = "";
 	String result = null;
 	String question = "";
+	int choice = 0;
+	boolean enoughMoney = false;
 	Memo memo = new Memo();
 	public Conversation(Character character, Unit unit)
 	{
@@ -23,6 +25,11 @@ public class Conversation{
 		if(to instanceof Character)
 		{
 			question = "My code is " + to.getUnitId() + ", what's my name?";
+			state = State.question;
+		}
+		else if(to instanceof Quiz)
+		{
+			question = ((Quiz)to).getHint();
 			state = State.question;
 		}
 		else
@@ -37,13 +44,27 @@ public class Conversation{
 		int keyCode = e.getKeyCode();
 		if(keyCode == KeyEvent.VK_SPACE)
 		{
-			if(state == State.question) state = State.answer;
+			if(state == State.question)
+			{
+				if(to instanceof Character)
+					state = State.choose;
+				else if(to instanceof Quiz)
+					state = State.choose;
+			}
 			else if(state == State.answer)
 			{
 				if(to instanceof Character)
 				{
 					String correct = memo.getWord(to.getUnitId());
 					if(answer.equals(correct))
+						result = "That's right.";
+					else
+						result = "Sorry, guess again.";
+					state = State.result;
+				}
+				else if(to instanceof Quiz)
+				{
+					if(answer.equals(to.getUnitId()))
 						result = "That's right.";
 					else
 						result = "Sorry, guess again.";
@@ -61,17 +82,74 @@ public class Conversation{
 					else
 						result = null;
 				}
+				else if(to instanceof Quiz)
+				{
+					state = State.finished;
+					if(result.equals("That's right."))
+						result = "answer quiz " + to.getUnitId() + " correctly";
+					else
+						result = null;
+				}
+			}
+			else if(state == State.choose)
+			{
+				if(to instanceof Quiz || to instanceof Character)
+				{
+					if(choice == 0)
+						state = State.answer;
+					else if(choice == 1)
+					{
+						state = State.finished;
+						result = null;
+					}
+					else if(choice == 2)
+					{
+						state = State.result;
+						enoughMoney = from.getMoney() > 0;
+						if(enoughMoney)
+						{
+							from.decreaseMoney();
+							if(to instanceof Quiz)
+								result = to.getUnitId();
+							else
+								result = memo.getWord(to.getUnitId());
+						}
+						else
+							result = "Sorry, you don't have enough money.";
+					}
+				}
 			}
 		}
-		else if(keyCode >= KeyEvent.VK_A && keyCode <= KeyEvent.VK_Z)
+		else if((keyCode >= KeyEvent.VK_A && keyCode <= KeyEvent.VK_Z)
+			|| (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9)
+			|| keyCode == KeyEvent.VK_MINUS)
 		{
+			if(state != State.answer) return;
 			String modifiers = KeyEvent.getKeyModifiersText(e.getModifiers());
-			if(!modifiers.contains("Shift")) keyCode += 32;
+			if((keyCode >= KeyEvent.VK_A && keyCode <= KeyEvent.VK_Z)
+			 && !modifiers.contains("Shift")) keyCode += 32;
 			answer += (char) keyCode;
 		}
 		else if(keyCode == KeyEvent.VK_BACK_SPACE)
 		{
+			if(state != State.answer) return;
 			if(answer.length() > 0) answer = answer.substring(0,answer.length()-1);
+		}
+		else if(keyCode == KeyEvent.VK_UP)
+		{
+			if(state == State.choose && (to instanceof Quiz || to instanceof Character))
+			{
+				choice--;
+				if(choice < 0) choice = 0;
+			}
+		}
+		else if(keyCode == KeyEvent.VK_DOWN)
+		{
+			if(state == State.choose && (to instanceof Quiz || to instanceof Character))
+			{
+				choice++;
+				if(choice > 2) choice = 2;
+			}
 		}
 	}
 	public String getResult()
@@ -86,7 +164,7 @@ public class Conversation{
 		{
 			X = to.getPixelX(clock)-viewOffsetX;
 			Y = to.getPixelY(clock)-viewOffsetY+from.height;
-			if(to instanceof Character)
+			if(to instanceof Character || to instanceof Quiz)
 			{
 				g.setColor(Color.YELLOW);
 				g.fillRect(X,Y,300,30);
@@ -102,7 +180,7 @@ public class Conversation{
 		{
 			X = from.getPixelX(clock)-viewOffsetX;
 			Y = from.getPixelY(clock)-viewOffsetY+from.height;
-			if(to instanceof Character)
+			if(to instanceof Character || to instanceof Quiz)
 			{
 				g.setColor(Color.YELLOW);
 				g.fillRect(X,Y,300,30);
@@ -111,6 +189,25 @@ public class Conversation{
 				g.setColor(Color.BLACK);
 				g.setFont(new Font("TimesRoman",Font.PLAIN,12));
 				g.drawString(answer,X,Y+20);
+			}
+		}
+		else if(state == State.choose)
+		{
+			X = from.getPixelX(clock)-viewOffsetX;
+			Y = from.getPixelY(clock)-viewOffsetY+from.height;
+			if(to instanceof Quiz || to instanceof Character)
+			{
+				g.setColor(Color.YELLOW);
+				g.fillRect(X,Y,300,70);
+				g.setColor(Color.BLACK);
+				g.drawRect(X,Y,300,70);
+				g.setColor(Color.BLUE);
+				g.fillRect(X,Y+choice*20+5,300,20);
+				g.setColor(Color.BLACK);
+				g.setFont(new Font("TimesRoman",Font.PLAIN,12));
+				g.drawString("I know.",X,Y+20);
+				g.drawString("I don't know.",X,Y+40);
+				g.drawString("I want to know.",X,Y+60);
 			}
 		}
 	}

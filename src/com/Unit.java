@@ -48,6 +48,15 @@ abstract class Unit implements Comparable{
 		}
 	}
 
+	public void executeAllActions(MapContainer map)
+	{
+		while(actions.size() > 0)
+		{
+			act(actions.get(0),map);
+			actions.remove(0);
+		}
+	}
+
 	public boolean ocupySpace()
 	{
 		return true;
@@ -93,4 +102,8 @@ abstract class Unit implements Comparable{
 		return y * height;
 	}
 
+	public String toString()
+	{
+		return null;
+	}
 }

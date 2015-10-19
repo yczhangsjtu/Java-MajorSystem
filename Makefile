@@ -8,8 +8,11 @@ list = path/Canvas.sfx\
 	   path/Unit.sfx\
 	   path/Jewel.sfx\
 	   path/Money.sfx\
+	   path/Quiz.sfx\
 	   path/UnitContainer.sfx\
 	   path/CharacterContainer.sfx\
+	   path/JewelContainer.sfx\
+	   path/QuizContainer.sfx\
 	   path/Conversation.sfx
 
 classlist = $(subst path/,$(bpath),$(subst sfx,class,$(list)))
@@ -42,10 +45,19 @@ $(bpath)Jewel.class: $(spath)Jewel.java
 $(bpath)Money.class: $(spath)Money.java
 	javac -sourcepath src -d bin $<
 
+$(bpath)Quiz.class: $(spath)Quiz.java
+	javac -sourcepath src -d bin $<
+
 $(bpath)UnitContainer.class: $(spath)UnitContainer.java
 	javac -sourcepath src -d bin $<
 
 $(bpath)CharacterContainer.class: $(spath)CharacterContainer.java
+	javac -sourcepath src -d bin $<
+
+$(bpath)JewelContainer.class: $(spath)JewelContainer.java
+	javac -sourcepath src -d bin $<
+
+$(bpath)QuizContainer.class: $(spath)QuizContainer.java
 	javac -sourcepath src -d bin $<
 
 $(bpath)Conversation.class: $(spath)Conversation.java

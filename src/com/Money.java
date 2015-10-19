@@ -11,4 +11,8 @@ public class Money extends Jewel{
 	{
 		super(id,x,y,img);
 	}
+	public String toString()
+	{
+		return "unit:"+getUnitId()+" Money "+x+" "+y+"\n";
+	}
 }

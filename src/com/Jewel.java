@@ -17,4 +17,8 @@ public class Jewel extends Unit{
 	{
 		return false;
 	}
+	public String toString()
+	{
+		return null;
+	}
 }

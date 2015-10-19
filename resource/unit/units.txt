@@ -4,4 +4,6 @@
 2 Character 7 8
 3 Character 8 9
 4 Character 15 9
+164 Character 17 4
 m1 Money 10 10
+1644 Quiz The_year_that_Ming_dynasty_fell_down. 12 12

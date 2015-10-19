@@ -10,7 +10,7 @@ public class Team{
 	}
 	public void addMember(Character character)
 	{
-		members.add(character);
+		if(character != null) members.add(character);
 	}
 	public void addMember(String id, CharacterContainer cc)
 	{
@@ -28,6 +28,7 @@ public class Team{
 	public boolean containMember(String id, CharacterContainer cc)
 	{
 		Character character = cc.getCharacterById(id);
+		if(character == null) return false;
 		return members.contains(character);
 	}
 	public boolean containMember(String id, MapContainer cc)
@@ -57,8 +58,20 @@ public class Team{
 				u = s.substring(t,t+3);
 			else
 				u = s.substring(t);
-			if(!containMember(s,cc)) return false;
+			if(!containMember(u,cc)) return false;
+			t += 3;
 		}
 		return true;
+	}
+	public boolean cover(String s, MapContainer map)
+	{
+		return cover(s,map.getCharacterContainer());
+	}
+	public String toString()
+	{
+		String s = "";
+		for(Character c : members)
+			s += c.getUnitId() + " ";
+		return s.trim();
 	}
 }

@@ -194,6 +194,18 @@ public class Character extends Unit{
 	{
 		return direction == Direction.Down;
 	}
+	public void setMoney(int m)
+	{
+		money = m;
+	}
+	public int getMoney()
+	{
+		return money;
+	}
+	public void decreaseMoney()
+	{
+		if(money > 0) money--;
+	}
 	public boolean goTo(MapContainer map, int x1, int y1)
 	{
 		if(pathToDest == null || pathToDest.isEmpty() ||
@@ -237,7 +249,10 @@ public class Character extends Unit{
 	}
 	public void setDest(int X, int Y)
 	{
-		dest = new Point(X,Y);
+		if(X == -1 || Y == -1)
+			dest = null;
+		else
+			dest = new Point(X,Y);
 	}
 	public Point getBack(MapContainer map)
 	{
@@ -266,5 +281,18 @@ public class Character extends Unit{
 	public void gotoDest(MapContainer map)
 	{
 		goTo(map,dest.x,dest.y);
+	}
+	public String toString()
+	{
+		String s = "unit:";
+		s += characterId + " Character ";
+		s += x + " " + y + " " + money + "\n";
+		if(dest != null)
+			s += "instruction:addaction "+characterId+" goto_"+dest.x
+				+"_"+dest.y+"\n";
+		if(target != null)
+			s += "instruction:addaction "+characterId+" follow_"
+				+target.getUnitId()+"\n";
+		return s;
 	}
 }

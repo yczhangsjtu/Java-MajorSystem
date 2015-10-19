@@ -1,0 +1,14 @@
+hero:0
+score:100
+unit:0 Character 37 12 1
+unit:1 Character 9 6 0
+unit:164 Character 35 12 0
+instruction:addaction 164 goto_36_12
+instruction:addaction 164 follow_0
+unit:2 Character 7 8 0
+unit:3 Character 36 12 0
+instruction:addaction 3 goto_36_12
+instruction:addaction 3 follow_0
+unit:4 Character 36 11 0
+instruction:addaction 4 goto_36_12
+instruction:addaction 4 follow_0

@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Point;
 import javax.imageio.ImageIO;
 
 import com.Unit;
@@ -31,49 +32,82 @@ public class UnitContainer{
 		imageTypes[4] = ImageType.Character;
 		units = new TreeMap<String,Unit>();
 	}
+	public void clear()
+	{
+		units = new TreeMap<String,Unit>();
+	}
+	public void execute(String s, CharacterContainer cc,
+		JewelContainer jc, QuizContainer qc, MapContainer map)
+	{
+		s = s.trim();
+		String []ss = s.split(" ");
+		if(ss.length < 2) return;
+		if(ss[1].equals("Character"))
+		{
+			int x,y,m=0;
+			if(ss.length < 4) return;
+			x = Integer.parseInt(ss[2]);
+			y = Integer.parseInt(ss[3]);
+			if(ss.length > 4) m = Integer.parseInt(ss[4]);
+			int k = hash(ss[0])%imageNum;
+			if(map.isAvailable(x,y))
+			{
+				cc.addCharacter(ss[0],x,y,k);
+				cc.getCharacterById(ss[0]).setMoney(m);
+				units.put(ss[0],cc.getUnitById(ss[0]));
+			}
+		}
+		else if(ss[1].equals("Money"))
+		{
+			if(ss.length < 4) return;
+			int x = Integer.parseInt(ss[2]);
+			int y = Integer.parseInt(ss[3]);
+			if(map.isAvailable(x,y))
+			{
+				jc.addMoney(ss[0],x,y);
+				units.put(ss[0],jc.getUnitById(ss[0]));
+			}
+		}
+		else if(ss[1].equals("Quiz"))
+		{
+			if(ss.length < 5) return;
+			int x = Integer.parseInt(ss[3]);
+			int y = Integer.parseInt(ss[4]);
+			if(map.isAvailable(x,y))
+			{
+				qc.addQuiz(ss[0],ss[2],x,y);
+				units.put(ss[0],qc.getUnitById(ss[0]));
+			}
+		}
+	}
 	public void readFromFile(String filename, CharacterContainer cc,
-		JewelContainer jc, MapContainer map)
+		JewelContainer jc, QuizContainer qc, MapContainer map)
 	{
 		try
 		{
+			clear();
+			cc.clear();
+			jc.clear();
+			qc.clear();
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String s = br.readLine();
 			while(s != null)
 			{
-				s = s.trim();
-				String []ss = s.split(" ");
-				if(s.startsWith("#"))
-				{
-					s = br.readLine();
-					continue;
-				}
-				if(ss[1].equals("Character"))
-				{
-					int x = Integer.parseInt(ss[2]);
-					int y = Integer.parseInt(ss[3]);
-					int k = hash(ss[0])%imageNum;
-					if(map.isAvailable(x,y))
-					{
-						cc.addCharacter(ss[0],x,y,k);
-						units.put(ss[0],cc.getUnitById(ss[0]));
-					}
-				}
-				else if(ss[1].equals("Money"))
-				{
-					int x = Integer.parseInt(ss[2]);
-					int y = Integer.parseInt(ss[3]);
-					if(map.isAvailable(x,y))
-					{
-						jc.addMoney(ss[0],x,y);
-						units.put(ss[0],jc.getUnitById(ss[0]));
-					}
-				}
+				execute(s,cc,jc,qc,map);
 				s = br.readLine();
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}
+	}
+	public void executeAllActions(MapContainer map)
+	{
+		for(String id: getAllUnitsId())
+		{
+			Unit unit = units.get(id);
+			if(unit != null) unit.executeAllActions(map);
 		}
 	}
 	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
