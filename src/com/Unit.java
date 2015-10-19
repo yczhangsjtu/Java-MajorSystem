@@ -3,9 +3,10 @@ package com;
 import com.MapContainer;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.util.LinkedList;
 
-abstract class Unit{
+abstract class Unit implements Comparable{
 	String unitId;
 	Image image;
 	LinkedList<String> actions;
@@ -24,6 +25,11 @@ abstract class Unit{
 		x = X;
 		y = Y;
 		actions = new LinkedList<String>();
+	}
+
+	public int compareTo(Object o)
+	{
+		return unitId.compareTo(((Unit)o).getUnitId());
 	}
 
 	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
@@ -70,6 +76,11 @@ abstract class Unit{
 	public int getY()
 	{
 		return y;
+	}
+
+	public Point getPoint()
+	{
+		return new Point(x,y);
 	}
 
 	public int getPixelX(int clock)

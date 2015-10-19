@@ -13,9 +13,9 @@ public class Character extends Unit{
 	String characterId;
 	Image images[][];
 	enum State {Standing, Moving}
-	enum Dir {Up, Down, Left, Right}
+	enum Direction {Up, Down, Left, Right}
 	State state = State.Standing;
-	Dir direction = Dir.Down;
+	Direction direction = Direction.Down;
 	LinkedList<Point> pathToDest;
 	Unit target;
 	Point dest;
@@ -36,10 +36,10 @@ public class Character extends Unit{
 	{
 		if(state == State.Moving)
 		{
-			if(direction == Dir.Down) return super.getPixelX(clock);
-			if(direction == Dir.Left) return super.getPixelX(clock) - clock*width/10;
-			if(direction == Dir.Right) return super.getPixelX(clock) + clock*width/10;
-			if(direction == Dir.Up) return super.getPixelX(clock);
+			if(direction == Direction.Down) return super.getPixelX(clock);
+			if(direction == Direction.Left) return super.getPixelX(clock) - clock*width/10;
+			if(direction == Direction.Right) return super.getPixelX(clock) + clock*width/10;
+			if(direction == Direction.Up) return super.getPixelX(clock);
 		}
 		return super.getPixelX(clock);
 	}
@@ -47,10 +47,10 @@ public class Character extends Unit{
 	{
 		if(state == State.Moving)
 		{
-			if(direction == Dir.Down) return super.getPixelY(clock) + clock*height/10;
-			if(direction == Dir.Left) return super.getPixelY(clock);
-			if(direction == Dir.Right) return super.getPixelY(clock);
-			if(direction == Dir.Up) return super.getPixelY(clock) - clock*height/10;
+			if(direction == Direction.Down) return super.getPixelY(clock) + clock*height/10;
+			if(direction == Direction.Left) return super.getPixelY(clock);
+			if(direction == Direction.Right) return super.getPixelY(clock);
+			if(direction == Direction.Up) return super.getPixelY(clock) - clock*height/10;
 		}
 		return super.getPixelY(clock);
 	}
@@ -60,17 +60,17 @@ public class Character extends Unit{
 		int Y = y*height-viewOffsetY;
 		int i = 0;
 		int j = 0;
-		if(direction == Dir.Down) i = 0;
-		if(direction == Dir.Left) i = 1;
-		if(direction == Dir.Right) i = 2;
-		if(direction == Dir.Up) i = 3;
+		if(direction == Direction.Down) i = 0;
+		if(direction == Direction.Left) i = 1;
+		if(direction == Direction.Right) i = 2;
+		if(direction == Direction.Up) i = 3;
 		if(state == State.Moving)
 		{
 			j = clock%4;
-			if(direction == Dir.Down) Y += clock*height/10;
-			if(direction == Dir.Left) X -= clock*height/10;
-			if(direction == Dir.Right) X += clock*height/10;
-			if(direction == Dir.Up) Y -= clock*height/10;
+			if(direction == Direction.Down) Y += clock*height/10;
+			if(direction == Direction.Left) X -= clock*height/10;
+			if(direction == Direction.Right) X += clock*height/10;
+			if(direction == Direction.Up) Y -= clock*height/10;
 		}
 		g.drawImage(images[i][j],X,Y,width,height,null);
 	}
@@ -79,10 +79,10 @@ public class Character extends Unit{
 		int xx = x, yy = y;
 		if(state == State.Moving)
 		{
-			if(direction == Dir.Down) yy++;
-			if(direction == Dir.Left) xx--;
-			if(direction == Dir.Right) xx++;
-			if(direction == Dir.Up) yy--;
+			if(direction == Direction.Down) yy++;
+			if(direction == Direction.Left) xx--;
+			if(direction == Direction.Right) xx++;
+			if(direction == Direction.Up) yy--;
 			state = State.Standing;
 			if(map.isAvailable(xx,yy))
 			{
@@ -97,7 +97,7 @@ public class Character extends Unit{
 				y = yy;
 			}
 		}
-		if(target != null) setDest(target.getX(),target.getY());
+		if(target != null) setDest(target,map);
 		if(dest != null) gotoDest(map);
 		super.update(map);
 	}
@@ -132,7 +132,7 @@ public class Character extends Unit{
 	}
 	public boolean moveLeft(MapContainer map)
 	{
-		direction = Dir.Left;
+		direction = Direction.Left;
 		if(map.isAvailable(x-1,y))
 		{
 			state = State.Moving;
@@ -143,7 +143,7 @@ public class Character extends Unit{
 	}
 	public boolean moveRight(MapContainer map)
 	{
-		direction = Dir.Right;
+		direction = Direction.Right;
 		if(map.isAvailable(x+1,y))
 		{
 			state = State.Moving;
@@ -154,7 +154,7 @@ public class Character extends Unit{
 	}
 	public boolean moveUp(MapContainer map)
 	{
-		direction = Dir.Up;
+		direction = Direction.Up;
 		if(map.isAvailable(x,y-1))
 		{
 			state = State.Moving;
@@ -165,7 +165,7 @@ public class Character extends Unit{
 	}
 	public boolean moveDown(MapContainer map)
 	{
-		direction = Dir.Down;
+		direction = Direction.Down;
 		if(map.isAvailable(x,y+1))
 		{
 			state = State.Moving;
@@ -174,41 +174,54 @@ public class Character extends Unit{
 		state = State.Standing;
 		return false;
 	}
+	public Direction getDirection()
+	{
+		return direction;
+	}
+	public boolean faceLeft()
+	{
+		return direction == Direction.Left;
+	}
+	public boolean faceRight()
+	{
+		return direction == Direction.Right;
+	}
+	public boolean faceUp()
+	{
+		return direction == Direction.Up;
+	}
+	public boolean faceDown()
+	{
+		return direction == Direction.Down;
+	}
 	public boolean goTo(MapContainer map, int x1, int y1)
 	{
 		if(pathToDest == null || pathToDest.isEmpty() ||
-			!pathToDest.getLast().equals(new Point(x1,y1)))
+			!pathToDest.getLast().equals(new Point(x1,y1)) ||
+			distance(pathToDest.getFirst(),new Point(x,y))>1)
 			pathToDest = map.findPath(new Point(x,y),new Point(x1,y1));
 		if(pathToDest != null && !pathToDest.isEmpty())
 		{
-			Point p = pathToDest.get(0);
+			Point p = pathToDest.getFirst();
 			if(p.equals(new Point(x,y)))
 			{
 				pathToDest.removeFirst();
 				if(pathToDest.isEmpty()) return true;
-				p = pathToDest.get(0);
+				p = pathToDest.getFirst();
 			}
 			boolean moveSucceed = false;
 			if(p.x == x + 1 && p.y == y) moveSucceed = moveRight(map);
 			else if(p.x == x - 1 && p.y == y) moveSucceed = moveLeft(map);
 			else if(p.x == x && p.y == y + 1) moveSucceed = moveDown(map);
 			else if(p.x == x && p.y == y - 1) moveSucceed = moveUp(map);
-			else{
-				LinkedList<Point> path = map.findPath(new Point(x,y),p);
-				if(path != null && !path.isEmpty())
-				{
-					path.removeLast();
-					pathToDest.addAll(0,path);
-					if(p.x == x + 1 && p.y == y) moveSucceed = moveRight(map);
-					else if(p.x == x - 1 && p.y == y) moveSucceed = moveLeft(map);
-					else if(p.x == x && p.y == y + 1) moveSucceed = moveDown(map);
-					else if(p.x == x && p.y == y - 1) moveSucceed = moveUp(map);
-				}
-			}
 			if(!moveSucceed) pathToDest = null;
 			return moveSucceed;
 		}
 		return false;
+	}
+	public int distance(Point p1, Point p2)
+	{
+		return Math.abs(p1.x-p2.x)+Math.abs(p1.y-p2.y);
 	}
 	public void follow(Unit unit)
 	{
@@ -218,9 +231,33 @@ public class Character extends Unit{
 	{
 		target = null;
 	}
+	public void setDest(Point p)
+	{
+		dest = p;
+	}
 	public void setDest(int X, int Y)
 	{
 		dest = new Point(X,Y);
+	}
+	public Point getBack(MapContainer map)
+	{
+		int X=-1,Y=-1;
+		if(direction == Direction.Left){X=x+1;Y=y;}
+		if(direction == Direction.Right){X=x-1;Y=y;}
+		if(direction == Direction.Up){X=x;Y=y+1;}
+		if(direction == Direction.Down){X=x;Y=y-1;}
+		return new Point(X,Y);
+	}
+	public void setDest(Character character, MapContainer map)
+	{
+		setDest(character.getBack(map));
+	}
+	public void setDest(Unit unit, MapContainer map)
+	{
+		if(unit instanceof Character)
+			setDest((Character)unit,map);
+		else
+			setDest(unit.getPoint());
 	}
 	public void clearDest()
 	{

@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeSet;
 import javax.imageio.ImageIO;
 
@@ -36,6 +37,8 @@ public class MapContainer{
 	CharacterContainer cc;
 	JewelContainer jc;
 	Image groundImage[] = new Image[groundTypeNum];
+	Conversation conversation = null;
+	String conversationResult = null;
 	public MapContainer(String mapfile)
 	{
 		try
@@ -81,6 +84,10 @@ public class MapContainer{
 		uc.draw(g,viewOffsetX,viewOffsetY,clock);
 		drawMiniMap(g,miniLeft);
 		uc.drawMini(g,miniSize,miniPad,miniWidth,windowWidth,miniLeft);
+		if(isTalking())
+		{
+			conversation.draw(g,viewOffsetX,viewOffsetY,clock);
+		}
 	}
 
 	public void drawMiniMap(Graphics g, boolean left)
@@ -129,6 +136,7 @@ public class MapContainer{
 
 	public void tick()
 	{
+		if(isTalking()) return;
 		clock++;
 		if(clock >= 10)
 		{
@@ -175,6 +183,26 @@ public class MapContainer{
 	{
 		uc.update(this);
 		executeInstructions();
+	}
+
+	public void talk(Character character, Unit unit)
+	{
+		conversation = new Conversation(character,unit);
+	}
+
+	public boolean isTalking()
+	{
+		if(conversation != null)
+		{
+			if(conversation.isFinished())
+			{
+				conversationResult = conversation.getResult();
+				conversation = null;
+			}
+			else
+				return true;
+		}
+		return false;
 	}
 
 	public boolean isAvailable(int x, int y)
@@ -224,10 +252,25 @@ public class MapContainer{
 		return uc.getUnitById(unitId);
 	}
 
+	Character getCharacterById(String characterId)
+	{
+		return cc.getCharacterById(characterId);
+	}
+
+	CharacterContainer getCharacterContainer()
+	{
+		return cc;
+	}
+
+	public Set<String> getAllUnitsId()
+	{
+		return uc.getAllUnitsId();
+	}
+
 	public void readUnitFile(String filename)
 	{
 		uc.readFromFile("resource/unit/"+filename,cc,jc,this);
-		for(String id: uc.getAllUnitsId())
+		for(String id: getAllUnitsId())
 		{
 			Unit unit = uc.getUnitById(id);
 			int x = unit.getX(), y = unit.getY();
@@ -260,13 +303,18 @@ public class MapContainer{
 		LinkedList<Point> path = new LinkedList<Point>();
 		if(p1.equals(p2)) return path;
 		TreeSet<Node> heap = new TreeSet<Node>();
-		TreeSet<Node> visited = new TreeSet<Node>();
+		//TreeSet<Node> visited = new TreeSet<Node>();
+		int value[][] = new int[mapWidth][mapHeight];
+		for(int i = 0; i < mapWidth; i++)
+			for(int j = 0; j < mapHeight; j++)
+				value[i][j] = -1;
 		heap.add(new Node(p1,0));
 		heap.first().setHCost(distance(p1,p2));
 		while(!heap.isEmpty())
 		{
 			Node f = heap.first();
-			if(visited.contains(f)) return null;
+			//if(visited.contains(f)) return null;
+			//visited.add(f);
 			heap.remove(f);
 			TreeSet<Node> neighbors = getNeighbors(f,p2);
 			if(neighbors.isEmpty()) return null;
@@ -283,7 +331,14 @@ public class MapContainer{
 					return path;
 				}
 				n.setHCost(distance(n.getPoint(),p2));
-				heap.add(n);
+				int v = value[n.getX()][n.getY()];
+				if(v == -1 || n.getCost() < v)
+				{
+					Node m = new Node(n.getPoint(),v);
+					value[n.getX()][n.getY()] = n.getCost();
+					heap.remove(m);
+					heap.add(n);
+				}
 			}
 		}
 		return null;
@@ -291,6 +346,10 @@ public class MapContainer{
 	int distance(Point p1, Point p2)
 	{
 		return Math.abs(p1.x-p2.x)+Math.abs(p1.y-p2.y);
+	}
+	int distance(Node n, Point p2)
+	{
+		return distance(n.getPoint(),p2);
 	}
 	TreeSet<Node> getNeighbors(Node n, Point p2)
 	{
@@ -327,19 +386,17 @@ class Node implements Comparable{
 	{
 		if(getCost() < n.getCost()) return true;
 		if(getCost() > n.getCost()) return false;
-		if(pcost < n.pcost) return true;
-		if(pcost > n.pcost) return false;
 		if(point.x < n.getX()) return true;
 		if(point.x > n.getX()) return false;
 		return point.y < n.getY();
 	}
 	public boolean equalTo(Node n)
 	{
-		return pcost == n.pcost && hcost == n.hcost;
+		return getCost() == n.getCost();
 	}
 	public boolean equals(Node n)
 	{
-		return point.equals(n.point) && pcost == n.pcost && hcost == n.hcost;
+		return point.equals(n.point) && getCost() == n.getCost();
 	}
 	public int compareTo(Object n)
 	{
