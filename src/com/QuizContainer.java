@@ -1,6 +1,7 @@
 package com;
 
 import java.util.TreeMap;
+import java.util.Set;
 import java.awt.Image;
 
 public class QuizContainer extends UnitContainer{
@@ -15,6 +16,30 @@ public class QuizContainer extends UnitContainer{
 	{
 		Quiz quiz = new Quiz(id,hint,x,y,quizImage);
 		quizes.put(id,quiz);
-		super.addUnit(id,quiz);
+	}
+	public void addQuiz(String id, Quiz quiz)
+	{
+		quizes.put(id,quiz);
+	}
+	public Quiz getQuizById(String id)
+	{
+		return quizes.get(id);
+	}
+	public void addUnit(String id, Unit unit)
+	{
+		if(unit instanceof Quiz)
+			addQuiz(id,(Quiz)unit);
+	}
+	public void removeUnit(String id)
+	{
+		quizes.put(id,null);
+	}
+	public Unit getUnitById(String id)
+	{
+		return quizes.get(id);
+	}
+	public Set<String> getAllUnitsId()
+	{
+		return quizes.keySet();
 	}
 }

@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Random;
 import javax.imageio.ImageIO;
 
 public class MapContainer{
@@ -37,9 +38,12 @@ public class MapContainer{
 	CharacterContainer cc;
 	JewelContainer jc;
 	QuizContainer qc;
+	TransportContainer tc;
+	OracleContainer oc;
 	Image groundImage[] = new Image[groundTypeNum];
 	Conversation conversation = null;
 	String conversationResult = null;
+	Random rand;
 	public MapContainer(String mapfile)
 	{
 		try
@@ -64,7 +68,9 @@ public class MapContainer{
 		cc = new CharacterContainer();
 		jc = new JewelContainer();
 		qc = new QuizContainer();
-		cc.getImageFromUnitContainer(uc);
+		tc = new TransportContainer();
+		oc = new OracleContainer();
+		rand = new Random();
 	}
 
 	public void clear()
@@ -200,7 +206,7 @@ public class MapContainer{
 
 	public void talk(Character character, Unit unit)
 	{
-		conversation = new Conversation(character,unit);
+		conversation = new Conversation(character,unit,this);
 	}
 
 	public boolean isTalking()
@@ -225,6 +231,36 @@ public class MapContainer{
 		if(map[x][y] > 2) return false;
 		if(units[x][y] != null && units[x][y].ocupySpace()) return false;
 		return true;
+	}
+
+	public void addRandomMoney()
+	{
+		int x = rand.nextInt(100);
+		int y = rand.nextInt(100);
+		if(isAvailable(x,y)) addMoney(x,y);
+	}
+
+	public void addMoney(int x, int y)
+	{
+		String id = "money"+(x * 100 + y);
+		jc.addMoney(id,x,y);
+		uc.addUnit(id,jc.getUnitById(id));
+		units[x][y] = jc.getUnitById(id);
+	}
+
+	public void addCharacter(String id, int x, int y)
+	{
+		cc.addCharacter(id,x,y);
+		uc.addUnit(id,cc.getUnitById(id));
+		units[x][y] = cc.getUnitById(id);
+	}
+
+	public void addQuiz(String id, String hint, int x, int y)
+	{
+		qc.addQuiz(id,hint,x,y);
+		Quiz qz = qc.getQuizById(id);
+		uc.addUnit(qz.getUnitId(),qz);
+		units[x][y] = qz;
 	}
 
 	public Unit getUnitByPosition(int x, int y)
@@ -266,6 +302,12 @@ public class MapContainer{
 		units[x][y] = unit;
 	}
 
+	public void removeQuiz(String id)
+	{
+		Quiz qz = qc.getQuizById(id);
+		if(qz != null) removeUnit(qz.getUnitId());
+	}
+
 	void adaptViewOffset()
 	{
 		int maxOffsetX = imgWidth - windowWidth;
@@ -301,21 +343,29 @@ public class MapContainer{
 		return uc.getAllUnitsId();
 	}
 
+	public Quiz getQuizById(String id)
+	{
+		return qc.getQuizById(id);
+	}
+
 	public void setUnitMap()
 	{
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = uc.getUnitById(id);
 			int x = unit.getX(), y = unit.getY();
-			if(isAvailable(x,y))
-				units[x][y] = unit;
+			if(isAvailable(x,y)) units[x][y] = unit;
 		}
 	}
 
-	public void readUnitFile(String filename)
+	public int getWindowWidth()
 	{
-		uc.readFromFile("resource/unit/"+filename,cc,jc,qc,this);
-		setUnitMap();
+		return windowWidth;
+	}
+
+	public int getWindowHeight()
+	{
+		return windowHeight;
 	}
 
 	public void readInstructionFile(String filename)
@@ -342,7 +392,6 @@ public class MapContainer{
 		LinkedList<Point> path = new LinkedList<Point>();
 		if(p1.equals(p2)) return path;
 		TreeSet<Node> heap = new TreeSet<Node>();
-		//TreeSet<Node> visited = new TreeSet<Node>();
 		int value[][] = new int[mapWidth][mapHeight];
 		for(int i = 0; i < mapWidth; i++)
 			for(int j = 0; j < mapHeight; j++)
@@ -352,8 +401,6 @@ public class MapContainer{
 		while(!heap.isEmpty())
 		{
 			Node f = heap.first();
-			//if(visited.contains(f)) return null;
-			//visited.add(f);
 			heap.remove(f);
 			TreeSet<Node> neighbors = getNeighbors(f,p2);
 			if(neighbors.isEmpty()) return null;

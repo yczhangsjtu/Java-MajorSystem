@@ -18,10 +18,12 @@ public class Conversation{
 	int choice = 0;
 	boolean enoughMoney = false;
 	Memo memo = new Memo();
-	public Conversation(Character character, Unit unit)
+	MapContainer map;
+	public Conversation(Character character, Unit unit, MapContainer m)
 	{
 		from = character;
 		to = unit;
+		map = m;
 		if(to instanceof Character)
 		{
 			question = "My code is " + to.getUnitId() + ", what's my name?";
@@ -30,6 +32,11 @@ public class Conversation{
 		else if(to instanceof Quiz)
 		{
 			question = ((Quiz)to).getHint();
+			state = State.question;
+		}
+		else if(to instanceof Oracle)
+		{
+			question = "What do you want to ask?";
 			state = State.question;
 		}
 		else
@@ -46,9 +53,8 @@ public class Conversation{
 		{
 			if(state == State.question)
 			{
-				if(to instanceof Character)
-					state = State.choose;
-				else if(to instanceof Quiz)
+				if(to instanceof Character || to instanceof Quiz
+					|| to instanceof Oracle)
 					state = State.choose;
 			}
 			else if(state == State.answer)
@@ -64,10 +70,24 @@ public class Conversation{
 				}
 				else if(to instanceof Quiz)
 				{
-					if(answer.equals(to.getUnitId()))
+					if(answer.equals(((Quiz)to).getCode()))
 						result = "That's right.";
 					else
 						result = "Sorry, guess again.";
+					state = State.result;
+				}
+				else if(to instanceof Oracle)
+				{
+					Character c = map.getCharacterById(answer);
+					if(c == null)
+						result = "Sorry, no such person.";
+					else
+					{
+						if(choice == 0)
+							result = "He is at " + c.getX() + "," + c.getY();
+						else
+							result = "His name is " + memo.getWord(c.getUnitId());
+					}
 					state = State.result;
 				}
 			}
@@ -77,8 +97,13 @@ public class Conversation{
 				{
 					state = State.finished;
 					if(result.equals("That's right."))
-						result = "addaction "+to.getUnitId()+" follow_"
-							+from.getUnitId();
+					{
+						if(((Character)to).target == from)
+							result = "addaction "+to.getUnitId()+" unfollow";
+						else
+							result = "addaction "+to.getUnitId()+" follow_"
+								+from.getUnitId();
+					}
 					else
 						result = null;
 				}
@@ -86,9 +111,14 @@ public class Conversation{
 				{
 					state = State.finished;
 					if(result.equals("That's right."))
-						result = "answer quiz " + to.getUnitId() + " correctly";
+						result = "answer quiz " + ((Quiz)to).getCode() + " correctly";
 					else
 						result = null;
+				}
+				else
+				{
+					state = State.finished;
+					result = null;
 				}
 			}
 			else if(state == State.choose)
@@ -110,12 +140,21 @@ public class Conversation{
 						{
 							from.decreaseMoney();
 							if(to instanceof Quiz)
-								result = to.getUnitId();
-							else
+								result = ((Quiz)to).getCode();
+							else if(to instanceof Character)
 								result = memo.getWord(to.getUnitId());
 						}
 						else
 							result = "Sorry, you don't have enough money.";
+					}
+				}
+				else if(to instanceof Oracle)
+				{
+					if(choice == 0 || choice == 1) state = State.answer;
+					else if(choice == 2)
+					{
+						state = State.finished;
+						result = null;
 					}
 				}
 			}
@@ -137,7 +176,7 @@ public class Conversation{
 		}
 		else if(keyCode == KeyEvent.VK_UP)
 		{
-			if(state == State.choose && (to instanceof Quiz || to instanceof Character))
+			if(state == State.choose)
 			{
 				choice--;
 				if(choice < 0) choice = 0;
@@ -145,7 +184,7 @@ public class Conversation{
 		}
 		else if(keyCode == KeyEvent.VK_DOWN)
 		{
-			if(state == State.choose && (to instanceof Quiz || to instanceof Character))
+			if(state == State.choose)
 			{
 				choice++;
 				if(choice > 2) choice = 2;
@@ -160,27 +199,27 @@ public class Conversation{
 	{
 		if(isFinished()) return;
 		int X,Y;
+		X = to.getPixelX(clock)-viewOffsetX;
+		Y = to.getPixelY(clock)-viewOffsetY+from.height;
+		if(X + 300 > map.getWindowWidth()) X -= 250;
+		if(Y + 90 > map.getWindowHeight()) Y -= 140;
 		if(state == State.question || state == State.result)
 		{
-			X = to.getPixelX(clock)-viewOffsetX;
-			Y = to.getPixelY(clock)-viewOffsetY+from.height;
-			if(to instanceof Character || to instanceof Quiz)
+			if(to instanceof Character || to instanceof Quiz || to instanceof Oracle)
 			{
 				g.setColor(Color.YELLOW);
-				g.fillRect(X,Y,300,30);
+				g.fillRect(X,Y,300,60);
 				g.setColor(Color.BLACK);
-				g.drawRect(X,Y,300,30);
+				g.drawRect(X,Y,300,60);
 				g.setColor(Color.BLACK);
 				g.setFont(new Font("TimesRoman",Font.PLAIN,12));
-				if(state == State.question) g.drawString(question,X,Y+20);
-				else if(state == State.result) g.drawString(result,X,Y+20);
+				if(state == State.question) drawString(g,question,X,Y+20);
+				else if(state == State.result) drawString(g,result,X,Y+20);
 			}
 		}
 		else if(state == State.answer)
 		{
-			X = from.getPixelX(clock)-viewOffsetX;
-			Y = from.getPixelY(clock)-viewOffsetY+from.height;
-			if(to instanceof Character || to instanceof Quiz)
+			if(to instanceof Character || to instanceof Quiz || to instanceof Oracle)
 			{
 				g.setColor(Color.YELLOW);
 				g.fillRect(X,Y,300,30);
@@ -193,8 +232,6 @@ public class Conversation{
 		}
 		else if(state == State.choose)
 		{
-			X = from.getPixelX(clock)-viewOffsetX;
-			Y = from.getPixelY(clock)-viewOffsetY+from.height;
 			if(to instanceof Quiz || to instanceof Character)
 			{
 				g.setColor(Color.YELLOW);
@@ -209,6 +246,28 @@ public class Conversation{
 				g.drawString("I don't know.",X,Y+40);
 				g.drawString("I want to know.",X,Y+60);
 			}
+			else if(to instanceof Oracle)
+			{
+				g.setColor(Color.YELLOW);
+				g.fillRect(X,Y,300,70);
+				g.setColor(Color.BLACK);
+				g.drawRect(X,Y,300,70);
+				g.setColor(Color.BLUE);
+				g.fillRect(X,Y+choice*20+5,300,20);
+				g.setColor(Color.BLACK);
+				g.setFont(new Font("TimesRoman",Font.PLAIN,12));
+				g.drawString("I want to find ",X,Y+20);
+				g.drawString("I want to know the name of ",X,Y+40);
+				g.drawString("No, thanks.",X,Y+60);
+			}
 		}
+	}
+
+	public int drawString(Graphics g, String str, int x, int y)
+	{
+		String ss[] = str.split("&");
+		for(int i = 0; i < ss.length; i++)
+			g.drawString(ss[i],x,y+i*20);
+		return ss.length;
 	}
 }

@@ -86,10 +86,21 @@ public class Character extends Unit{
 			state = State.Standing;
 			if(map.isAvailable(xx,yy))
 			{
-				if(map.getUnitByPosition(xx,yy) instanceof Money)
+				Unit unit = map.getUnitByPosition(xx,yy);
+				if(unit instanceof Money)
 				{
 					map.removeUnit(xx,yy);
 					money++;
+				}
+				else if(unit instanceof Transport)
+				{
+					int x1 = ((Transport)unit).getTargetX();
+					int y1 = ((Transport)unit).getTargetY();
+					if(map.isAvailable(x1,y1))
+					{
+						xx = x1;
+						yy = y1;
+					}
 				}
 				map.setUnitByPosition(null,x,y);
 				map.setUnitByPosition(this,xx,yy);
@@ -121,6 +132,10 @@ public class Character extends Unit{
 		else if(tokens[0].equals("follow"))
 		{
 			follow(map.getUnitById(tokens[1]));
+		}
+		else if(tokens[0].equals("unfollow"))
+		{
+			clearFollow();
 		}
 		else if(tokens[0].equals("checkpos"))
 		{
@@ -280,7 +295,8 @@ public class Character extends Unit{
 	}
 	public void gotoDest(MapContainer map)
 	{
-		goTo(map,dest.x,dest.y);
+		if(dest != null && x == dest.x && y == dest.y) dest = null;
+		if(dest != null) goTo(map,dest.x,dest.y);
 	}
 	public String toString()
 	{

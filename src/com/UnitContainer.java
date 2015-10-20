@@ -17,19 +17,8 @@ import com.Unit;
 
 public class UnitContainer{
 	TreeMap<String,Unit> units;
-	public static int imageNum = 5;
-	public enum ImageType {Character,Money}
-	BufferedImage images[] = new BufferedImage[imageNum];
-	ImageType imageTypes[] = new ImageType[imageNum];
 	public UnitContainer()
 	{
-		for(int i = 0; i < imageNum; i++)
-			images[i] = getUnitImage("resource/images/unit/unit"+i+".png");
-		imageTypes[0] = ImageType.Character;
-		imageTypes[1] = ImageType.Character;
-		imageTypes[2] = ImageType.Character;
-		imageTypes[3] = ImageType.Character;
-		imageTypes[4] = ImageType.Character;
 		units = new TreeMap<String,Unit>();
 	}
 	public void clear()
@@ -37,7 +26,8 @@ public class UnitContainer{
 		units = new TreeMap<String,Unit>();
 	}
 	public void execute(String s, CharacterContainer cc,
-		JewelContainer jc, QuizContainer qc, MapContainer map)
+		JewelContainer jc, QuizContainer qc, TransportContainer tc,
+		OracleContainer oc, MapContainer map)
 	{
 		s = s.trim();
 		String []ss = s.split(" ");
@@ -49,10 +39,10 @@ public class UnitContainer{
 			x = Integer.parseInt(ss[2]);
 			y = Integer.parseInt(ss[3]);
 			if(ss.length > 4) m = Integer.parseInt(ss[4]);
-			int k = hash(ss[0])%imageNum;
+			int k = cc.getImageIndex(ss[0]);
 			if(map.isAvailable(x,y))
 			{
-				cc.addCharacter(ss[0],x,y,k);
+				cc.addCharacter(ss[0],x,y);
 				cc.getCharacterById(ss[0]).setMoney(m);
 				units.put(ss[0],cc.getUnitById(ss[0]));
 			}
@@ -76,30 +66,35 @@ public class UnitContainer{
 			if(map.isAvailable(x,y))
 			{
 				qc.addQuiz(ss[0],ss[2],x,y);
-				units.put(ss[0],qc.getUnitById(ss[0]));
+				Quiz qz = qc.getQuizById(ss[0]);
+				units.put(qz.getUnitId(),qz);
 			}
 		}
-	}
-	public void readFromFile(String filename, CharacterContainer cc,
-		JewelContainer jc, QuizContainer qc, MapContainer map)
-	{
-		try
+		else if(ss[1].equals("Transport"))
 		{
-			clear();
-			cc.clear();
-			jc.clear();
-			qc.clear();
-			BufferedReader br = new BufferedReader(new FileReader(filename));
-			String s = br.readLine();
-			while(s != null)
+			if(ss.length < 6) return;
+			int x = Integer.parseInt(ss[2]);
+			int y = Integer.parseInt(ss[3]);
+			int tx = Integer.parseInt(ss[4]);
+			int ty = Integer.parseInt(ss[5]);
+			if(map.isAvailable(x,y))
 			{
-				execute(s,cc,jc,qc,map);
-				s = br.readLine();
+				tc.addTransport(ss[0],x,y,tx,ty);
+				Transport tp = tc.getTransportById(ss[0]);
+				units.put(tp.getUnitId(),tp);
 			}
 		}
-		catch(Exception e)
+		else if(ss[1].equals("Oracle"))
 		{
-			e.printStackTrace();
+			if(ss.length < 4) return;
+			int x = Integer.parseInt(ss[2]);
+			int y = Integer.parseInt(ss[3]);
+			if(map.isAvailable(x,y))
+			{
+				oc.addOracle(ss[0],x,y);
+				Oracle or = oc.getOracleById(ss[0]);
+				units.put(or.getUnitId(),or);
+			}
 		}
 	}
 	public void executeAllActions(MapContainer map)
@@ -107,7 +102,10 @@ public class UnitContainer{
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = units.get(id);
-			if(unit != null) unit.executeAllActions(map);
+			if(unit != null)
+			{
+				unit.executeAllActions(map);
+			}
 		}
 	}
 	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
@@ -130,7 +128,16 @@ public class UnitContainer{
 			{
 				int x = unit.getX()*miniSize+x0;
 				int y = unit.getY()*miniSize+y0;
-				g.setColor(Color.BLUE);
+				if(unit instanceof Character)
+					g.setColor(Color.BLUE);
+				else if(unit instanceof Jewel)
+					g.setColor(Color.YELLOW);
+				else if(unit instanceof Quiz)
+					g.setColor(Color.RED);
+				else if(unit instanceof Transport)
+					g.setColor(Color.GREEN);
+				else if(unit instanceof Oracle)
+					g.setColor(Color.BLACK);
 				g.fillRect(x,y,miniSize,miniSize);
 			}
 		}
@@ -158,14 +165,6 @@ public class UnitContainer{
 	public Set<String> getAllUnitsId()
 	{
 		return units.keySet();
-	}
-	public BufferedImage getImage(int i)
-	{
-		return images[i];
-	}
-	public ImageType getImageType(int i)
-	{
-		return imageTypes[i];
 	}
 	public void addAction(String id, String action)
 	{

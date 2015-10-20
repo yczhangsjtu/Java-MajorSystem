@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 
 import com.Memo;
+import com.QuizLibrary;
 import com.Character;
 
 public class Canvas extends JPanel implements ActionListener
@@ -25,7 +26,10 @@ public class Canvas extends JPanel implements ActionListener
 	String directions[] = new String[4];
 	String message = null;
 	Pattern followAction = Pattern.compile("addaction (\\d+) follow_"+hero);
+	Pattern unfollowAction = Pattern.compile("addaction (\\d+) unfollow");
 	Pattern answerQuiz = Pattern.compile("answer quiz (\\d+) correctly");
+	Memo memo;
+	QuizLibrary quizlib;
 	int clock = 0;
 	int score = 0;
 	public Canvas()
@@ -43,6 +47,8 @@ public class Canvas extends JPanel implements ActionListener
 		directions[1] = "right";
 		directions[2] = "up";
 		directions[3] = "down";
+		memo = new Memo();
+		quizlib = new QuizLibrary();
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e)
 			{
@@ -122,10 +128,62 @@ public class Canvas extends JPanel implements ActionListener
 	{
 		map.tick();
 		map.focus(""+hero);
+		clock++;
+		handleConversation();
+		if(clock % 100 == 0)
+		{
+			addRandomCharacter();
+			addRandomMoney();
+		}
+		if(clock % 100 == 0)
+		{
+			addRandomQuiz();
+		}
+		repaint();
+	}
+
+	public void addRandomCharacter()
+	{
+		int x = rand.nextInt(100);
+		int y = rand.nextInt(100);
+		for(String w : memo.getNums())
+		{
+			if(map.getCharacterById(w) == null)
+			{
+				if(map.isAvailable(x,y))
+					map.addCharacter(w,x,y);
+				break;
+			}
+		}
+	}
+
+	public void addRandomMoney()
+	{
+		map.addRandomMoney();
+	}
+
+	public void addRandomQuiz()
+	{
+		int x = rand.nextInt(100);
+		int y = rand.nextInt(100);
+		for(String n : quizlib.getNums())
+		{
+			if(map.getQuizById(n) == null)
+			{
+				if(map.isAvailable(x,y))
+					map.addQuiz(n,quizlib.getHint(n),x,y);
+				break;
+			}
+		}
+	}
+
+	public void handleConversation()
+	{
 		if(map.conversationResult != null)
 		{
 			Matcher m1 = followAction.matcher(map.conversationResult);
 			Matcher m2 = answerQuiz.matcher(map.conversationResult);
+			Matcher m3 = unfollowAction.matcher(map.conversationResult);
 			if(m1.find())
 			{
 				map.execute(map.conversationResult);
@@ -135,7 +193,7 @@ public class Canvas extends JPanel implements ActionListener
 			{
 				if(team.cover(m2.group(1),map))
 				{
-					map.removeUnit(m2.group(1));
+					map.removeQuiz(m2.group(1));
 					score+=100;
 				}
 				else
@@ -143,10 +201,13 @@ public class Canvas extends JPanel implements ActionListener
 					message = "What a pity, you don't have enough team members.";
 				}
 			}
+			else if(m3.find())
+			{
+				map.execute(map.conversationResult);
+				team.removeMember(m3.group(1),map);
+			}
 			map.conversationResult = null;
 		}
-		clock++;
-		repaint();
 	}
 
 	public void readSaveFile(String filename)
@@ -167,13 +228,15 @@ public class Canvas extends JPanel implements ActionListener
 				String cmd = ss[0];
 				String major = ss[1];
 				if(cmd.equals("unit"))
-					map.uc.execute(major,map.cc,map.jc,map.qc,map);
+					map.uc.execute(major,map.cc,map.jc,map.qc,map.tc,map.oc,map);
 				else if(cmd.equals("hero"))
 					hero = major;
 				else if(cmd.equals("score"))
 					score = Integer.parseInt(major);
 				else if(cmd.equals("instruction"))
 					map.addInstruction(major);
+				else if(cmd.equals("clock"))
+					clock = Integer.parseInt(major);
 				s = br.readLine();
 			}
 			map.setUnitMap();
@@ -202,6 +265,7 @@ public class Canvas extends JPanel implements ActionListener
 					new FileWriter("resource/save/"+filename));
 			bw.write("hero:"+hero+"\n");
 			bw.write("score:"+score+"\n");
+			bw.write("clock:"+clock+"\n");
 			for(String id: map.getAllUnitsId())
 			{
 				Unit unit = map.getUnitById(id);
@@ -238,5 +302,7 @@ public class Canvas extends JPanel implements ActionListener
 		g.drawString("Money: " + map.getCharacterById(hero).getMoney(),0,40);
 		g.drawString("Team: " + team.toString(),0,60);
 		g.drawString("Score: " + score,0,80);
+		g.drawString("Position: " + map.getCharacterById(hero).getX()+","+
+			map.getCharacterById(hero).getY(),0,100);
 	}
 }

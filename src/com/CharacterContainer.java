@@ -1,6 +1,7 @@
 package com;
 
 import java.util.TreeMap;
+import java.util.Set;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -10,34 +11,48 @@ import com.MapContainer;
 
 public class CharacterContainer extends UnitContainer{
 	TreeMap<String,Character> characters;
+	public static int imageNum = 5;
 	Image characterImage[][][] = new Image[imageNum][4][4];
 	public CharacterContainer()
 	{
 		characters = new TreeMap<String,Character>();
-	}
-	public void getImageFromUnitContainer(UnitContainer uc)
-	{
 		for(int i = 0; i < imageNum; i++)
 		{
-			if(uc.getImageType(i) == UnitContainer.ImageType.Character)
-				characterImage[i] = getCharacterImage(uc.getImage(i));
-			else
-				characterImage[i] = null;
+			characterImage[i] = getCharacterImage(
+				getUnitImage("resource/images/unit/unit"+i+".png"));
 		}
 	}
 	public void addCharacter(String characterId, Character c)
 	{
 		characters.put(characterId,c);
-		super.addUnit(characterId,c);
+		//super.addUnit(characterId,c);
 	}
-	public void addCharacter(String characterId, int x, int y, int k)
+	public void addCharacter(String characterId, int x, int y)
 	{
+		int k = getImageIndex(characterId);
 		Character c = new Character(characterId,x,y,characterImage[k]);
 		addCharacter(characterId,c);
 	}
 	public Character getCharacterById(String characterId)
 	{
 		return characters.get(characterId);
+	}
+	public void addUnit(String id, Unit unit)
+	{
+		if(unit instanceof Character)
+			addCharacter(id,(Character)unit);
+	}
+	public void removeUnit(String id)
+	{
+		characters.put(id,null);
+	}
+	public Unit getUnitById(String id)
+	{
+		return characters.get(id);
+	}
+	public Set<String> getAllUnitsId()
+	{
+		return characters.keySet();
 	}
 	public void move(String target, String direction, MapContainer map)
 	{
@@ -50,6 +65,10 @@ public class CharacterContainer extends UnitContainer{
 			character.moveUp(map);
 		if(direction.equals("down"))
 			character.moveDown(map);
+	}
+	public int getImageIndex(String str)
+	{
+		return hash(str)%imageNum;
 	}
 	public Image[][] getCharacterImage(BufferedImage image)
 	{
