@@ -3,24 +3,17 @@ package com;
 import java.awt.Image;
 
 public class Quiz extends Unit{
-	String hint;
 	String code;
-	public Quiz(String id, String h)
+	public Quiz(String id)
 	{
 		super("quiz"+id);
 		code = id;
-		hint = h.replaceAll("_"," ");
 	}
-	public Quiz(String id, String h, int x, int y, Image img)
+	public Quiz(String id, int x, int y, Image img)
 	{
 		super("quiz"+id,x,y);
-		hint = h.replaceAll("_"," ");
 		code = id;
 		image = img;
-	}
-	public String getHint()
-	{
-		return hint;
 	}
 	public String getCode()
 	{
@@ -28,6 +21,6 @@ public class Quiz extends Unit{
 	}
 	public String toString()
 	{
-		return "unit:"+getCode()+" Quiz "+hint.replaceAll(" ","_")+" "+x+" "+y+"\n";
+		return "unit:"+getCode()+" Quiz "+x+" "+y+"\n";
 	}
 }

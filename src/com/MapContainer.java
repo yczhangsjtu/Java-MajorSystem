@@ -233,11 +233,20 @@ public class MapContainer{
 		return true;
 	}
 
+	public boolean isEmpty(int x, int y)
+	{
+		if(x < 0 || x >= mapWidth) return false;
+		if(y < 0 || y >= mapHeight) return false;
+		if(map[x][y] > 2) return false;
+		if(units[x][y] != null) return false;
+		return true;
+	}
+
 	public void addRandomMoney()
 	{
 		int x = rand.nextInt(100);
 		int y = rand.nextInt(100);
-		if(isAvailable(x,y)) addMoney(x,y);
+		if(isEmpty(x,y)) addMoney(x,y);
 	}
 
 	public void addMoney(int x, int y)
@@ -255,9 +264,9 @@ public class MapContainer{
 		units[x][y] = cc.getUnitById(id);
 	}
 
-	public void addQuiz(String id, String hint, int x, int y)
+	public void addQuiz(String id, int x, int y)
 	{
-		qc.addQuiz(id,hint,x,y);
+		qc.addQuiz(id,x,y);
 		Quiz qz = qc.getQuizById(id);
 		uc.addUnit(qz.getUnitId(),qz);
 		units[x][y] = qz;
@@ -353,8 +362,11 @@ public class MapContainer{
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = uc.getUnitById(id);
-			int x = unit.getX(), y = unit.getY();
-			if(isAvailable(x,y)) units[x][y] = unit;
+			if(unit != null)
+			{
+				int x = unit.getX(), y = unit.getY();
+				if(isEmpty(x,y)) units[x][y] = unit;
+			}
 		}
 	}
 

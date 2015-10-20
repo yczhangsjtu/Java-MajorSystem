@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import com.Memo;
+import com.QuizLibrary;
 
 public class Conversation{
 	Character from;
@@ -18,6 +19,7 @@ public class Conversation{
 	int choice = 0;
 	boolean enoughMoney = false;
 	Memo memo = new Memo();
+	QuizLibrary quizlib = new QuizLibrary();
 	MapContainer map;
 	public Conversation(Character character, Unit unit, MapContainer m)
 	{
@@ -31,7 +33,7 @@ public class Conversation{
 		}
 		else if(to instanceof Quiz)
 		{
-			question = ((Quiz)to).getHint();
+			question = quizlib.getHint(((Quiz)to).getCode());
 			state = State.question;
 		}
 		else if(to instanceof Oracle)

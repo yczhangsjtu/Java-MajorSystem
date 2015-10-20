@@ -12,9 +12,9 @@ public class QuizContainer extends UnitContainer{
 		quizes = new TreeMap<String,Quiz>();
 		quizImage = getUnitImage("resource/images/unit/quiz.png");
 	}
-	public void addQuiz(String id, String hint, int x, int y)
+	public void addQuiz(String id, int x, int y)
 	{
-		Quiz quiz = new Quiz(id,hint,x,y,quizImage);
+		Quiz quiz = new Quiz(id,x,y,quizImage);
 		quizes.put(id,quiz);
 	}
 	public void addQuiz(String id, Quiz quiz)

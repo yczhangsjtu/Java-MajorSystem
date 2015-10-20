@@ -40,7 +40,7 @@ public class UnitContainer{
 			y = Integer.parseInt(ss[3]);
 			if(ss.length > 4) m = Integer.parseInt(ss[4]);
 			int k = cc.getImageIndex(ss[0]);
-			if(map.isAvailable(x,y))
+			if(map.isEmpty(x,y))
 			{
 				cc.addCharacter(ss[0],x,y);
 				cc.getCharacterById(ss[0]).setMoney(m);
@@ -52,7 +52,7 @@ public class UnitContainer{
 			if(ss.length < 4) return;
 			int x = Integer.parseInt(ss[2]);
 			int y = Integer.parseInt(ss[3]);
-			if(map.isAvailable(x,y))
+			if(map.isEmpty(x,y))
 			{
 				jc.addMoney(ss[0],x,y);
 				units.put(ss[0],jc.getUnitById(ss[0]));
@@ -60,12 +60,12 @@ public class UnitContainer{
 		}
 		else if(ss[1].equals("Quiz"))
 		{
-			if(ss.length < 5) return;
-			int x = Integer.parseInt(ss[3]);
-			int y = Integer.parseInt(ss[4]);
-			if(map.isAvailable(x,y))
+			if(ss.length < 4) return;
+			int x = Integer.parseInt(ss[2]);
+			int y = Integer.parseInt(ss[3]);
+			if(map.isEmpty(x,y))
 			{
-				qc.addQuiz(ss[0],ss[2],x,y);
+				qc.addQuiz(ss[0],x,y);
 				Quiz qz = qc.getQuizById(ss[0]);
 				units.put(qz.getUnitId(),qz);
 			}
@@ -77,7 +77,7 @@ public class UnitContainer{
 			int y = Integer.parseInt(ss[3]);
 			int tx = Integer.parseInt(ss[4]);
 			int ty = Integer.parseInt(ss[5]);
-			if(map.isAvailable(x,y))
+			if(map.isEmpty(x,y))
 			{
 				tc.addTransport(ss[0],x,y,tx,ty);
 				Transport tp = tc.getTransportById(ss[0]);
@@ -89,7 +89,7 @@ public class UnitContainer{
 			if(ss.length < 4) return;
 			int x = Integer.parseInt(ss[2]);
 			int y = Integer.parseInt(ss[3]);
-			if(map.isAvailable(x,y))
+			if(map.isEmpty(x,y))
 			{
 				oc.addOracle(ss[0],x,y);
 				Oracle or = oc.getOracleById(ss[0]);

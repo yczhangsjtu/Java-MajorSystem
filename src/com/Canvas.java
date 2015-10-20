@@ -134,10 +134,20 @@ public class Canvas extends JPanel implements ActionListener
 		{
 			addRandomCharacter();
 			addRandomMoney();
+			addRandomQuiz();
 		}
 		if(clock % 100 == 0)
 		{
-			addRandomQuiz();
+			for(String id: map.getAllCharactersId())
+			{
+				if(id.equals(hero)) continue;
+				if(rand.nextInt(100) > 90)
+				{
+					Character character = map.getCharacterById(id);
+					if(character.target == null)
+						character.move(directions[rand.nextInt(4)],map);
+				}
+			}
 		}
 		repaint();
 	}
@@ -150,7 +160,7 @@ public class Canvas extends JPanel implements ActionListener
 		{
 			if(map.getCharacterById(w) == null)
 			{
-				if(map.isAvailable(x,y))
+				if(map.isEmpty(x,y))
 					map.addCharacter(w,x,y);
 				break;
 			}
@@ -170,8 +180,8 @@ public class Canvas extends JPanel implements ActionListener
 		{
 			if(map.getQuizById(n) == null)
 			{
-				if(map.isAvailable(x,y))
-					map.addQuiz(n,quizlib.getHint(n),x,y);
+				if(map.isEmpty(x,y))
+					map.addQuiz(n,x,y);
 				break;
 			}
 		}

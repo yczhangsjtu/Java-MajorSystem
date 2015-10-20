@@ -7,6 +7,7 @@ import java.awt.Image;
 public class JewelContainer extends UnitContainer{
 	TreeMap<String,Jewel> jewels;
 	Image moneyImage;
+	int maxSize = 20;
 	public JewelContainer()
 	{
 		jewels = new TreeMap<String,Jewel>();
@@ -14,11 +15,13 @@ public class JewelContainer extends UnitContainer{
 	}
 	public void addMoney(String id, int x, int y)
 	{
+		if(jewels.size() >= maxSize) return;
 		Money money = new Money(id,x,y,moneyImage);
 		jewels.put(id,money);
 	}
 	public void addJewel(String id, Jewel jewel)
 	{
+		if(jewels.size() >= maxSize) return;
 		jewels.put(id,jewel);
 	}
 	public void addUnit(String id, Unit unit)

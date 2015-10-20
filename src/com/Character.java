@@ -100,6 +100,16 @@ public class Character extends Unit{
 					{
 						xx = x1;
 						yy = y1;
+						if(map.getUnitByPosition(x1,y1) instanceof Money)
+						{
+							map.removeUnit(x1,y1);
+							money++;
+						}
+					}
+					else
+					{
+						xx = x;
+						yy = y;
 					}
 				}
 				map.setUnitByPosition(null,x,y);
@@ -144,6 +154,14 @@ public class Character extends Unit{
 			return x == X && y == Y;
 		}
 		return true;
+	}
+	public boolean move(String direction, MapContainer map)
+	{
+		if(direction.equals("left")) return moveLeft(map);
+		if(direction.equals("right")) return moveRight(map);
+		if(direction.equals("up")) return moveUp(map);
+		if(direction.equals("down")) return moveDown(map);
+		return false;
 	}
 	public boolean moveLeft(MapContainer map)
 	{
