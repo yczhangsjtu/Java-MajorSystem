@@ -32,11 +32,18 @@ abstract class Unit implements Comparable{
 		return unitId.compareTo(((Unit)o).getUnitId());
 	}
 
-	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
+	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock, MapContainer map)
 	{
 		int X = x*width-viewOffsetX;
 		int Y = y*height-viewOffsetY;
+		if(X > map.windowWidth || X + width < 0 || Y > map.windowHeight || Y + height < 0)
+			return;
 		g.drawImage(image,X,Y,width,height,null);
+	}
+
+	public void drawMini(Graphics g, int x, int y, int size)
+	{
+		g.drawImage(image,x,y,size,size,null);
 	}
 
 	public void update(MapContainer map)

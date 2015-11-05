@@ -1,6 +1,7 @@
 spath=src/com/
 bpath=bin/com/
 list = path/Canvas.sfx\
+	   path/AI.sfx\
 	   path/Memo.sfx\
 	   path/QuizLibrary.sfx\
 	   path/Character.sfx\
@@ -27,6 +28,9 @@ $(bpath)Main.class: $(spath)Main.java $(classlist)
 	javac -sourcepath src -d bin $<
 
 $(bpath)Canvas.class: $(spath)Canvas.java
+	javac -sourcepath src -d bin $<
+
+$(bpath)AI.class: $(spath)AI.java
 	javac -sourcepath src -d bin $<
 
 $(bpath)Memo.class: $(spath)Memo.java

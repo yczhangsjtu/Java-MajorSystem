@@ -34,15 +34,17 @@ public class UnitContainer{
 		if(ss.length < 2) return;
 		if(ss[1].equals("Character"))
 		{
-			int x,y,m=0;
+			int x,y,m=0,k;
 			if(ss.length < 4) return;
 			x = Integer.parseInt(ss[2]);
 			y = Integer.parseInt(ss[3]);
 			if(ss.length > 4) m = Integer.parseInt(ss[4]);
-			int k = cc.getImageIndex(ss[0]);
+			if(ss.length > 5) k = Integer.parseInt(ss[5]);
+			//if(ss.length > 5) k = cc.getImageIndex(ss[0]);
+			else k = cc.getImageIndex(ss[0]);
 			if(map.isEmpty(x,y))
 			{
-				cc.addCharacter(ss[0],x,y);
+				cc.addCharacter(ss[0],x,y,k);
 				cc.getCharacterById(ss[0]).setMoney(m);
 				units.put(ss[0],cc.getUnitById(ss[0]));
 			}
@@ -67,6 +69,8 @@ public class UnitContainer{
 			{
 				qc.addQuiz(ss[0],x,y);
 				Quiz qz = qc.getQuizById(ss[0]);
+				if(ss.length > 4 && ss[4].equals("solved"))
+					qz.setSolved(true,map);
 				units.put(qz.getUnitId(),qz);
 			}
 		}
@@ -108,12 +112,12 @@ public class UnitContainer{
 			}
 		}
 	}
-	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
+	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock, MapContainer map)
 	{
 		for(String id: getAllUnitsId())
 		{
 			Unit unit = units.get(id);
-			if(unit != null) unit.draw(g, viewOffsetX, viewOffsetY, clock);
+			if(unit != null) unit.draw(g, viewOffsetX, viewOffsetY, clock, map);
 		}
 	}
 	public void drawMini(Graphics g, int miniSize, int miniPad, int miniWidth,
@@ -129,16 +133,21 @@ public class UnitContainer{
 				int x = unit.getX()*miniSize+x0;
 				int y = unit.getY()*miniSize+y0;
 				if(unit instanceof Character)
-					g.setColor(Color.BLUE);
-				else if(unit instanceof Jewel)
-					g.setColor(Color.YELLOW);
-				else if(unit instanceof Quiz)
-					g.setColor(Color.RED);
-				else if(unit instanceof Transport)
-					g.setColor(Color.GREEN);
-				else if(unit instanceof Oracle)
-					g.setColor(Color.BLACK);
-				g.fillRect(x,y,miniSize,miniSize);
+				{
+					unit.drawMini(g,x,y,miniSize*2);
+				}
+				else
+				{
+					if(unit instanceof Jewel)
+						g.setColor(Color.YELLOW);
+					else if(unit instanceof Quiz)
+						g.setColor(Color.RED);
+					else if(unit instanceof Transport)
+						g.setColor(Color.GREEN);
+					else if(unit instanceof Oracle)
+						g.setColor(Color.BLACK);
+					g.fillRect(x,y,miniSize,miniSize);
+				}
 			}
 		}
 	}
@@ -182,15 +191,5 @@ public class UnitContainer{
 			e.printStackTrace();
 		}
 		return null;
-	}
-	int hash(String str)
-	{
-		int s = 0;
-		for(int i = 0; i < str.length(); i++)
-		{
-			int c = str.codePointAt(i);
-			s += c;
-		}
-		return s;
 	}
 }

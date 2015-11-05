@@ -1,1032 +1,319 @@
 hero:0
-score:1800
-clock:184288
-unit:0 Character 33 72 279
-unit:019 Character 87 90 0
-unit:028 Character 91 88 0
-unit:042 Character 94 82 0
-unit:056 Character 62 6 0
-unit:058 Character 84 26 0
-unit:062 Character 92 88 0
-unit:067 Character 90 19 0
-unit:078 Character 56 29 0
-unit:08 Character 96 95 0
-unit:089 Character 36 11 0
-unit:09 Character 99 2 0
-unit:1 Character 86 66 4
-unit:10 Character 63 33 0
-unit:100 Character 88 97 0
-unit:1000 Character 94 66 0
-unit:101 Character 38 35 0
-unit:102 Character 31 6 0
-unit:103 Character 79 57 0
-unit:104 Character 62 14 0
-unit:105 Character 49 54 0
-unit:106 Character 86 65 0
-unit:107 Character 4 86 0
-unit:108 Character 35 22 0
-unit:109 Character 42 9 0
-unit:11 Character 10 71 0
-unit:110 Character 50 78 0
-unit:111 Character 63 55 1
-unit:112 Character 88 23 0
-unit:113 Character 36 73 0
-unit:114 Character 49 48 0
-unit:115 Character 70 47 1
-unit:116 Character 94 30 0
-unit:117 Character 90 89 0
-unit:118 Character 0 31 0
-unit:119 Character 73 21 0
-unit:12 Character 5 73 1
-unit:120 Character 56 48 0
-unit:121 Character 97 88 0
-unit:122 Character 24 42 0
-unit:123 Character 45 56 0
-unit:124 Character 69 49 0
-unit:125 Character 23 93 0
-unit:126 Character 44 91 0
-unit:127 Character 71 40 0
-unit:128 Character 62 51 0
-unit:129 Character 54 44 0
-unit:13 Character 43 5 0
-unit:130 Character 45 7 0
-unit:131 Character 9 98 0
-unit:132 Character 82 36 0
-unit:133 Character 50 20 0
-unit:134 Character 50 61 0
-unit:135 Character 54 62 0
-unit:136 Character 60 55 0
-unit:137 Character 24 35 0
-unit:138 Character 44 4 0
-unit:139 Character 13 77 0
-unit:14 Character 47 39 0
-unit:140 Character 6 84 0
-unit:141 Character 82 86 0
-unit:142 Character 46 33 0
-unit:143 Character 18 80 0
-unit:144 Character 70 8 0
-unit:145 Character 58 78 0
-unit:146 Character 55 65 0
-unit:147 Character 61 0 0
-unit:148 Character 42 18 0
-unit:149 Character 73 52 0
-unit:15 Character 14 27 0
-unit:150 Character 46 76 0
-unit:151 Character 73 91 0
-unit:152 Character 1 98 0
-unit:153 Character 75 27 0
-unit:154 Character 13 4 0
-unit:155 Character 9 90 0
-unit:156 Character 45 35 0
-unit:157 Character 17 21 0
-unit:158 Character 88 15 0
-unit:159 Character 37 64 0
-unit:16 Character 73 66 0
-unit:160 Character 32 5 0
-unit:161 Character 85 48 0
-unit:162 Character 73 11 0
-unit:163 Character 48 6 0
-unit:164 Character 85 97 0
-unit:165 Character 42 49 0
-unit:166 Character 6 14 10
-unit:167 Character 87 5 0
-unit:168 Character 91 61 0
-unit:169 Character 20 4 0
-unit:17 Character 74 91 0
-unit:170 Character 7 27 0
-unit:171 Character 54 86 0
-unit:172 Character 55 7 0
-unit:173 Character 40 50 0
-unit:174 Character 35 30 0
-unit:175 Character 95 28 0
-unit:176 Character 90 18 0
-unit:177 Character 34 29 0
-unit:178 Character 80 30 0
-unit:179 Character 51 83 0
-unit:18 Character 32 36 0
-unit:180 Character 85 56 0
-unit:181 Character 69 91 0
-unit:182 Character 29 64 0
-unit:183 Character 9 81 0
-unit:184 Character 39 92 0
-unit:185 Character 48 89 0
-unit:186 Character 49 7 0
-unit:187 Character 26 15 0
-unit:188 Character 7 45 0
-unit:189 Character 78 73 0
-unit:19 Character 66 74 0
-unit:190 Character 80 32 0
-unit:191 Character 70 64 0
-unit:192 Character 69 59 0
-unit:193 Character 48 8 0
-unit:194 Character 26 29 0
-unit:195 Character 95 94 0
-unit:196 Character 45 83 0
-unit:197 Character 17 61 0
-unit:198 Character 47 74 0
-unit:199 Character 93 87 0
-unit:2 Character 1 6 7
-unit:20 Character 81 43 0
-unit:200 Character 73 60 1
-unit:201 Character 11 66 0
-unit:202 Character 76 23 0
-unit:203 Character 89 71 0
-unit:204 Character 45 37 0
-unit:205 Character 95 15 0
-unit:206 Character 68 25 0
-unit:207 Character 33 41 0
-unit:208 Character 26 49 0
-unit:209 Character 85 29 0
-unit:21 Character 29 58 0
-unit:210 Character 23 77 0
-unit:211 Character 1 72 0
-unit:212 Character 86 7 0
-unit:213 Character 49 96 0
-unit:214 Character 3 83 0
-unit:215 Character 21 23 0
-unit:216 Character 31 71 0
-unit:217 Character 50 6 0
-unit:218 Character 96 42 0
-unit:219 Character 54 23 0
-unit:22 Character 40 43 0
-unit:220 Character 68 43 1
-unit:221 Character 53 12 0
-unit:222 Character 39 5 0
-unit:223 Character 91 73 0
-unit:224 Character 27 98 0
-unit:225 Character 83 59 0
-unit:226 Character 58 87 0
-unit:227 Character 41 95 0
-unit:228 Character 58 44 0
-unit:229 Character 36 25 0
-unit:23 Character 85 19 0
-unit:230 Character 55 49 0
-unit:231 Character 66 35 0
-unit:232 Character 79 27 0
-unit:233 Character 24 78 0
-unit:234 Character 30 44 0
-unit:235 Character 29 46 0
-unit:236 Character 94 32 0
-unit:237 Character 98 49 0
-unit:238 Character 48 67 0
-unit:239 Character 99 76 0
-unit:24 Character 47 41 0
-unit:240 Character 66 68 0
-unit:241 Character 9 43 0
-unit:242 Character 37 35 0
-unit:243 Character 51 23 0
-unit:244 Character 94 50 0
-unit:245 Character 12 52 0
-unit:246 Character 3 64 0
-unit:247 Character 99 97 0
-unit:248 Character 48 77 0
-unit:249 Character 23 22 0
-unit:25 Character 83 9 0
-unit:250 Character 51 26 0
-unit:251 Character 75 71 0
-unit:252 Character 95 37 0
-unit:253 Character 89 56 0
-unit:254 Character 14 23 0
-unit:255 Character 45 69 0
-unit:256 Character 54 49 0
-unit:257 Character 75 51 0
-unit:258 Character 1 51 0
-unit:259 Character 41 52 0
-unit:26 Character 95 24 0
-unit:260 Character 69 29 0
-unit:261 Character 20 51 0
-unit:262 Character 40 66 0
-unit:263 Character 74 73 0
-unit:264 Character 81 81 0
-unit:265 Character 14 83 0
-unit:266 Character 5 71 0
-unit:267 Character 66 8 0
-unit:268 Character 88 38 1
-unit:269 Character 44 67 0
-unit:27 Character 32 21 0
-unit:270 Character 17 10 0
-unit:271 Character 27 65 0
-unit:272 Character 12 43 0
-unit:273 Character 2 41 0
-unit:274 Character 55 30 0
-unit:275 Character 60 60 0
-unit:276 Character 1 8 0
-unit:277 Character 14 42 0
-unit:278 Character 74 63 0
-unit:279 Character 34 68 0
-unit:28 Character 12 54 0
-unit:280 Character 30 77 0
-unit:281 Character 92 1 0
-unit:282 Character 95 63 0
-unit:283 Character 55 16 0
-unit:284 Character 40 38 0
-unit:285 Character 65 50 0
-unit:286 Character 76 31 0
-unit:287 Character 37 47 0
-unit:288 Character 88 33 0
-unit:289 Character 21 47 0
-unit:29 Character 4 29 0
-unit:290 Character 29 28 0
-unit:291 Character 91 92 0
-unit:292 Character 53 49 0
-unit:293 Character 5 96 0
-unit:294 Character 75 75 0
-unit:295 Character 31 68 0
-unit:296 Character 62 97 0
-unit:297 Character 71 27 0
-unit:298 Character 42 89 0
-unit:299 Character 45 63 0
-unit:3 Character 97 87 0
-unit:30 Character 84 6 0
-unit:300 Character 17 94 0
-unit:301 Character 2 61 0
-unit:302 Character 4 26 0
-unit:303 Character 45 64 0
-unit:304 Character 77 26 0
-unit:305 Character 72 36 0
-unit:306 Character 5 95 0
-unit:307 Character 98 19 0
-unit:308 Character 51 65 0
-unit:309 Character 71 14 0
-unit:31 Character 8 56 0
-unit:310 Character 6 32 0
-unit:311 Character 50 5 0
-unit:312 Character 89 27 0
-unit:313 Character 95 0 0
-unit:314 Character 23 82 0
-unit:315 Character 31 28 0
-unit:316 Character 70 15 0
-unit:317 Character 61 82 0
-unit:318 Character 20 94 0
-unit:319 Character 37 84 0
-unit:32 Character 75 97 0
-unit:320 Character 95 89 0
-unit:321 Character 46 69 0
-unit:322 Character 43 55 0
-unit:323 Character 57 53 0
-unit:324 Character 26 98 0
-unit:325 Character 78 1 0
-unit:326 Character 12 41 0
-unit:327 Character 93 18 0
-unit:328 Character 94 60 0
-unit:329 Character 96 30 0
-unit:33 Character 74 60 0
-unit:330 Character 83 28 0
-unit:331 Character 99 82 0
-unit:332 Character 29 5 0
-unit:333 Character 92 89 0
-unit:334 Character 91 17 0
-unit:335 Character 63 86 0
-unit:336 Character 36 89 0
-unit:337 Character 62 61 0
-unit:338 Character 92 77 0
-unit:339 Character 71 70 1
-unit:34 Character 73 36 0
-unit:340 Character 87 28 0
-unit:341 Character 3 58 0
-unit:342 Character 39 88 0
-unit:343 Character 4 34 0
-unit:344 Character 62 29 0
-unit:345 Character 75 72 0
-unit:346 Character 55 64 0
-unit:347 Character 75 92 0
-unit:348 Character 14 31 0
-unit:349 Character 35 40 0
-unit:35 Character 28 45 0
-unit:350 Character 42 42 0
-unit:351 Character 12 1 0
-unit:352 Character 29 86 1
-unit:353 Character 56 87 0
-unit:354 Character 64 35 0
-unit:355 Character 99 23 0
-unit:356 Character 12 82 0
-unit:357 Character 52 21 0
-unit:358 Character 19 59 0
-unit:359 Character 57 68 0
-unit:36 Character 53 89 0
-unit:360 Character 96 87 0
-unit:361 Character 71 51 0
-unit:362 Character 99 51 0
-unit:363 Character 30 21 0
-unit:364 Character 55 96 0
-unit:365 Character 83 46 0
-unit:366 Character 80 16 0
-unit:367 Character 65 69 0
-unit:368 Character 31 65 0
-unit:369 Character 93 49 0
-unit:37 Character 34 85 0
-unit:370 Character 91 30 0
-unit:371 Character 34 60 0
-unit:372 Character 42 67 0
-unit:373 Character 41 16 0
-unit:374 Character 37 38 0
-unit:375 Character 64 87 0
-unit:376 Character 71 44 0
-unit:377 Character 75 82 0
-unit:378 Character 77 22 0
-unit:379 Character 43 84 0
-unit:38 Character 9 79 1
-unit:380 Character 33 11 0
-unit:381 Character 80 88 0
-unit:382 Character 9 74 0
-unit:383 Character 21 72 0
-unit:384 Character 92 67 0
-unit:385 Character 54 18 0
-unit:386 Character 80 36 0
-unit:387 Character 24 32 0
-unit:388 Character 26 2 0
-unit:389 Character 74 52 0
-unit:39 Character 46 29 0
-unit:390 Character 84 85 0
-unit:391 Character 11 42 0
-unit:392 Character 68 86 0
-unit:393 Character 67 45 0
-unit:394 Character 79 34 0
-unit:395 Character 65 56 0
-unit:396 Character 41 84 0
-unit:397 Character 94 56 0
-unit:398 Character 37 0 0
-unit:399 Character 73 94 0
-unit:4 Character 87 89 0
-unit:40 Character 55 12 0
-unit:400 Character 21 91 0
-unit:401 Character 46 26 0
-unit:402 Character 36 56 0
-unit:403 Character 62 65 0
-unit:404 Character 22 6 0
-unit:405 Character 0 40 0
-unit:406 Character 5 64 0
-unit:407 Character 16 63 0
-unit:408 Character 4 31 0
-unit:409 Character 86 37 0
-unit:41 Character 97 40 0
-unit:410 Character 69 36 0
-unit:411 Character 29 45 0
-unit:412 Character 64 67 0
-unit:413 Character 17 67 0
-unit:414 Character 29 0 0
-unit:415 Character 2 83 0
-unit:416 Character 70 99 0
-unit:417 Character 54 80 0
-unit:418 Character 91 59 0
-unit:419 Character 29 51 0
-unit:42 Character 60 63 0
-unit:420 Character 84 99 0
-unit:421 Character 94 83 0
-unit:422 Character 12 99 0
-unit:423 Character 30 96 0
-unit:424 Character 24 36 0
-unit:425 Character 25 20 0
-unit:426 Character 32 80 0
-unit:427 Character 28 62 0
-unit:428 Character 1 54 0
-unit:429 Character 7 88 0
-unit:43 Character 85 12 0
-unit:430 Character 91 13 0
-unit:431 Character 99 74 0
-unit:432 Character 13 42 0
-unit:433 Character 34 65 0
-unit:434 Character 55 36 0
-unit:435 Character 77 28 0
-unit:436 Character 52 75 0
-unit:437 Character 77 54 0
-unit:438 Character 50 19 0
-unit:439 Character 39 53 0
-unit:44 Character 32 35 0
-unit:440 Character 58 22 0
-unit:441 Character 78 84 0
-unit:442 Character 7 19 0
-unit:443 Character 29 92 0
-unit:444 Character 63 7 0
-unit:445 Character 9 94 0
-unit:446 Character 30 20 0
-unit:447 Character 7 58 0
-unit:448 Character 40 57 0
-unit:449 Character 64 55 0
-unit:45 Character 79 10 0
-unit:450 Character 81 28 1
-unit:451 Character 2 80 0
-unit:452 Character 83 3 0
-unit:453 Character 40 3 0
-unit:454 Character 96 16 0
-unit:455 Character 45 51 0
-unit:456 Character 18 77 0
-unit:457 Character 36 68 0
-unit:458 Character 20 76 0
-unit:459 Character 4 67 0
-unit:46 Character 72 94 0
-unit:460 Character 88 99 0
-unit:461 Character 68 96 0
-unit:462 Character 17 6 0
-unit:463 Character 88 83 0
-unit:464 Character 53 11 0
-unit:465 Character 94 33 1
-unit:466 Character 56 2 0
-unit:467 Character 6 57 0
-unit:468 Character 33 15 0
-unit:469 Character 23 35 0
-unit:47 Character 84 0 0
-unit:470 Character 98 43 0
-unit:471 Character 91 96 0
-unit:472 Character 35 9 1
-unit:473 Character 30 57 0
-unit:474 Character 69 44 0
-unit:475 Character 97 22 0
-unit:476 Character 79 33 0
-unit:477 Character 25 36 0
-unit:478 Character 77 88 0
-unit:479 Character 60 20 0
-unit:48 Character 40 58 0
-unit:480 Character 79 78 0
-unit:481 Character 66 31 0
-unit:482 Character 80 77 0
-unit:483 Character 95 61 0
-unit:484 Character 18 70 0
-unit:485 Character 18 91 0
-unit:486 Character 84 2 0
-unit:487 Character 51 13 0
-unit:488 Character 67 67 0
-unit:489 Character 30 33 0
-unit:49 Character 58 35 0
-unit:490 Character 44 18 0
-unit:491 Character 39 45 0
-unit:492 Character 59 78 0
-unit:493 Character 47 25 0
-unit:494 Character 61 23 0
-unit:495 Character 22 7 0
-unit:496 Character 58 82 0
-unit:497 Character 66 46 0
-unit:498 Character 32 60 0
-unit:499 Character 83 76 0
-unit:5 Character 65 51 0
-unit:50 Character 89 88 0
-unit:500 Character 98 93 0
-unit:501 Character 88 79 0
-unit:502 Character 45 39 0
-unit:503 Character 5 79 0
-unit:504 Character 28 25 0
-unit:505 Character 67 64 0
-unit:506 Character 65 27 0
-unit:507 Character 94 15 0
-unit:508 Character 55 85 0
-unit:509 Character 82 31 0
-unit:51 Character 35 61 0
-unit:510 Character 94 98 0
-unit:511 Character 58 76 0
-unit:512 Character 90 16 0
-unit:513 Character 57 51 0
-unit:514 Character 28 58 0
-unit:515 Character 17 90 0
-unit:516 Character 18 50 0
-unit:517 Character 57 31 1
-unit:518 Character 42 34 0
-unit:519 Character 10 51 0
-unit:52 Character 26 91 0
-unit:520 Character 81 97 0
-unit:521 Character 9 8 0
-unit:522 Character 67 48 0
-unit:523 Character 28 75 0
-unit:524 Character 42 53 0
-unit:525 Character 60 99 0
-unit:526 Character 58 72 0
-unit:527 Character 90 59 0
-unit:528 Character 44 75 0
-unit:529 Character 64 60 0
-unit:53 Character 56 76 0
-unit:530 Character 15 38 0
-unit:531 Character 48 55 0
-unit:532 Character 31 49 0
-unit:533 Character 13 25 0
-unit:534 Character 75 38 0
-unit:535 Character 18 42 0
-unit:536 Character 73 48 0
-unit:537 Character 95 13 0
-unit:538 Character 8 3 0
-unit:539 Character 12 30 0
-unit:54 Character 24 86 0
-unit:540 Character 30 61 0
-unit:541 Character 17 75 0
-unit:542 Character 69 72 0
-unit:543 Character 42 68 0
-unit:544 Character 56 94 0
-unit:545 Character 26 17 0
-unit:546 Character 39 30 0
-unit:547 Character 13 44 0
-unit:548 Character 41 6 0
-unit:549 Character 8 15 0
-unit:55 Character 80 69 0
-unit:550 Character 77 70 0
-unit:551 Character 27 94 0
-unit:552 Character 45 97 0
-unit:553 Character 25 67 0
-unit:554 Character 26 35 0
-unit:555 Character 43 35 0
-unit:556 Character 86 59 0
-unit:557 Character 30 76 0
-unit:558 Character 67 41 0
-unit:559 Character 26 47 0
-unit:56 Character 42 46 0
-unit:560 Character 71 69 0
-unit:561 Character 77 63 0
-unit:562 Character 78 92 0
-unit:563 Character 73 4 0
-unit:564 Character 90 10 0
-unit:565 Character 71 76 1
-unit:566 Character 2 81 0
-unit:567 Character 39 58 0
-unit:568 Character 17 13 0
-unit:569 Character 25 56 0
-unit:57 Character 35 14 0
-unit:570 Character 40 78 0
-unit:571 Character 40 91 0
-unit:572 Character 91 53 0
-unit:573 Character 1 41 0
-unit:574 Character 35 97 0
-unit:575 Character 6 64 0
-unit:576 Character 57 2 0
-unit:577 Character 56 5 0
-unit:578 Character 86 47 0
-unit:579 Character 26 41 0
-unit:58 Character 2 14 0
-unit:580 Character 26 64 0
-unit:581 Character 65 3 0
-unit:582 Character 40 6 0
-unit:583 Character 37 43 0
-unit:584 Character 46 64 0
-unit:585 Character 31 85 0
-unit:586 Character 52 82 0
-unit:587 Character 41 54 0
-unit:588 Character 64 5 0
-unit:589 Character 29 26 0
-unit:59 Character 16 14 0
-unit:590 Character 20 15 0
-unit:591 Character 60 70 0
-unit:592 Character 78 67 0
-unit:593 Character 31 89 0
-unit:594 Character 64 24 0
-unit:595 Character 74 62 0
-unit:596 Character 43 32 0
-unit:597 Character 18 69 0
-unit:598 Character 89 17 0
-unit:599 Character 29 75 0
-unit:6 Character 54 46 1
-unit:60 Character 23 19 0
-unit:600 Character 98 27 0
-unit:601 Character 62 1 0
-unit:602 Character 56 80 0
-unit:603 Character 52 76 0
-unit:604 Character 41 49 0
-unit:605 Character 66 84 0
-unit:606 Character 0 14 0
-unit:607 Character 56 12 0
-unit:608 Character 80 43 0
-unit:609 Character 77 4 0
-unit:61 Character 58 90 0
-unit:610 Character 45 20 0
-unit:611 Character 7 35 0
-unit:612 Character 16 76 0
-unit:613 Character 23 11 0
-unit:614 Character 58 46 0
-unit:615 Character 4 48 0
-unit:616 Character 51 7 0
-unit:617 Character 46 79 0
-unit:618 Character 47 72 0
-unit:619 Character 4 6 0
-unit:62 Character 34 82 0
-unit:620 Character 27 75 0
-unit:621 Character 79 66 0
-unit:622 Character 89 62 0
-unit:623 Character 98 18 0
-unit:624 Character 38 58 0
-unit:625 Character 96 62 0
-unit:626 Character 54 12 0
-unit:627 Character 67 90 0
-unit:628 Character 37 91 0
-unit:629 Character 53 16 0
-unit:63 Character 42 36 0
-unit:630 Character 47 91 0
-unit:631 Character 14 41 0
-unit:632 Character 57 81 0
-unit:633 Character 82 45 0
-unit:634 Character 91 28 0
-unit:635 Character 3 72 0
-unit:636 Character 10 73 0
-unit:637 Character 37 16 0
-unit:638 Character 13 7 0
-unit:639 Character 54 71 0
-unit:64 Character 30 72 0
-unit:640 Character 81 18 0
-unit:641 Character 56 66 0
-unit:642 Character 34 39 0
-unit:643 Character 50 36 0
-unit:644 Character 3 3 0
-unit:645 Character 43 86 0
-unit:646 Character 97 50 0
-unit:647 Character 28 47 0
-unit:648 Character 40 2 0
-unit:649 Character 52 26 0
-unit:65 Character 86 69 0
-unit:650 Character 42 48 0
-unit:651 Character 42 38 0
-unit:652 Character 39 17 0
-unit:653 Character 47 30 0
-unit:654 Character 95 12 0
-unit:655 Character 8 32 0
-unit:656 Character 31 22 0
-unit:657 Character 78 74 0
-unit:658 Character 78 98 0
-unit:659 Character 4 40 0
-unit:66 Character 76 7 0
-unit:660 Character 91 48 0
-unit:661 Character 39 47 0
-unit:662 Character 94 79 0
-unit:663 Character 50 12 0
-unit:664 Character 4 88 0
-unit:665 Character 3 59 0
-unit:666 Character 96 71 0
-unit:667 Character 15 6 0
-unit:668 Character 31 76 0
-unit:669 Character 2 4 0
-unit:67 Character 66 19 0
-unit:670 Character 40 14 0
-unit:671 Character 70 25 0
-unit:672 Character 39 64 0
-unit:673 Character 53 54 0
-unit:674 Character 50 41 0
-unit:675 Character 38 16 0
-unit:676 Character 96 65 0
-unit:677 Character 46 0 0
-unit:678 Character 75 31 0
-unit:679 Character 43 31 0
-unit:68 Character 50 42 0
-unit:680 Character 5 81 0
-unit:681 Character 23 48 0
-unit:682 Character 60 36 0
-unit:683 Character 42 16 0
-unit:684 Character 64 47 1
-unit:685 Character 11 21 0
-unit:686 Character 37 14 0
-unit:687 Character 0 60 0
-unit:688 Character 90 11 0
-unit:689 Character 64 83 0
-unit:69 Character 45 12 0
-unit:690 Character 72 18 0
-unit:691 Character 90 42 0
-unit:692 Character 55 28 0
-unit:693 Character 28 73 0
-unit:694 Character 33 57 0
-unit:695 Character 36 34 0
-unit:696 Character 25 90 0
-unit:697 Character 6 25 0
-unit:698 Character 54 22 0
-unit:699 Character 49 16 0
-unit:7 Character 78 17 0
-unit:70 Character 29 74 0
-unit:700 Character 66 45 0
-unit:701 Character 32 76 0
-unit:702 Character 60 72 0
-unit:703 Character 84 70 0
-unit:704 Character 51 30 0
-unit:705 Character 82 94 0
-unit:706 Character 17 19 0
-unit:707 Character 62 76 0
-unit:708 Character 37 82 0
-unit:709 Character 27 38 0
-unit:71 Character 98 2 0
-unit:710 Character 42 87 0
-unit:711 Character 31 0 0
-unit:712 Character 3 19 0
-unit:713 Character 61 43 0
-unit:714 Character 98 3 0
-unit:715 Character 68 55 0
-unit:716 Character 45 48 0
-unit:717 Character 74 75 0
-unit:718 Character 79 24 0
-unit:719 Character 70 71 0
-unit:72 Character 73 97 0
-unit:720 Character 23 73 0
-unit:721 Character 32 6 0
-unit:722 Character 5 33 0
-unit:723 Character 45 89 0
-unit:724 Character 53 20 0
-unit:725 Character 71 3 0
-unit:726 Character 67 40 0
-unit:727 Character 90 85 0
-unit:728 Character 22 96 0
-unit:729 Character 23 65 0
-unit:73 Character 22 34 0
-unit:730 Character 42 65 0
-unit:731 Character 36 31 0
-unit:732 Character 56 74 0
-unit:733 Character 13 19 0
-unit:734 Character 27 5 0
-unit:735 Character 3 22 0
-unit:736 Character 86 9 0
-unit:737 Character 90 67 0
-unit:738 Character 0 95 0
-unit:739 Character 61 66 0
-unit:74 Character 92 6 0
-unit:740 Character 58 77 0
-unit:741 Character 67 34 0
-unit:742 Character 62 40 0
-unit:743 Character 33 53 0
-unit:744 Character 66 54 0
-unit:745 Character 31 30 0
-unit:746 Character 86 92 0
-unit:747 Character 54 96 0
-unit:748 Character 23 99 0
-unit:749 Character 95 74 0
-unit:75 Character 47 44 0
-unit:750 Character 43 17 0
-unit:751 Character 12 36 0
-unit:752 Character 29 82 0
-unit:753 Character 49 76 0
-unit:754 Character 82 59 0
-unit:755 Character 62 83 0
-unit:756 Character 32 98 0
-unit:757 Character 88 21 0
-unit:758 Character 19 80 0
-unit:759 Character 49 83 0
-unit:76 Character 24 88 0
-unit:760 Character 52 63 0
-unit:761 Character 51 25 0
-unit:762 Character 53 40 0
-unit:763 Character 5 15 0
-unit:764 Character 10 7 0
-unit:765 Character 59 68 0
-unit:766 Character 57 93 0
-unit:767 Character 18 71 0
-unit:768 Character 83 34 0
-unit:769 Character 22 26 0
-unit:77 Character 63 26 0
-unit:770 Character 50 86 0
-unit:771 Character 29 62 0
-unit:772 Character 79 95 0
-unit:773 Character 74 6 0
-unit:774 Character 39 39 0
-unit:775 Character 8 2 0
-unit:776 Character 56 34 0
-unit:777 Character 78 8 0
-unit:778 Character 83 33 0
-unit:779 Character 41 3 0
-unit:78 Character 63 36 0
-unit:780 Character 36 42 0
-unit:781 Character 47 6 0
-unit:782 Character 42 92 0
-unit:783 Character 44 78 0
-unit:784 Character 76 17 0
-unit:785 Character 12 87 0
-unit:786 Character 95 53 0
-unit:787 Character 77 58 0
-unit:788 Character 88 89 0
-unit:789 Character 15 21 0
-unit:79 Character 98 70 0
-unit:790 Character 92 47 0
-unit:791 Character 69 81 0
-unit:792 Character 58 1 0
-unit:793 Character 95 21 0
-unit:794 Character 56 68 0
-unit:795 Character 40 51 0
-unit:796 Character 22 23 0
-unit:797 Character 35 55 0
-unit:798 Character 78 91 0
-unit:799 Character 58 98 0
-unit:8 Character 58 48 0
-unit:80 Character 92 44 0
-unit:800 Character 31 47 0
-unit:801 Character 69 70 0
-unit:802 Character 29 57 0
-unit:803 Character 34 22 0
-unit:804 Character 94 75 0
-unit:805 Character 41 8 0
-unit:806 Character 0 70 0
-unit:807 Character 7 34 0
-unit:808 Character 98 31 0
-unit:809 Character 18 97 0
-unit:81 Character 46 82 0
-unit:810 Character 29 14 0
-unit:811 Character 16 20 0
-unit:812 Character 33 67 0
-unit:813 Character 1 26 0
-unit:814 Character 50 11 0
-unit:815 Character 39 81 0
-unit:816 Character 61 65 0
-unit:817 Character 49 35 0
-unit:818 Character 73 65 0
-unit:819 Character 11 28 0
-unit:82 Character 28 41 0
-unit:820 Character 65 70 0
-unit:821 Character 16 93 0
-unit:822 Character 69 33 0
-unit:823 Character 61 95 0
-unit:824 Character 99 57 0
-unit:825 Character 23 30 0
-unit:826 Character 0 29 0
-unit:827 Character 63 13 0
-unit:828 Character 2 32 0
-unit:829 Character 18 96 0
-unit:83 Character 15 72 0
-unit:830 Character 43 74 0
-unit:831 Character 21 41 0
-unit:832 Character 28 30 0
-unit:833 Character 38 31 0
-unit:834 Character 45 88 0
-unit:835 Character 81 0 0
-unit:836 Character 27 58 0
-unit:837 Character 33 30 0
-unit:838 Character 59 48 0
-unit:839 Character 94 23 0
-unit:84 Character 98 87 0
-unit:840 Character 76 32 0
-unit:841 Character 33 83 0
-unit:842 Character 64 84 0
-unit:843 Character 7 62 0
-unit:844 Character 72 92 0
-unit:845 Character 36 39 0
-unit:846 Character 96 18 0
-unit:847 Character 5 88 0
-unit:848 Character 80 50 0
-unit:849 Character 97 90 0
-unit:85 Character 47 76 0
-unit:850 Character 14 90 0
-unit:851 Character 25 99 0
-unit:852 Character 31 16 0
-unit:853 Character 10 96 0
-unit:854 Character 95 57 0
-unit:855 Character 81 91 0
-unit:856 Character 49 18 0
-unit:857 Character 4 95 0
-unit:858 Character 64 12 0
-unit:859 Character 73 12 0
-unit:86 Character 28 24 0
-unit:860 Character 22 56 0
-unit:861 Character 22 67 0
-unit:862 Character 87 4 0
-unit:863 Character 26 21 0
-unit:864 Character 95 25 0
-unit:865 Character 96 23 0
-unit:866 Character 97 48 0
-unit:867 Character 75 29 0
-unit:868 Character 92 28 0
-unit:869 Character 79 2 0
-unit:87 Character 54 17 0
-unit:870 Character 46 1 0
-unit:871 Character 20 16 0
-unit:872 Character 17 23 0
-unit:873 Character 20 65 0
-unit:874 Character 91 7 0
-unit:875 Character 0 46 0
-unit:876 Character 51 63 0
-unit:877 Character 28 44 0
-unit:878 Character 52 93 0
-unit:879 Character 82 3 0
-unit:88 Character 82 76 0
-unit:880 Character 28 21 0
-unit:881 Character 72 49 0
-unit:882 Character 36 40 0
-unit:883 Character 71 89 0
-unit:884 Character 38 86 0
-unit:885 Character 0 44 0
-unit:886 Character 21 93 0
-unit:887 Character 39 73 0
-unit:888 Character 28 86 0
-unit:889 Character 37 27 0
-unit:89 Character 69 27 0
-unit:890 Character 71 20 0
-unit:891 Character 6 4 0
-unit:892 Character 92 2 0
-unit:893 Character 22 93 0
-unit:894 Character 66 36 0
-unit:895 Character 77 94 0
-unit:896 Character 82 17 0
-unit:897 Character 31 8 0
-unit:898 Character 31 97 0
-unit:899 Character 82 84 0
-unit:9 Character 66 41 0
-unit:90 Character 29 19 0
-unit:900 Character 57 96 0
-unit:901 Character 2 1 0
-unit:902 Character 65 65 0
-unit:903 Character 95 65 1
-unit:904 Character 25 94 0
-unit:905 Character 63 83 0
-unit:906 Character 33 95 0
-unit:907 Character 30 63 0
-unit:908 Character 43 43 0
-unit:909 Character 12 33 0
-unit:91 Character 17 9 0
-unit:910 Character 78 95 0
-unit:911 Character 36 24 0
-unit:912 Character 16 11 0
-unit:913 Character 18 9 0
-unit:914 Character 33 46 0
-unit:915 Character 45 3 0
-unit:916 Character 9 1 0
-unit:917 Character 31 60 0
-unit:918 Character 46 43 0
-unit:919 Character 96 85 0
-unit:92 Character 33 1 0
-unit:920 Character 6 19 0
-unit:921 Character 11 80 0
-unit:922 Character 59 87 0
-unit:923 Character 16 91 0
-unit:924 Character 45 8 0
-unit:925 Character 36 48 0
-unit:926 Character 54 29 0
-unit:927 Character 9 40 0
-unit:928 Character 31 83 0
-unit:929 Character 19 92 0
-unit:93 Character 71 81 0
-unit:930 Character 44 82 0
-unit:931 Character 38 20 0
-unit:932 Character 63 53 0
-unit:933 Character 18 60 0
-unit:934 Character 56 47 0
-unit:935 Character 1 15 0
-unit:936 Character 4 46 0
-unit:937 Character 9 20 0
-unit:938 Character 36 84 0
-unit:939 Character 7 84 0
-unit:94 Character 19 67 0
-unit:940 Character 0 4 0
-unit:941 Character 11 44 0
-unit:942 Character 85 84 1
-unit:943 Character 98 60 0
-unit:944 Character 33 6 0
-unit:945 Character 11 2 0
-unit:946 Character 45 68 0
-unit:947 Character 20 64 0
-unit:948 Character 94 31 0
-unit:949 Character 99 44 0
-unit:95 Character 52 29 0
-unit:950 Character 39 21 0
-unit:951 Character 72 75 0
-unit:952 Character 44 98 0
-unit:953 Character 43 83 0
-unit:954 Character 79 45 0
-unit:955 Character 89 83 0
-unit:956 Character 98 76 1
-unit:957 Character 41 20 0
-unit:958 Character 45 23 0
-unit:959 Character 94 81 0
-unit:96 Character 22 47 0
-unit:960 Character 51 80 1
-unit:961 Character 43 93 0
-unit:962 Character 22 95 0
-unit:963 Character 91 95 0
-unit:964 Character 79 32 0
-unit:965 Character 63 60 0
-unit:966 Character 60 41 0
-unit:967 Character 56 51 0
-unit:968 Character 35 27 0
-unit:969 Character 91 24 0
-unit:97 Character 30 59 0
-unit:970 Character 40 1 0
-unit:971 Character 13 38 0
-unit:972 Character 25 27 0
-unit:973 Character 83 85 0
-unit:974 Character 68 45 0
-unit:975 Character 7 87 0
-unit:976 Character 37 71 0
-unit:977 Character 83 35 0
-unit:978 Character 90 38 0
-unit:979 Character 21 3 0
-unit:98 Character 42 93 0
-unit:980 Character 24 93 0
-unit:981 Character 29 29 0
-unit:982 Character 29 54 0
-unit:983 Character 29 8 0
-unit:984 Character 74 64 0
-unit:985 Character 87 65 0
-unit:986 Character 93 98 0
-unit:987 Character 18 5 0
-unit:988 Character 53 64 0
-unit:989 Character 52 28 0
-unit:99 Character 75 6 0
-unit:990 Character 57 80 0
-unit:991 Character 88 96 0
-unit:992 Character 34 83 0
-unit:993 Character 49 45 0
-unit:994 Character 14 13 0
-unit:995 Character 28 46 0
-unit:996 Character 16 97 0
-unit:997 Character 45 60 0
-unit:998 Character 65 1 0
-unit:999 Character 79 86 0
-unit:money120 Money 1 20
-unit:money1251 Money 12 51
-unit:money2505 Money 25 5
-unit:money3198 Money 31 98
-unit:money3802 Money 38 2
-unit:money4421 Money 44 21
-unit:money550 Money 5 50
-unit:money6308 Money 63 8
-unit:money637 Money 6 37
-unit:money7610 Money 76 10
-unit:money8101 Money 81 1
-unit:money8353 Money 83 53
-unit:money8440 Money 84 40
-unit:money8751 Money 87 51
+score:2500
+clock:649049
+gather:0 1 27
+gather:1 56 29
+gather:2 33 51
+gather:3 80 56
+gather:4 52 70
+gather:5 5 38
+gather:6 97 73
+gather:7 17 95
+gather:8 69 69
+gather:9 54 35
+gather:10 48 18
+gather:11 10 42
+gather:12 58 35
+gather:13 48 33
+gather:14 12 87
+attack:0 5
+attack:1 9
+attack:2 11
+attack:3 12
+attack:4 8
+attack:5 0
+attack:6 8
+attack:7 14
+attack:8 4
+attack:9 1
+attack:10 13
+attack:11 2
+attack:12 3
+attack:13 10
+attack:14 7
+unit:0 Character 57 36 179 3
+unit:019 Character 80 55 0 3
+instruction:addaction 019 goto_80_56
+unit:028 Character 79 53 0 3
+instruction:addaction 028 goto_80_56
+unit:042 Character 80 56 1 3
+unit:056 Character 4 38 0 5
+instruction:addaction 056 goto_5_38
+unit:058 Character 18 95 0 7
+instruction:addaction 058 goto_17_95
+unit:062 Character 80 57 0 3
+instruction:addaction 062 goto_80_56
+unit:067 Character 17 95 0 7
+unit:078 Character 54 35 0 9
+unit:08 Character 12 88 0 14
+instruction:addaction 08 goto_12_87
+unit:089 Character 5 38 0 5
+unit:09 Character 1 26 0 0
+instruction:addaction 09 goto_1_27
+unit:1 Character 79 52 0 3
+instruction:addaction 1 goto_80_56
+unit:10 Character 16 95 0 7
+instruction:addaction 10 goto_17_95
+unit:100 Character 49 18 0 10
+instruction:addaction 100 goto_48_18
+unit:1000 Character 47 33 0 13
+instruction:addaction 1000 goto_48_33
+unit:101 Character 10 42 0 11
+unit:102 Character 58 35 0 12
+unit:103 Character 49 33 0 13
+instruction:addaction 103 goto_48_33
+unit:104 Character 12 87 0 14
+unit:105 Character 1 28 0 0
+instruction:addaction 105 goto_1_27
+unit:106 Character 56 29 0 1
+unit:107 Character 33 52 0 2
+instruction:addaction 107 goto_33_51
+unit:108 Character 81 56 0 3
+instruction:addaction 108 goto_80_56
+unit:109 Character 52 70 0 4
+unit:11 Character 69 69 1 8
+unit:110 Character 10 41 0 11
+instruction:addaction 110 goto_10_42
+unit:111 Character 59 35 0 12
+instruction:addaction 111 goto_58_35
+unit:112 Character 48 33 0 13
+unit:113 Character 13 87 0 14
+instruction:addaction 113 goto_12_87
+unit:114 Character 1 27 0 0
+unit:115 Character 55 29 0 1
+instruction:addaction 115 goto_56_29
+unit:116 Character 32 52 0 2
+instruction:addaction 116 goto_33_51
+unit:117 Character 45 59 0 3
+instruction:addaction 117 goto_80_56
+unit:118 Character 51 70 0 4
+instruction:addaction 118 goto_52_70
+unit:119 Character 5 37 2 5
+instruction:addaction 119 goto_5_38
+unit:12 Character 54 36 0 9
+instruction:addaction 12 goto_54_35
+unit:120 Character 57 35 0 12
+instruction:addaction 120 goto_58_35
+unit:121 Character 48 34 0 13
+instruction:addaction 121 goto_48_33
+unit:122 Character 12 86 0 14
+instruction:addaction 122 goto_12_87
+unit:123 Character 2 27 0 0
+instruction:addaction 123 goto_1_27
+unit:124 Character 56 30 0 1
+instruction:addaction 124 goto_56_29
+unit:125 Character 31 53 0 2
+instruction:addaction 125 goto_33_51
+unit:126 Character 77 50 0 3
+instruction:addaction 126 goto_80_56
+unit:127 Character 52 69 0 4
+instruction:addaction 127 goto_52_70
+unit:128 Character 5 39 0 5
+instruction:addaction 128 goto_5_38
+unit:129 Character 97 73 0 6
+unit:13 Character 48 17 0 10
+instruction:addaction 13 goto_48_18
+unit:130 Character 48 32 0 13
+instruction:addaction 130 goto_48_33
+unit:131 Character 11 87 0 14
+instruction:addaction 131 goto_12_87
+unit:132 Character 0 27 0 0
+instruction:addaction 132 goto_1_27
+unit:133 Character 57 29 0 1
+instruction:addaction 133 goto_56_29
+unit:134 Character 32 53 0 2
+instruction:addaction 134 goto_33_51
+unit:135 Character 82 53 0 3
+instruction:addaction 135 goto_80_56
+unit:136 Character 53 70 0 4
+instruction:addaction 136 goto_52_70
+unit:137 Character 6 38 0 5
+instruction:addaction 137 goto_5_38
+unit:138 Character 96 73 0 6
+instruction:addaction 138 goto_97_73
+unit:139 Character 17 94 0 7
+instruction:addaction 139 goto_17_95
+unit:14 Character 11 42 0 11
+instruction:addaction 14 goto_10_42
+unit:140 Character 13 88 0 14
+instruction:addaction 140 goto_12_87
+unit:141 Character 4 25 0 0
+instruction:addaction 141 goto_1_27
+unit:142 Character 55 28 0 1
+instruction:addaction 142 goto_56_29
+unit:143 Character 50 42 0 2
+instruction:addaction 143 goto_33_51
+unit:144 Character 80 10 0 3
+instruction:addaction 144 goto_80_56
+unit:145 Character 72 77 0 4
+instruction:addaction 145 goto_52_70
+unit:146 Character 43 26 0 5
+instruction:addaction 146 goto_5_38
+unit:147 Character 97 72 0 6
+instruction:addaction 147 goto_97_73
+unit:148 Character 17 93 0 7
+instruction:addaction 148 goto_17_95
+unit:149 Character 68 69 0 8
+instruction:addaction 149 goto_69_69
+unit:15 Character 57 37 0 12
+instruction:addaction 15 goto_58_35
+unit:150 Character 15 72 0 0
+instruction:addaction 150 goto_1_27
+unit:151 Character 56 28 0 1
+instruction:addaction 151 goto_56_29
+unit:152 Character 36 6 0 2
+instruction:addaction 152 goto_33_51
+unit:153 Character 84 66 0 3
+instruction:addaction 153 goto_73_46
+unit:154 Character 6 85 0 4
+instruction:addaction 154 goto_52_70
+unit:155 Character 72 98 0 5
+instruction:addaction 155 goto_5_38
+unit:156 Character 96 74 0 6
+instruction:addaction 156 goto_97_73
+unit:157 Character 10 85 0 7
+unit:192 Character 79 56 0 3
+instruction:addaction 192 goto_80_56
+unit:317 Character 79 50 0 3
+instruction:addaction 317 goto_79_51
+instruction:addaction 317 follow_1
+unit:450 Character 79 51 2 3
+instruction:addaction 450 follow_1
+unit:471 Character 80 51 1 3
+instruction:addaction 471 goto_79_51
+instruction:addaction 471 follow_1
+unit:477 Character 77 53 1 3
+instruction:addaction 477 goto_79_51
+instruction:addaction 477 follow_1
+unit:48 Character 77 54 0 3
+instruction:addaction 48 goto_79_51
+instruction:addaction 48 follow_1
+unit:49 Character 84 64 0 3
+unit:491 Character 69 56 0 3
+instruction:addaction 491 goto_69_57
+unit:507 Character 74 53 1 3
+unit:509 Character 87 58 1 3
+unit:516 Character 76 53 1 3
+unit:518 Character 82 51 1 3
+unit:525 Character 77 63 0 3
+unit:527 Character 88 55 0 3
+unit:531 Character 82 54 0 3
+unit:534 Character 85 57 0 3
+unit:536 Character 87 61 0 3
+unit:537 Character 78 58 0 3
+unit:540 Character 81 57 1 3
+unit:543 Character 86 54 0 3
+unit:545 Character 79 57 0 3
+unit:55 Character 75 54 0 3
+unit:552 Character 85 53 0 3
+unit:558 Character 87 51 0 3
+unit:560 Character 77 52 1 3
+unit:561 Character 85 50 0 3
+unit:572 Character 79 54 0 3
+unit:574 Character 77 51 0 3
+unit:581 Character 77 48 0 3
+unit:595 Character 82 55 0 3
+unit:603 Character 79 48 0 3
+unit:606 Character 88 57 0 3
+unit:607 Character 78 54 0 3
+unit:608 Character 83 66 0 3
+unit:615 Character 87 64 1 3
+unit:617 Character 73 54 1 3
+unit:621 Character 84 58 0 3
+unit:624 Character 83 57 0 3
+unit:631 Character 84 53 0 3
+unit:633 Character 85 48 1 3
+instruction:addaction 633 goto_78_60
+unit:635 Character 85 66 0 3
+unit:642 Character 81 45 0 3
+unit:644 Character 79 45 0 3
+unit:651 Character 78 62 0 3
+instruction:addaction 651 goto_78_61
+unit:653 Character 86 51 0 3
+unit:660 Character 81 60 0 3
+unit:680 Character 75 63 0 3
+unit:689 Character 84 60 1 3
+unit:699 Character 86 56 0 3
+unit:705 Character 82 56 1 3
+unit:707 Character 78 63 1 3
+instruction:addaction 707 goto_78_61
+unit:708 Character 90 56 1 3
+unit:714 Character 83 59 0 3
+unit:720 Character 80 50 0 3
+unit:725 Character 84 59 0 3
+unit:730 Character 83 62 0 3
+unit:732 Character 85 55 1 3
+unit:734 Character 78 57 0 3
+unit:741 Character 76 64 1 3
+unit:75 Character 77 55 0 3
+unit:750 Character 69 54 0 3
+unit:759 Character 86 53 1 3
+unit:761 Character 89 58 0 3
+unit:769 Character 77 58 0 3
+instruction:addaction 769 goto_78_58
+unit:770 Character 86 64 0 3
+unit:777 Character 83 47 0 3
+unit:78 Character 76 52 0 3
+unit:801 Character 86 59 0 3
+unit:803 Character 70 53 0 3
+unit:804 Character 80 48 0 3
+unit:806 Character 83 55 1 3
+unit:813 Character 81 59 0 3
+unit:822 Character 85 61 0 3
+unit:824 Character 81 64 0 3
+unit:831 Character 77 65 0 3
+unit:833 Character 86 58 0 3
+unit:84 Character 80 53 0 3
+unit:842 Character 90 57 0 3
+unit:846 Character 78 52 0 3
+unit:860 Character 88 58 0 3
+unit:864 Character 81 55 0 3
+unit:87 Character 83 61 1 3
+instruction:addaction 87 goto_83_62
+unit:879 Character 77 46 0 3
+unit:882 Character 78 50 2 3
+unit:888 Character 80 70 0 3
+unit:89 Character 85 59 1 3
+instruction:addaction 89 goto_83_60
+unit:897 Character 84 51 0 3
+unit:9 Character 74 59 0 3
+unit:905 Character 72 53 1 3
+unit:911 Character 83 56 0 3
+unit:912 Character 79 58 0 3
+unit:914 Character 81 54 0 3
+unit:921 Character 76 48 0 3
+unit:923 Character 91 54 0 3
+instruction:addaction 923 goto_72_49
+unit:93 Character 79 55 0 3
+unit:930 Character 87 52 0 3
+unit:941 Character 92 58 0 3
+unit:950 Character 90 54 1 3
+unit:969 Character 83 48 0 3
+unit:97 Character 73 63 2 3
+unit:98 Character 85 54 0 3
+unit:987 Character 85 52 1 3
+unit:999 Character 82 47 0 3
+instruction:addaction 999 goto_87_55
+unit:money3863 Money 38 63
+unit:money4567 Money 45 67
+unit:money5065 Money 50 65
+unit:money5092 Money 50 92
+unit:money7168 Money 71 68
+unit:money7699 Money 76 99
+unit:money8091 Money 80 91
+unit:money8190 Money 81 90
+unit:money8211 Money 82 11
+unit:money8396 Money 83 96
+unit:money8508 Money 85 8
+unit:money9206 Money 92 6
+unit:money9433 Money 94 33
+unit:money9522 Money 95 22
+unit:money9609 Money 96 9
+unit:money9733 Money 97 33
+unit:money9815 Money 98 15
+unit:money9870 Money 98 70
+unit:money9920 Money 99 20
+unit:money9956 Money 99 56
 unit:oracle0 Oracle 99 99
 unit:oracle1 Oracle 0 99
 unit:oracle2 Oracle 99 0
@@ -1034,18 +321,19 @@ unit:oracle3 Oracle 0 9
 unit:oracle4 Oracle 50 50
 unit:1038 Quiz 40 85
 unit:105 Quiz 62 19
-unit:1069 Quiz 13 51
+unit:1069 Quiz 58 20
 unit:1115 Quiz 93 35
 unit:1125 Quiz 75 24
-unit:1127 Quiz 39 7
+unit:1127 Quiz 98 40
 unit:1206 Quiz 89 55
 unit:1271 Quiz 4 64
 unit:1276 Quiz 16 99
 unit:1279 Quiz 51 73
-unit:132 Quiz 7 25
+unit:132 Quiz 18 47
 unit:1368 Quiz 36 49
 unit:1553 Quiz 83 7
-unit:1616 Quiz 2 3
+unit:1616 Quiz 70 27
+unit:1636 Quiz 28 77
 unit:1643 Quiz 27 91
 unit:1644 Quiz 9 68
 unit:1645 Quiz 62 3
@@ -1057,12 +345,13 @@ unit:200 Quiz 58 32
 unit:208 Quiz 94 3
 unit:220 Quiz 51 95
 unit:221 Quiz 71 38
-unit:229 Quiz 7 28
+unit:229 Quiz 87 50
 unit:25 Quiz 24 46
 unit:581 Quiz 11 98
 unit:589 Quiz 57 88
 unit:605 Quiz 1 52
-unit:626 Quiz 35 5
+unit:618 Quiz 2 88
+unit:626 Quiz 79 85
 unit:73 Quiz 48 61
 unit:916 Quiz 61 45
 unit:960 Quiz 64 95

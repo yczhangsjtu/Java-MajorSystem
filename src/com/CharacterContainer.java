@@ -11,8 +11,8 @@ import com.MapContainer;
 
 public class CharacterContainer extends UnitContainer{
 	TreeMap<String,Character> characters;
-	public static int imageNum = 5;
-	Image characterImage[][][] = new Image[imageNum][4][4];
+	public static int imageNum = 15;
+	public static Image characterImage[][][] = new Image[imageNum][4][4];
 	public CharacterContainer()
 	{
 		characters = new TreeMap<String,Character>();
@@ -25,12 +25,16 @@ public class CharacterContainer extends UnitContainer{
 	public void addCharacter(String characterId, Character c)
 	{
 		characters.put(characterId,c);
-		//super.addUnit(characterId,c);
 	}
 	public void addCharacter(String characterId, int x, int y)
 	{
 		int k = getImageIndex(characterId);
 		Character c = new Character(characterId,x,y,characterImage[k]);
+		addCharacter(characterId,c);
+	}
+	public void addCharacter(String characterId, int x, int y, int k)
+	{
+		Character c = new Character(characterId,x,y,k);
 		addCharacter(characterId,c);
 	}
 	public Character getCharacterById(String characterId)
@@ -66,7 +70,17 @@ public class CharacterContainer extends UnitContainer{
 		if(direction.equals("down"))
 			character.moveDown(map);
 	}
-	public int getImageIndex(String str)
+	public static int hash(String str)
+	{
+		int s = 0;
+		for(int i = 0; i < str.length(); i++)
+		{
+			int c = str.codePointAt(i);
+			s += c;
+		}
+		return s;
+	}
+	public static int getImageIndex(String str)
 	{
 		return hash(str)%imageNum;
 	}

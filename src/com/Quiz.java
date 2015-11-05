@@ -4,6 +4,7 @@ import java.awt.Image;
 
 public class Quiz extends Unit{
 	String code;
+	boolean solved = false;
 	public Quiz(String id)
 	{
 		super("quiz"+id);
@@ -21,6 +22,15 @@ public class Quiz extends Unit{
 	}
 	public String toString()
 	{
-		return "unit:"+getCode()+" Quiz "+x+" "+y+"\n";
+		String ifsolved = "";
+		if(solved) ifsolved = " solved";
+		return "unit:"+getCode()+" Quiz "+x+" "+y+ifsolved+"\n";
+	}
+	public void setSolved(boolean s, MapContainer map)
+	{
+		if(s && map.units[x][y] == this)
+			map.units[x][y] = null;
+		if(s) x=y=-1;
+		solved = s;
 	}
 }

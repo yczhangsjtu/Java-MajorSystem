@@ -34,6 +34,8 @@ public class MapContainer{
 	boolean miniLeft = true;
 	Unit units[][] = new Unit[mapWidth][mapHeight];
 	LinkedList<String> instructions = new LinkedList<String>();
+	LinkedList<Fire> fires;
+	Image fireImage;
 	UnitContainer uc;
 	CharacterContainer cc;
 	JewelContainer jc;
@@ -46,12 +48,14 @@ public class MapContainer{
 	Random rand;
 	public MapContainer(String mapfile)
 	{
+		fires = new LinkedList<Fire>();
 		try
 		{
 			for(int i = 0; i < groundTypeNum; i++)
 				groundImage[i] = ImageIO.read(new File("resource/images/ground/ground"+i+".jpg"));
 			BufferedReader br = new BufferedReader(
 					new FileReader("resource/map/"+mapfile));
+			fireImage = ImageIO.read(new File("resource/images/effects/fire.png"));
 			for(int y = 0; y < mapHeight; y++)
 			{
 				String line = br.readLine();
@@ -100,7 +104,11 @@ public class MapContainer{
 				}
 			}
 		}
-		uc.draw(g,viewOffsetX,viewOffsetY,clock);
+		uc.draw(g,viewOffsetX,viewOffsetY,clock,this);
+		for(Fire fire: fires)
+		{
+			g.drawImage(fireImage,fire.x*gridSize-viewOffsetX,fire.y*gridSize-viewOffsetY,gridSize,gridSize,null);
+		}
 		drawMiniMap(g,miniLeft);
 		uc.drawMini(g,miniSize,miniPad,miniWidth,windowWidth,miniLeft);
 		if(isTalking())
@@ -153,15 +161,20 @@ public class MapContainer{
 		focus(unit);
 	}
 
-	public void tick()
+	public boolean tick()
 	{
-		if(isTalking()) return;
+		if(isTalking()) return false;
 		clock++;
 		if(clock >= 10)
 		{
 			clock = 0;
 			update();
 		}
+		for(Fire fire: fires)
+		{
+			fire.countDown();
+		}
+		return true;
 	}
 
 	public void executeInstructions()
@@ -202,6 +215,10 @@ public class MapContainer{
 	{
 		uc.update(this);
 		executeInstructions();
+		LinkedList<Fire> newFires = new LinkedList<Fire>();
+		for(Fire fire: fires)
+			if(fire.live()) newFires.add(fire);
+		fires = newFires;
 	}
 
 	public void talk(Character character, Unit unit)
@@ -274,7 +291,9 @@ public class MapContainer{
 
 	public Unit getUnitByPosition(int x, int y)
 	{
-		return units[x][y];
+		if(x >= 0 && y >= 0 && x < mapWidth && y < mapHeight)
+			return units[x][y];
+		return null;
 	}
 
 	public void removeUnit(int x, int y)
@@ -315,6 +334,12 @@ public class MapContainer{
 	{
 		Quiz qz = qc.getQuizById(id);
 		if(qz != null) removeUnit(qz.getUnitId());
+	}
+
+	public void solveQuiz(String id)
+	{
+		Quiz qz = qc.getQuizById(id);
+		if(qz != null) qz.setSolved(true,this);
 	}
 
 	void adaptViewOffset()

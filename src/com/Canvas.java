@@ -7,10 +7,13 @@ import javax.swing.*;
 import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.LinkedList;
+import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import javax.imageio.ImageIO;
 
 import com.Memo;
 import com.QuizLibrary;
@@ -21,9 +24,8 @@ public class Canvas extends JPanel implements ActionListener
 	MapContainer map;
 	Team team;
 	Timer timer;
-	Random rand;
-	String hero = "0";
-	String directions[] = new String[4];
+	Random rand = new Random();
+	static String hero = "0";
 	String message = null;
 	Pattern followAction = Pattern.compile("addaction (\\d+) follow_"+hero);
 	Pattern unfollowAction = Pattern.compile("addaction (\\d+) unfollow");
@@ -32,10 +34,12 @@ public class Canvas extends JPanel implements ActionListener
 	QuizLibrary quizlib;
 	int clock = 0;
 	int score = 0;
+	AI ai;
 	public Canvas()
 	{
 		map = new MapContainer("map.txt");
 		team = new Team();
+		ai = new AI(map);
 		readSaveFile("resource/save/save.txt");
 		team.addMember(map.getCharacterById(hero));
 		timer = new Timer(50,this);
@@ -43,10 +47,6 @@ public class Canvas extends JPanel implements ActionListener
 		timer.setActionCommand("tick");
 		timer.start();
 		rand = new Random();
-		directions[0] = "left";
-		directions[1] = "right";
-		directions[2] = "up";
-		directions[3] = "down";
 		memo = new Memo();
 		quizlib = new QuizLibrary();
 		addKeyListener(new KeyAdapter() {
@@ -126,28 +126,19 @@ public class Canvas extends JPanel implements ActionListener
 
 	public void tick()
 	{
-		map.tick();
+		if(!map.tick()) return;
+		ai.tick();
 		map.focus(""+hero);
 		clock++;
 		handleConversation();
 		if(clock % 100 == 0)
 		{
-			addRandomCharacter();
 			addRandomMoney();
 			addRandomQuiz();
+			addRandomCharacter();
 		}
-		if(clock % 100 == 0)
+		if(clock % 1000 == 0)
 		{
-			for(String id: map.getAllCharactersId())
-			{
-				if(id.equals(hero)) continue;
-				if(rand.nextInt(100) > 90)
-				{
-					Character character = map.getCharacterById(id);
-					if(character.target == null)
-						character.move(directions[rand.nextInt(4)],map);
-				}
-			}
 		}
 		repaint();
 	}
@@ -198,12 +189,14 @@ public class Canvas extends JPanel implements ActionListener
 			{
 				map.execute(map.conversationResult);
 				team.addMember(m1.group(1),map);
+				Character c = map.getCharacterById(m1.group(1));
+				if(c != null) c.setImageIndex(map.getCharacterById(hero).getImageIndex());
 			}
 			else if(m2.find())
 			{
 				if(team.cover(m2.group(1),map))
 				{
-					map.removeQuiz(m2.group(1));
+					map.solveQuiz(m2.group(1));
 					score+=100;
 				}
 				else
@@ -215,6 +208,8 @@ public class Canvas extends JPanel implements ActionListener
 			{
 				map.execute(map.conversationResult);
 				team.removeMember(m3.group(1),map);
+				Character c = map.getCharacterById(m3.group(1));
+				if(c != null) c.setImageIndex(map.getCharacterById(hero).getImageIndex());
 			}
 			map.conversationResult = null;
 		}
@@ -247,6 +242,10 @@ public class Canvas extends JPanel implements ActionListener
 					map.addInstruction(major);
 				else if(cmd.equals("clock"))
 					clock = Integer.parseInt(major);
+				else if(cmd.equals("gather"))
+					ai.setGatherPoints(major);
+				else if(cmd.equals("attack"))
+					ai.setAttacking(major);
 				s = br.readLine();
 			}
 			map.setUnitMap();
@@ -255,8 +254,10 @@ public class Canvas extends JPanel implements ActionListener
 			for(String id: map.getAllCharactersId())
 			{
 				Character ch = map.getCharacterById(id);
+				int myIndex = map.getCharacterById(hero).getImageIndex();
 				if(ch != null && ch.target != null
-					&& ch.target.getUnitId().equals(hero))
+					&& ch.target.getUnitId().equals(hero) &&
+					ch.getImageIndex() == myIndex)
 					team.addMember(ch);
 			}
 		}
@@ -276,6 +277,10 @@ public class Canvas extends JPanel implements ActionListener
 			bw.write("hero:"+hero+"\n");
 			bw.write("score:"+score+"\n");
 			bw.write("clock:"+clock+"\n");
+			for(int i = 0; i < CharacterContainer.imageNum; i++)
+				bw.write("gather:"+i+" "+ai.gatherPoints[i].x+" "+ai.gatherPoints[i].y+"\n");
+			for(int i = 0; i < CharacterContainer.imageNum; i++)
+				bw.write("attack:"+i+" "+ai.attacking[i]+"\n");
 			for(String id: map.getAllUnitsId())
 			{
 				Unit unit = map.getUnitById(id);
@@ -302,10 +307,27 @@ public class Canvas extends JPanel implements ActionListener
 		}
 	}
 
+	public int distance(Unit u1, Unit u2)
+	{
+		return distance(u1.getPoint(),u2.getPoint());
+	}
+
+	public int distance(Point p1, Point p2)
+	{
+		return Math.abs(p1.x-p2.x)+Math.abs(p1.y-p2.y);
+	}
+
+	public int distance(int x, int y, Point p)
+	{
+		return Math.abs(x-p.x)+Math.abs(y-p.y);
+	}
+
 	public void paint(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		map.draw(g);
+		Character c = map.getCharacterById(hero);
+		int myIndex = c.getImageIndex();
 		g.setFont(new Font("TimesRoman",Font.PLAIN,12));
 		g.setColor(Color.WHITE);
 		if(message != null) g.drawString(message,0,20);
@@ -314,5 +336,18 @@ public class Canvas extends JPanel implements ActionListener
 		g.drawString("Score: " + score,0,80);
 		g.drawString("Position: " + map.getCharacterById(hero).getX()+","+
 			map.getCharacterById(hero).getY(),0,100);
+		g.drawString("Enemy: ",0,120);
+		if(ai.attacking[myIndex] != -1)
+		{
+			g.drawImage(map.cc.characterImage[ai.attacking[myIndex]][0][0],
+			50,100,30,30,null);
+			if(ai.enemyX >= 0 && ai.enemyY >= 0)
+				g.drawString(ai.enemyX + "," + ai.enemyY,100,120);
+		}
+		for(int i = 0; i < CharacterContainer.imageNum; i++)
+		{
+			g.drawImage(map.cc.characterImage[i][0][0],i*50,map.windowHeight-50,30,30,null);
+			g.drawString(""+ai.numbers[i],i*50,map.windowHeight);
+		}
 	}
 }

@@ -3,6 +3,7 @@ package com;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Iterator;
 
@@ -12,6 +13,7 @@ import com.MapContainer;
 public class Character extends Unit{
 	String characterId;
 	Image images[][];
+	int imageIndex;
 	enum State {Standing, Moving}
 	enum Direction {Up, Down, Left, Right}
 	State state = State.Standing;
@@ -25,12 +27,30 @@ public class Character extends Unit{
 		super(id);
 		characterId = id;
 		images = null;
+		imageIndex = CharacterContainer.getImageIndex(id);
 	}
 	public Character(String id, int x, int y, Image imgs[][])
 	{
 		super(id,x,y);
 		characterId = id;
 		images = imgs;
+		imageIndex = CharacterContainer.getImageIndex(id);
+	}
+	public Character(String id, int x, int y, int index)
+	{
+		super(id,x,y);
+		characterId = id;
+		imageIndex = index;
+		images = CharacterContainer.characterImage[index];
+	}
+	public void setImageIndex(int index)
+	{
+		imageIndex = index % CharacterContainer.imageNum;
+		images = CharacterContainer.characterImage[imageIndex];
+	}
+	public int getImageIndex()
+	{
+		return imageIndex;
 	}
 	public int getPixelX(int clock)
 	{
@@ -54,7 +74,7 @@ public class Character extends Unit{
 		}
 		return super.getPixelY(clock);
 	}
-	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock)
+	public void draw(Graphics g, int viewOffsetX, int viewOffsetY, int clock, MapContainer map)
 	{
 		int X = x*width-viewOffsetX;
 		int Y = y*height-viewOffsetY;
@@ -72,7 +92,11 @@ public class Character extends Unit{
 			if(direction == Direction.Right) X += clock*height/10;
 			if(direction == Direction.Up) Y -= clock*height/10;
 		}
+		if(X > map.windowWidth || X + width < 0 || Y > map.windowHeight || Y + height < 0)
+			return;
 		g.drawImage(images[i][j],X,Y,width,height,null);
+		g.setColor(Color.WHITE);
+		g.drawString(getUnitId(),X+20,Y+height+20);
 	}
 	public void update(MapContainer map)
 	{
@@ -137,6 +161,10 @@ public class Character extends Unit{
 		{
 			int X = Integer.parseInt(tokens[1]);
 			int Y = Integer.parseInt(tokens[2]);
+			if(X < 0) X = 0;
+			if(Y < 0) Y = 0;
+			if(X >= map.mapWidth) X = map.mapWidth - 1;
+			if(Y >= map.mapHeight) Y = map.mapHeight - 1;
 			setDest(X,Y);
 		}
 		else if(tokens[0].equals("follow"))
@@ -241,6 +269,11 @@ public class Character extends Unit{
 	}
 	public boolean goTo(MapContainer map, int x1, int y1)
 	{
+		if(x == x1 && y == y1) return true;
+		if(x1 == x + 1 && y1 == y) return moveRight(map);
+		else if(x1 == x - 1 && y1 == y) return moveLeft(map);
+		else if(x1 == x && y1 == y + 1) return moveDown(map);
+		else if(x1 == x && y1 == y - 1) return moveUp(map);
 		if(pathToDest == null || pathToDest.isEmpty() ||
 			!pathToDest.getLast().equals(new Point(x1,y1)) ||
 			distance(pathToDest.getFirst(),new Point(x,y))>1)
@@ -259,7 +292,7 @@ public class Character extends Unit{
 			else if(p.x == x - 1 && p.y == y) moveSucceed = moveLeft(map);
 			else if(p.x == x && p.y == y + 1) moveSucceed = moveDown(map);
 			else if(p.x == x && p.y == y - 1) moveSucceed = moveUp(map);
-			if(!moveSucceed) pathToDest = null;
+			//if(!moveSucceed) pathToDest = null;
 			return moveSucceed;
 		}
 		return false;
@@ -268,6 +301,10 @@ public class Character extends Unit{
 	{
 		return Math.abs(p1.x-p2.x)+Math.abs(p1.y-p2.y);
 	}
+	public int distance(Unit unit)
+	{
+		return distance(getPoint(),unit.getPoint());
+	}
 	public void follow(Unit unit)
 	{
 		target = unit;
@@ -275,6 +312,8 @@ public class Character extends Unit{
 	public void clearFollow()
 	{
 		target = null;
+		dest = null;
+		state = State.Standing;
 	}
 	public void setDest(Point p)
 	{
@@ -298,6 +337,17 @@ public class Character extends Unit{
 	}
 	public void setDest(Character character, MapContainer map)
 	{
+		if(character != null)
+		{
+			if(getPoint().equals(character.getBack(map)))
+			{
+				setDest(null);
+				if(character.faceLeft()) moveLeft(map);
+				if(character.faceRight()) moveRight(map);
+				if(character.faceUp()) moveUp(map);
+				if(character.faceDown()) moveDown(map);
+			}
+		}
 		setDest(character.getBack(map));
 	}
 	public void setDest(Unit unit, MapContainer map)
@@ -320,7 +370,7 @@ public class Character extends Unit{
 	{
 		String s = "unit:";
 		s += characterId + " Character ";
-		s += x + " " + y + " " + money + "\n";
+		s += x + " " + y + " " + money + " " + imageIndex + "\n";
 		if(dest != null)
 			s += "instruction:addaction "+characterId+" goto_"+dest.x
 				+"_"+dest.y+"\n";
@@ -328,5 +378,10 @@ public class Character extends Unit{
 			s += "instruction:addaction "+characterId+" follow_"
 				+target.getUnitId()+"\n";
 		return s;
+	}
+
+	public void drawMini(Graphics g, int x, int y, int size)
+	{
+		g.drawImage(images[0][0],x,y,size,size,null);
 	}
 }
