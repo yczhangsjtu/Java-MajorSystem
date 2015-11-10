@@ -14,6 +14,7 @@ public class AI {
 	int numbers[];
 	int enemyX = -1, enemyY = -1;
 	int numOfCountries = CharacterContainer.imageNum;
+	int heroIndex;
 	String directions[] = {"left","right","up","down"};
 	ArrayList<TreeSet<String>> countries =
 		new ArrayList<TreeSet<String>>(numOfCountries);
@@ -40,6 +41,8 @@ public class AI {
 
 	public void resetCountries()
 	{
+		Character chero = map.getCharacterById(hero);
+		heroIndex = chero.getImageIndex();
 		for(int i = 0; i < numOfCountries; i++)
 			countries.set(i,new TreeSet<String>());
 		for(String id: map.getAllCharactersId())
@@ -76,10 +79,19 @@ public class AI {
 		if(troops.get(index) == null)
 			troops.set(index,new TreeSet<String>());
 		TreeSet<String> troop = troops.get(index);
+		ArrayList<String> deads = new ArrayList<String>();
+		for(String id: troop)
+		{
+			Character c = map.getCharacterById(id);
+			if(c == null) {deads.add(id);continue;}
+			if(c.getImageIndex() != index) deads.add(id);
+		}
+		for(int i = 0; i < deads.size(); i++)
+			troop.remove(deads.get(i));
 		for(String id: countries.get(index))
 		{
 			if(id.equals(hero)) continue;
-			if(troop.size() >= 10) return;
+			if(troop.size() >= 10) break;
 			if(troop.contains(id)) continue;
 			Character c = map.getCharacterById(id);
 			if(c == null) continue;
@@ -101,6 +113,8 @@ public class AI {
 			if(id.equals(hero)) continue;
 			Character c = map.getCharacterById(id);
 			if(c == null) continue;
+    		if(index == heroIndex && c.target != null &&
+				c.target.getUnitId().equals(hero)) continue;
 			c.clearFollow();
 			c.setDest(troopPoint[index]);
 		}

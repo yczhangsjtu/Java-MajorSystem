@@ -190,7 +190,10 @@ public class Canvas extends JPanel implements ActionListener
 				map.execute(map.conversationResult);
 				team.addMember(m1.group(1),map);
 				Character c = map.getCharacterById(m1.group(1));
-				if(c != null) c.setImageIndex(map.getCharacterById(hero).getImageIndex());
+				if(c != null)
+				{
+					c.setImageIndex(map.getCharacterById(hero).getImageIndex());
+				}
 			}
 			else if(m2.find())
 			{

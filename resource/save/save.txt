@@ -1,309 +1,434 @@
 hero:0
 score:2500
-clock:649049
-gather:0 1 27
-gather:1 56 29
-gather:2 33 51
-gather:3 80 56
-gather:4 52 70
-gather:5 5 38
-gather:6 97 73
-gather:7 17 95
-gather:8 69 69
-gather:9 54 35
-gather:10 48 18
-gather:11 10 42
-gather:12 58 35
-gather:13 48 33
-gather:14 12 87
+clock:661166
+gather:0 7 25
+gather:1 58 29
+gather:2 29 55
+gather:3 83 58
+gather:4 50 68
+gather:5 2 40
+gather:6 92 74
+gather:7 15 91
+gather:8 67 68
+gather:9 56 35
+gather:10 49 21
+gather:11 12 40
+gather:12 61 37
+gather:13 44 29
+gather:14 13 85
 attack:0 5
 attack:1 9
-attack:2 11
-attack:3 12
-attack:4 8
+attack:2 4
+attack:3 6
+attack:4 2
 attack:5 0
-attack:6 8
+attack:6 3
 attack:7 14
 attack:8 4
 attack:9 1
 attack:10 13
-attack:11 2
-attack:12 3
+attack:11 5
+attack:12 9
 attack:13 10
 attack:14 7
-unit:0 Character 57 36 179 3
-unit:019 Character 80 55 0 3
-instruction:addaction 019 goto_80_56
-unit:028 Character 79 53 0 3
-instruction:addaction 028 goto_80_56
-unit:042 Character 80 56 1 3
-unit:056 Character 4 38 0 5
-instruction:addaction 056 goto_5_38
-unit:058 Character 18 95 0 7
-instruction:addaction 058 goto_17_95
+unit:0 Character 87 72 175 3
+unit:019 Character 79 55 0 3
+instruction:addaction 019 goto_83_58
+unit:028 Character 84 58 0 3
+instruction:addaction 028 goto_83_58
+unit:042 Character 82 53 1 3
+instruction:addaction 042 goto_83_58
+unit:056 Character 2 40 0 5
+unit:058 Character 17 92 0 7
+instruction:addaction 058 goto_15_91
 unit:062 Character 80 57 0 3
-instruction:addaction 062 goto_80_56
-unit:067 Character 17 95 0 7
-unit:078 Character 54 35 0 9
-unit:08 Character 12 88 0 14
-instruction:addaction 08 goto_12_87
-unit:089 Character 5 38 0 5
-unit:09 Character 1 26 0 0
-instruction:addaction 09 goto_1_27
-unit:1 Character 79 52 0 3
-instruction:addaction 1 goto_80_56
-unit:10 Character 16 95 0 7
-instruction:addaction 10 goto_17_95
-unit:100 Character 49 18 0 10
-instruction:addaction 100 goto_48_18
-unit:1000 Character 47 33 0 13
-instruction:addaction 1000 goto_48_33
-unit:101 Character 10 42 0 11
-unit:102 Character 58 35 0 12
-unit:103 Character 49 33 0 13
-instruction:addaction 103 goto_48_33
-unit:104 Character 12 87 0 14
-unit:105 Character 1 28 0 0
-instruction:addaction 105 goto_1_27
-unit:106 Character 56 29 0 1
-unit:107 Character 33 52 0 2
-instruction:addaction 107 goto_33_51
-unit:108 Character 81 56 0 3
-instruction:addaction 108 goto_80_56
-unit:109 Character 52 70 0 4
-unit:11 Character 69 69 1 8
-unit:110 Character 10 41 0 11
-instruction:addaction 110 goto_10_42
-unit:111 Character 59 35 0 12
-instruction:addaction 111 goto_58_35
-unit:112 Character 48 33 0 13
-unit:113 Character 13 87 0 14
-instruction:addaction 113 goto_12_87
-unit:114 Character 1 27 0 0
-unit:115 Character 55 29 0 1
-instruction:addaction 115 goto_56_29
-unit:116 Character 32 52 0 2
-instruction:addaction 116 goto_33_51
-unit:117 Character 45 59 0 3
-instruction:addaction 117 goto_80_56
-unit:118 Character 51 70 0 4
-instruction:addaction 118 goto_52_70
-unit:119 Character 5 37 2 5
-instruction:addaction 119 goto_5_38
-unit:12 Character 54 36 0 9
-instruction:addaction 12 goto_54_35
-unit:120 Character 57 35 0 12
-instruction:addaction 120 goto_58_35
-unit:121 Character 48 34 0 13
-instruction:addaction 121 goto_48_33
-unit:122 Character 12 86 0 14
-instruction:addaction 122 goto_12_87
-unit:123 Character 2 27 0 0
-instruction:addaction 123 goto_1_27
-unit:124 Character 56 30 0 1
-instruction:addaction 124 goto_56_29
-unit:125 Character 31 53 0 2
-instruction:addaction 125 goto_33_51
-unit:126 Character 77 50 0 3
-instruction:addaction 126 goto_80_56
-unit:127 Character 52 69 0 4
-instruction:addaction 127 goto_52_70
-unit:128 Character 5 39 0 5
-instruction:addaction 128 goto_5_38
-unit:129 Character 97 73 0 6
-unit:13 Character 48 17 0 10
-instruction:addaction 13 goto_48_18
-unit:130 Character 48 32 0 13
-instruction:addaction 130 goto_48_33
-unit:131 Character 11 87 0 14
-instruction:addaction 131 goto_12_87
-unit:132 Character 0 27 0 0
-instruction:addaction 132 goto_1_27
-unit:133 Character 57 29 0 1
-instruction:addaction 133 goto_56_29
-unit:134 Character 32 53 0 2
-instruction:addaction 134 goto_33_51
-unit:135 Character 82 53 0 3
-instruction:addaction 135 goto_80_56
-unit:136 Character 53 70 0 4
-instruction:addaction 136 goto_52_70
-unit:137 Character 6 38 0 5
-instruction:addaction 137 goto_5_38
-unit:138 Character 96 73 0 6
-instruction:addaction 138 goto_97_73
-unit:139 Character 17 94 0 7
-instruction:addaction 139 goto_17_95
-unit:14 Character 11 42 0 11
-instruction:addaction 14 goto_10_42
-unit:140 Character 13 88 0 14
-instruction:addaction 140 goto_12_87
-unit:141 Character 4 25 0 0
-instruction:addaction 141 goto_1_27
-unit:142 Character 55 28 0 1
-instruction:addaction 142 goto_56_29
-unit:143 Character 50 42 0 2
-instruction:addaction 143 goto_33_51
-unit:144 Character 80 10 0 3
-instruction:addaction 144 goto_80_56
-unit:145 Character 72 77 0 4
-instruction:addaction 145 goto_52_70
-unit:146 Character 43 26 0 5
-instruction:addaction 146 goto_5_38
-unit:147 Character 97 72 0 6
-instruction:addaction 147 goto_97_73
-unit:148 Character 17 93 0 7
-instruction:addaction 148 goto_17_95
-unit:149 Character 68 69 0 8
-instruction:addaction 149 goto_69_69
-unit:15 Character 57 37 0 12
-instruction:addaction 15 goto_58_35
-unit:150 Character 15 72 0 0
-instruction:addaction 150 goto_1_27
-unit:151 Character 56 28 0 1
-instruction:addaction 151 goto_56_29
-unit:152 Character 36 6 0 2
-instruction:addaction 152 goto_33_51
-unit:153 Character 84 66 0 3
-instruction:addaction 153 goto_73_46
-unit:154 Character 6 85 0 4
-instruction:addaction 154 goto_52_70
-unit:155 Character 72 98 0 5
-instruction:addaction 155 goto_5_38
-unit:156 Character 96 74 0 6
-instruction:addaction 156 goto_97_73
-unit:157 Character 10 85 0 7
-unit:192 Character 79 56 0 3
-instruction:addaction 192 goto_80_56
-unit:317 Character 79 50 0 3
-instruction:addaction 317 goto_79_51
+instruction:addaction 062 goto_83_58
+unit:067 Character 17 90 0 7
+instruction:addaction 067 goto_15_91
+unit:078 Character 56 34 0 9
+instruction:addaction 078 goto_56_35
+unit:08 Character 15 84 0 14
+instruction:addaction 08 goto_13_85
+unit:089 Character 1 40 0 5
+instruction:addaction 089 goto_2_40
+unit:09 Character 7 27 0 0
+instruction:addaction 09 goto_7_25
+unit:1 Character 78 54 0 3
+instruction:addaction 1 goto_83_58
+unit:10 Character 14 91 0 7
+instruction:addaction 10 goto_15_91
+unit:100 Character 50 21 0 10
+instruction:addaction 100 goto_49_21
+unit:1000 Character 44 27 0 13
+instruction:addaction 1000 goto_44_29
+unit:101 Character 11 40 0 11
+instruction:addaction 101 goto_12_40
+unit:102 Character 82 58 0 3
+instruction:addaction 102 goto_83_58
+unit:103 Character 44 30 0 13
+instruction:addaction 103 goto_44_29
+unit:104 Character 13 84 0 14
+instruction:addaction 104 goto_13_85
+unit:105 Character 8 27 0 0
+instruction:addaction 105 goto_7_25
+unit:106 Character 57 29 0 1
+instruction:addaction 106 goto_58_29
+unit:107 Character 29 56 0 2
+instruction:addaction 107 goto_29_55
+unit:108 Character 82 54 0 3
+instruction:addaction 108 goto_83_58
+unit:109 Character 50 67 0 4
+instruction:addaction 109 goto_50_68
+unit:11 Character 65 71 0 3
+instruction:addaction 11 goto_83_58
+unit:110 Character 10 40 0 11
+instruction:addaction 110 goto_12_40
+unit:111 Character 76 46 0 3
+instruction:addaction 111 goto_83_58
+unit:112 Character 43 29 0 13
+instruction:addaction 112 goto_44_29
+unit:113 Character 14 85 0 14
+instruction:addaction 113 goto_13_85
+unit:114 Character 8 25 0 0
+instruction:addaction 114 goto_7_25
+unit:115 Character 58 26 0 1
+instruction:addaction 115 goto_58_29
+unit:116 Character 28 55 0 2
+instruction:addaction 116 goto_29_55
+unit:117 Character 83 57 0 3
+instruction:addaction 117 goto_83_58
+unit:118 Character 55 74 0 4
+instruction:addaction 118 goto_50_68
+unit:119 Character 1 42 2 5
+instruction:addaction 119 goto_2_40
+unit:12 Character 56 35 0 9
+unit:120 Character 75 46 0 3
+instruction:addaction 120 goto_83_58
+unit:121 Character 44 29 0 13
+unit:122 Character 13 85 0 14
+unit:123 Character 6 25 0 0
+instruction:addaction 123 goto_7_25
+unit:124 Character 58 31 0 1
+instruction:addaction 124 goto_58_29
+unit:125 Character 30 54 0 2
+instruction:addaction 125 goto_29_55
+unit:126 Character 76 48 0 3
+instruction:addaction 126 goto_81_55
+unit:127 Character 49 69 0 4
+instruction:addaction 127 goto_50_68
+unit:128 Character 3 39 0 5
+instruction:addaction 128 goto_2_40
+unit:129 Character 86 73 0 3
+unit:13 Character 50 20 0 10
+instruction:addaction 13 goto_49_21
+unit:130 Character 43 32 0 13
+instruction:addaction 130 goto_44_29
+unit:131 Character 13 86 0 14
+instruction:addaction 131 goto_13_85
+unit:132 Character 6 24 0 0
+instruction:addaction 132 goto_7_25
+unit:133 Character 58 30 0 1
+instruction:addaction 133 goto_58_29
+unit:134 Character 31 54 0 2
+instruction:addaction 134 goto_29_55
+unit:135 Character 79 56 0 3
+instruction:addaction 135 goto_79_55
+unit:136 Character 50 68 0 4
+unit:137 Character 3 41 0 5
+instruction:addaction 137 goto_2_40
+unit:138 Character 83 69 0 3
+unit:139 Character 15 92 0 7
+instruction:addaction 139 goto_15_91
+unit:14 Character 12 40 0 11
+unit:140 Character 14 84 1 14
+instruction:addaction 140 goto_13_85
+unit:141 Character 7 24 0 0
+instruction:addaction 141 goto_7_25
+unit:142 Character 58 27 0 1
+instruction:addaction 142 goto_58_29
+unit:143 Character 27 54 0 2
+instruction:addaction 143 goto_29_55
+unit:144 Character 80 55 0 3
+instruction:addaction 144 goto_79_55
+unit:145 Character 51 68 0 4
+instruction:addaction 145 goto_50_68
+unit:146 Character 0 40 0 5
+instruction:addaction 146 goto_2_40
+unit:147 Character 83 68 0 3
+unit:148 Character 15 90 0 7
+instruction:addaction 148 goto_15_91
+unit:149 Character 65 70 0 3
+unit:15 Character 60 41 0 3
+unit:150 Character 1 41 0 5
+instruction:addaction 150 goto_2_40
+unit:151 Character 58 29 0 1
+unit:152 Character 29 54 0 2
+instruction:addaction 152 goto_29_55
+unit:153 Character 70 49 0 3
+unit:154 Character 52 68 0 4
+instruction:addaction 154 goto_50_68
+unit:155 Character 3 40 0 5
+instruction:addaction 155 goto_2_40
+unit:156 Character 86 70 0 3
+unit:157 Character 16 90 0 7
+instruction:addaction 157 goto_15_91
+unit:158 Character 62 70 1 3
+unit:159 Character 57 35 0 9
+instruction:addaction 159 goto_56_35
+unit:16 Character 45 29 0 13
+instruction:addaction 16 goto_44_29
+unit:160 Character 58 28 0 1
+instruction:addaction 160 goto_58_29
+unit:161 Character 28 54 0 2
+instruction:addaction 161 goto_29_55
+unit:162 Character 81 58 0 3
+unit:163 Character 48 69 0 4
+instruction:addaction 163 goto_50_68
+unit:164 Character 2 39 0 5
+instruction:addaction 164 goto_2_40
+unit:165 Character 97 73 0 3
+unit:166 Character 15 91 0 7
+unit:167 Character 69 69 0 3
+instruction:addaction 167 goto_83_62
+unit:168 Character 55 35 0 9
+instruction:addaction 168 goto_56_35
+unit:169 Character 49 21 0 10
+unit:17 Character 12 86 0 14
+instruction:addaction 17 goto_13_85
+unit:170 Character 32 54 0 2
+instruction:addaction 170 goto_29_55
+unit:171 Character 75 52 0 3
+unit:172 Character 49 68 0 4
+instruction:addaction 172 goto_50_68
+unit:173 Character 2 41 0 5
+instruction:addaction 173 goto_2_40
+unit:174 Character 89 69 0 3
+unit:175 Character 15 89 0 7
+instruction:addaction 175 goto_15_91
+unit:176 Character 50 69 0 4
+instruction:addaction 176 goto_50_68
+unit:177 Character 56 36 0 9
+instruction:addaction 177 goto_56_35
+unit:178 Character 50 22 0 10
+instruction:addaction 178 goto_49_21
+unit:179 Character 12 41 0 11
+instruction:addaction 179 goto_12_40
+unit:18 Character 6 23 0 0
+instruction:addaction 18 goto_7_25
+unit:180 Character 74 45 0 3
+instruction:addaction 180 goto_86_49
+unit:181 Character 49 67 0 4
+instruction:addaction 181 goto_50_68
+unit:182 Character 8 41 0 5
+unit:183 Character 91 72 0 3
+unit:184 Character 17 91 0 7
+instruction:addaction 184 goto_15_91
+unit:185 Character 68 71 0 3
+unit:186 Character 55 37 0 9
+instruction:addaction 186 goto_56_35
+unit:187 Character 48 21 0 10
+instruction:addaction 187 goto_49_21
+unit:188 Character 11 41 0 11
+instruction:addaction 188 goto_12_40
+unit:189 Character 60 37 0 12
+instruction:addaction 189 goto_61_37
+unit:19 Character 58 25 0 1
+instruction:addaction 19 goto_58_29
+unit:190 Character 53 68 0 4
+instruction:addaction 190 goto_50_68
+unit:191 Character 0 39 0 5
+unit:192 Character 78 58 0 3
+unit:193 Character 16 91 0 7
+instruction:addaction 193 goto_15_91
+unit:194 Character 68 70 0 3
+unit:195 Character 55 36 0 9
+instruction:addaction 195 goto_56_35
+unit:196 Character 49 22 0 10
+instruction:addaction 196 goto_49_21
+unit:197 Character 13 40 0 11
+instruction:addaction 197 goto_12_40
+unit:198 Character 61 37 0 12
+unit:199 Character 43 31 0 13
+instruction:addaction 199 goto_44_29
+unit:2 Character 8 38 0 5
+unit:20 Character 65 73 0 3
+unit:200 Character 12 39 0 11
+instruction:addaction 200 goto_12_40
+unit:201 Character 61 36 0 12
+instruction:addaction 201 goto_61_37
+unit:202 Character 43 30 0 13
+instruction:addaction 202 goto_44_29
+unit:203 Character 12 85 0 14
+instruction:addaction 203 goto_13_85
+unit:204 Character 7 26 0 0
+instruction:addaction 204 goto_7_25
+unit:205 Character 57 28 0 1
+instruction:addaction 205 goto_58_29
+unit:206 Character 29 55 1 2
+unit:207 Character 86 65 0 3
+unit:208 Character 56 70 0 4
+unit:209 Character 75 45 0 5
+instruction:addaction 209 goto_6_43
+unit:21 Character 59 29 0 1
+instruction:addaction 21 goto_58_29
+unit:210 Character 81 45 0 12
+instruction:addaction 210 goto_61_37
+unit:211 Character 44 28 0 13
+instruction:addaction 211 goto_44_29
+unit:212 Character 5 84 0 14
+instruction:addaction 212 goto_13_85
+unit:213 Character 7 25 0 0
+unit:214 Character 62 33 0 1
+unit:215 Character 30 55 0 2
+instruction:addaction 215 goto_29_55
+unit:216 Character 30 77 0 3
+unit:217 Character 41 75 0 4
+instruction:addaction 217 goto_47_75
+unit:218 Character 3 42 0 5
+unit:219 Character 92 74 0 6
+unit:22 Character 81 46 0 10
+instruction:addaction 22 goto_49_21
+unit:220 Character 16 97 0 13
+instruction:addaction 220 goto_44_29
+unit:221 Character 51 50 0 14
+instruction:addaction 221 goto_13_85
+unit:222 Character 79 11 0 0
+instruction:addaction 222 goto_7_25
+unit:223 Character 77 29 0 1
+instruction:addaction 223 goto_62_26
+unit:317 Character 74 50 0 3
+instruction:addaction 317 goto_78_53
 instruction:addaction 317 follow_1
-unit:450 Character 79 51 2 3
+unit:450 Character 78 53 2 3
 instruction:addaction 450 follow_1
-unit:471 Character 80 51 1 3
-instruction:addaction 471 goto_79_51
+unit:471 Character 78 52 1 3
+instruction:addaction 471 goto_78_53
 instruction:addaction 471 follow_1
-unit:477 Character 77 53 1 3
-instruction:addaction 477 goto_79_51
+unit:477 Character 79 53 1 3
+instruction:addaction 477 goto_78_53
 instruction:addaction 477 follow_1
-unit:48 Character 77 54 0 3
-instruction:addaction 48 goto_79_51
+unit:48 Character 77 53 0 3
+instruction:addaction 48 goto_78_53
 instruction:addaction 48 follow_1
-unit:49 Character 84 64 0 3
+unit:49 Character 77 66 0 3
 unit:491 Character 69 56 0 3
 instruction:addaction 491 goto_69_57
-unit:507 Character 74 53 1 3
-unit:509 Character 87 58 1 3
-unit:516 Character 76 53 1 3
-unit:518 Character 82 51 1 3
-unit:525 Character 77 63 0 3
-unit:527 Character 88 55 0 3
-unit:531 Character 82 54 0 3
-unit:534 Character 85 57 0 3
-unit:536 Character 87 61 0 3
-unit:537 Character 78 58 0 3
-unit:540 Character 81 57 1 3
-unit:543 Character 86 54 0 3
-unit:545 Character 79 57 0 3
-unit:55 Character 75 54 0 3
-unit:552 Character 85 53 0 3
-unit:558 Character 87 51 0 3
-unit:560 Character 77 52 1 3
-unit:561 Character 85 50 0 3
-unit:572 Character 79 54 0 3
-unit:574 Character 77 51 0 3
-unit:581 Character 77 48 0 3
-unit:595 Character 82 55 0 3
-unit:603 Character 79 48 0 3
-unit:606 Character 88 57 0 3
-unit:607 Character 78 54 0 3
-unit:608 Character 83 66 0 3
-unit:615 Character 87 64 1 3
-unit:617 Character 73 54 1 3
-unit:621 Character 84 58 0 3
-unit:624 Character 83 57 0 3
-unit:631 Character 84 53 0 3
-unit:633 Character 85 48 1 3
-instruction:addaction 633 goto_78_60
-unit:635 Character 85 66 0 3
-unit:642 Character 81 45 0 3
-unit:644 Character 79 45 0 3
+unit:507 Character 71 55 1 3
+unit:509 Character 86 59 1 3
+unit:516 Character 80 47 1 3
+unit:518 Character 79 52 1 3
+unit:525 Character 73 68 0 3
+unit:527 Character 91 55 0 3
+unit:531 Character 83 53 0 3
+unit:534 Character 88 54 0 3
+unit:536 Character 85 62 0 3
+unit:537 Character 78 55 0 3
+unit:540 Character 79 59 1 3
+unit:543 Character 85 50 0 3
+unit:545 Character 78 56 0 3
+unit:55 Character 74 52 0 3
+unit:552 Character 88 52 0 3
+unit:558 Character 92 52 0 3
+unit:560 Character 77 49 1 3
+unit:561 Character 87 63 0 3
+unit:572 Character 83 52 0 3
+unit:574 Character 90 54 0 3
+instruction:addaction 574 goto_76_62
+unit:581 Character 70 53 0 3
+unit:595 Character 80 54 0 3
+unit:603 Character 88 57 0 3
+instruction:addaction 603 goto_87_61
+unit:606 Character 75 51 0 3
+unit:607 Character 81 54 0 3
+unit:608 Character 80 46 0 3
+unit:615 Character 79 51 1 3
+unit:617 Character 74 56 1 3
+unit:621 Character 82 59 0 3
+unit:624 Character 86 55 0 3
+unit:631 Character 82 56 0 3
+unit:633 Character 83 56 1 3
+instruction:addaction 633 goto_82_56
+unit:635 Character 70 50 0 3
+unit:642 Character 82 47 0 3
+unit:644 Character 73 59 0 3
+instruction:addaction 644 goto_73_58
 unit:651 Character 78 62 0 3
 instruction:addaction 651 goto_78_61
-unit:653 Character 86 51 0 3
-unit:660 Character 81 60 0 3
-unit:680 Character 75 63 0 3
-unit:689 Character 84 60 1 3
-unit:699 Character 86 56 0 3
-unit:705 Character 82 56 1 3
+unit:653 Character 81 48 0 3
+unit:660 Character 81 59 0 3
+unit:680 Character 78 66 0 3
+unit:689 Character 87 61 1 3
+unit:699 Character 87 48 0 3
+unit:705 Character 83 58 1 3
 unit:707 Character 78 63 1 3
 instruction:addaction 707 goto_78_61
-unit:708 Character 90 56 1 3
-unit:714 Character 83 59 0 3
-unit:720 Character 80 50 0 3
-unit:725 Character 84 59 0 3
+unit:708 Character 88 60 1 3
+unit:714 Character 86 62 0 3
+unit:720 Character 77 51 0 3
+unit:725 Character 86 57 0 3
 unit:730 Character 83 62 0 3
-unit:732 Character 85 55 1 3
-unit:734 Character 78 57 0 3
-unit:741 Character 76 64 1 3
-unit:75 Character 77 55 0 3
-unit:750 Character 69 54 0 3
-unit:759 Character 86 53 1 3
-unit:761 Character 89 58 0 3
-unit:769 Character 77 58 0 3
-instruction:addaction 769 goto_78_58
-unit:770 Character 86 64 0 3
-unit:777 Character 83 47 0 3
-unit:78 Character 76 52 0 3
-unit:801 Character 86 59 0 3
-unit:803 Character 70 53 0 3
-unit:804 Character 80 48 0 3
-unit:806 Character 83 55 1 3
-unit:813 Character 81 59 0 3
-unit:822 Character 85 61 0 3
-unit:824 Character 81 64 0 3
-unit:831 Character 77 65 0 3
-unit:833 Character 86 58 0 3
-unit:84 Character 80 53 0 3
-unit:842 Character 90 57 0 3
-unit:846 Character 78 52 0 3
-unit:860 Character 88 58 0 3
+unit:732 Character 87 53 1 3
+unit:734 Character 79 58 0 3
+unit:741 Character 76 62 1 3
+unit:75 Character 74 54 0 3
+unit:750 Character 77 52 0 3
+unit:759 Character 83 49 1 3
+unit:761 Character 80 45 0 3
+instruction:addaction 761 goto_81_52
+unit:769 Character 76 57 0 3
+unit:770 Character 79 67 0 3
+unit:777 Character 80 43 0 3
+instruction:addaction 777 goto_81_58
+unit:78 Character 76 54 0 3
+unit:801 Character 81 56 0 3
+unit:803 Character 87 55 0 3
+unit:804 Character 84 45 0 3
+unit:806 Character 85 54 1 3
+unit:813 Character 84 59 0 3
+unit:822 Character 86 56 0 3
+unit:824 Character 84 65 0 3
+unit:831 Character 73 60 0 3
+unit:833 Character 87 59 0 3
+unit:84 Character 84 54 0 3
+unit:842 Character 84 61 0 3
+unit:846 Character 86 51 0 3
 unit:864 Character 81 55 0 3
 unit:87 Character 83 61 1 3
 instruction:addaction 87 goto_83_62
-unit:879 Character 77 46 0 3
-unit:882 Character 78 50 2 3
-unit:888 Character 80 70 0 3
-unit:89 Character 85 59 1 3
-instruction:addaction 89 goto_83_60
-unit:897 Character 84 51 0 3
-unit:9 Character 74 59 0 3
-unit:905 Character 72 53 1 3
-unit:911 Character 83 56 0 3
-unit:912 Character 79 58 0 3
-unit:914 Character 81 54 0 3
-unit:921 Character 76 48 0 3
-unit:923 Character 91 54 0 3
-instruction:addaction 923 goto_72_49
-unit:93 Character 79 55 0 3
-unit:930 Character 87 52 0 3
-unit:941 Character 92 58 0 3
-unit:950 Character 90 54 1 3
-unit:969 Character 83 48 0 3
-unit:97 Character 73 63 2 3
-unit:98 Character 85 54 0 3
-unit:987 Character 85 52 1 3
-unit:999 Character 82 47 0 3
-instruction:addaction 999 goto_87_55
-unit:money3863 Money 38 63
-unit:money4567 Money 45 67
-unit:money5065 Money 50 65
+unit:879 Character 76 53 0 3
+unit:882 Character 79 48 2 3
+unit:888 Character 86 61 0 3
+unit:89 Character 82 61 1 3
+unit:897 Character 83 55 0 3
+unit:9 Character 90 55 0 3
+instruction:addaction 9 goto_86_46
+unit:905 Character 78 64 1 3
+instruction:addaction 905 goto_92_59
+unit:911 Character 84 60 0 3
+unit:912 Character 80 58 0 3
+unit:914 Character 82 52 0 3
+unit:921 Character 82 46 0 3
+unit:923 Character 77 62 0 3
+instruction:addaction 923 goto_78_62
+unit:93 Character 77 54 0 3
+unit:930 Character 85 52 0 3
+unit:941 Character 76 60 0 3
+instruction:addaction 941 goto_77_60
+unit:950 Character 80 49 1 3
+unit:969 Character 84 49 0 3
+unit:97 Character 88 58 2 3
+instruction:addaction 97 goto_82_47
+unit:98 Character 83 54 0 3
+unit:987 Character 80 50 1 3
+unit:999 Character 89 52 0 3
+unit:money4699 Money 46 99
 unit:money5092 Money 50 92
-unit:money7168 Money 71 68
+unit:money5486 Money 54 86
+unit:money5514 Money 55 14
 unit:money7699 Money 76 99
 unit:money8091 Money 80 91
 unit:money8190 Money 81 90
 unit:money8211 Money 82 11
-unit:money8396 Money 83 96
 unit:money8508 Money 85 8
 unit:money9206 Money 92 6
 unit:money9433 Money 94 33
@@ -311,7 +436,6 @@ unit:money9522 Money 95 22
 unit:money9609 Money 96 9
 unit:money9733 Money 97 33
 unit:money9815 Money 98 15
-unit:money9870 Money 98 70
 unit:money9920 Money 99 20
 unit:money9956 Money 99 56
 unit:oracle0 Oracle 99 99
